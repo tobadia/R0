@@ -53,7 +53,7 @@ plotREG <- function(x, ...)#Internal plot method for EG estimates
          xlim=c(-1,1), ylim=c(0,3), 
          type="l", lty="dashed", 
          xlab="r (Growth rate)", ylab="R (Reproduction number)", 
-         main=paste("Reproduction number (", x$method,")"))
+         main=paste("Reproduction number (", x$method,")"), ...)
     lines(y=constant.r.seq, x=r.seq, xlim=c(-1,1), ylim=c(0,3), lty="solid")
     
     points(y=R, x=r, col="blue")
@@ -72,7 +72,7 @@ plotRAR <- function(x, ...)#Internal plot method for AR estimates
     plot(x=1, y=R, col="blue", 
          ylab="R0 value", xaxt="n", 
          xlab="", 
-         main=paste("Reproduction number (", x$method,")"))
+         main=paste("Reproduction number (", x$method,")"), ...)
     arrows(1,conf.int[2], 1, conf.int[1], angle=90, code=3, col="blue", length=0.03)   
 }
 
@@ -86,7 +86,7 @@ plotRML <- function(x, ...)#Internal plot method for ML estimates
     
     plot(x=1, y=R, col="blue", 
          ylab="R (Reproduction number)", xaxt="n", xlab="", 
-         main=paste("Reproduction number (", x$method,")"))
+         main=paste("Reproduction number (", x$method,")"), ...)
     arrows(1,conf.int[2], 1, conf.int[1], angle=90, code=3, col="blue", length=0.03)   
 }
 
@@ -118,7 +118,7 @@ plotRTD <- function(x, xscale, TD.split,...)#Internal plot method for TD estimat
       axis(1, at=atLab, labels=lab)
       screen(2)
     }
-    plot(epid$t, R[1:length(epid$t)], ylim=c(0, max(polygon.y)), xlab="Time", ylab="R(t)", xaxt="n", pch=NA_integer_, lty="blank", main=paste("Reproduction number (", x$method,")"))
+    plot(epid$t, R[1:length(epid$t)], ylim=c(0, max(polygon.y)), xlab="Time", ylab="R(t)", xaxt="n", pch=NA_integer_, lty="blank", main=paste("Reproduction number (", x$method,")"), ...)
     polygon(polygon.x, polygon.y, col="gray", border=NA)
     lines(epid$t, R[1:length(epid$t)])
     abline(h=1, lty="dashed", col="gray40")
@@ -148,7 +148,7 @@ plotRSB <- function(x, xscale,...)#Internal plot method for SB estimates
 	  
 	  #plot(epid$t, Rt.quant$R.t.[1:length(epid$t)], ylim=c(0, max(polygon.y)), xlab="Time", ylab="R(t)", xaxt="n", main=paste("Reproduction number (", x$method,")"),...)
 	  plot(epid$t, R[1:length(epid$t)], ylim=c(0, max(polygon.y)), xlab="Time", ylab="R(t)", xaxt="n", pch=NA_integer_, lty="blank", 
-    main=paste("Reproduction number (", x$method,")"))
+    main=paste("Reproduction number (", x$method,")"), ...)
 	  polygon(polygon.x, polygon.y, col="gray", border=NA)
 	  lines(epid$t, R[1:length(epid$t)])
 	  abline(h=1, lty="dashed", col="gray40")

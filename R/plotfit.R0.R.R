@@ -54,7 +54,7 @@ plotfitRxx <- function(x, xscale,...)#Internal plotfit method for EG, ML and TD 
   epid.used.for.fit = list(incid=epid$incid[begin.nb:end.nb], t=epid$t[begin.nb:end.nb])
   
   #Plot the whole original epidemic data
-  plot(epid$t,epid$incid, xlab="Time",ylab="Incidence",t='s', xaxt="n", main=paste("Epidemic curve & model (", x$method,")"))
+  plot(epid$t,epid$incid, xlab="Time",ylab="Incidence",t='s', xaxt="n", main=paste("Epidemic curve & model (", x$method,")"), ...)
   
   #Add a line showing predicted simulation
   lines(epid.used.for.fit$t,x$pred,col='red')
@@ -81,7 +81,7 @@ plotfitRAR <- function(x, xscale,...)#Internal plotfit method for AR estimates
   epid.used.for.fit = list(incid=epid.orig$incid, t=epid.orig$t)
   
   #Plot the whole original epidemic data
-  plot(epid$t,epid$incid, xlab="Time",ylab="Incidence",t='s', xaxt="n", main="Epidemic curve (Attack Rate)")
+  plot(epid$t,epid$incid, xlab="Time",ylab="Incidence",t='s', xaxt="n", main="Epidemic curve (Attack Rate)", ...)
   
   #Highlight the original points
   points(epid.used.for.fit$t,epid.used.for.fit$incid,pch=19)
@@ -110,7 +110,7 @@ plotfitRSB <- function(x, xscale, SB.dist,...)#Internal plot method for SB estim
   epid.used.for.fit = list(incid=epid$incid[begin.nb:end.nb], t=epid$t[begin.nb:end.nb])
   
   #Plot the whole original epidemic data
-  plot(epid$t,epid$incid, xlab="Time",ylab="Incidence",t='s', xaxt="n", main=paste("Epidemic curve & model (", x$method,")"))
+  plot(epid$t,epid$incid, xlab="Time",ylab="Incidence",t='s', xaxt="n", main=paste("Epidemic curve & model (", x$method,")"), ...)
   
   #Add a line showing predicted simulation
   lines(epid.used.for.fit$t,x$pred,col='red')
@@ -140,7 +140,7 @@ plotfitRSB <- function(x, xscale, SB.dist,...)#Internal plot method for SB estim
     for (i in 1:length(num.to.plot)) {
       if (i == 1) {
         screen(1)
-        plot(y=x$proba.Rt[[num.to.plot[i]]], x=seq(from=0, to=(length(x$proba.Rt[[num.to.plot[i]]])/100-0.01), by=0.01), xlab="R value", ylab="PDF", type="l", main=paste("t=",num.to.plot[i]))
+        plot(y=x$proba.Rt[[num.to.plot[i]]], x=seq(from=0, to=(length(x$proba.Rt[[num.to.plot[i]]])/100-0.01), by=0.01), xlab="R value", ylab="PDF", type="l", main=paste("t=",num.to.plot[i]), ...)
         abline(v=(which.max((cumsum(x$proba.Rt[[num.to.plot[i]]])) >= 0.025)-1)/100, col="red", lty="dotted")
         abline(v=(which.max((cumsum(x$proba.Rt[[num.to.plot[i]]])) >= 0.975)-1)/100, col="red", lty="dotted")
         next
@@ -150,7 +150,7 @@ plotfitRSB <- function(x, xscale, SB.dist,...)#Internal plot method for SB estim
       }
       
       screen(i)
-      plot(x$proba.Rt[[num.to.plot[i]]], x=seq(from=0, to=(length(x$proba.Rt[[num.to.plot[i]]])/100-0.01), by=0.01), xlim=c(0,((length(x$proba.Rt[[num.to.plot[i]]]) - which.max(rev(x$proba.Rt[[num.to.plot[i]]])>0) + 1))/100 - 0.01), xlab="R value", ylab="PDF", pch=NA_integer_, type="l", main=paste("t=",num.to.plot[i]))
+      plot(x$proba.Rt[[num.to.plot[i]]], x=seq(from=0, to=(length(x$proba.Rt[[num.to.plot[i]]])/100-0.01), by=0.01), xlim=c(0,((length(x$proba.Rt[[num.to.plot[i]]]) - which.max(rev(x$proba.Rt[[num.to.plot[i]]])>0) + 1))/100 - 0.01), xlab="R value", ylab="PDF", pch=NA_integer_, type="l", main=paste("t=",num.to.plot[i]), ...)
       abline(v=(which.max((cumsum(x$proba.Rt[[num.to.plot[i]]])) >= 0.025)-1)/100, col="red", lty="dotted")
       abline(v=(which.max((cumsum(x$proba.Rt[[num.to.plot[i]]])) >= 0.975)-1)/100, col="red", lty="dotted")
       

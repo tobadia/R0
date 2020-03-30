@@ -74,7 +74,7 @@ plot.R0.S <- function#Plot objects from sensitivity.analysis
     #x11()
     dev.new()
     
-    plot(x=as.numeric(levels(fact))[skip:length(as.numeric(levels(fact)))], y=max.Rsquared$Rsquared[skip:length(max.Rsquared$Rsquared)], type="o", xlab="Time Period", ylab="Maximum Rsquared", main="Goodness of fit (R^2) of the model with time period")
+    plot(x=as.numeric(levels(fact))[skip:length(as.numeric(levels(fact)))], y=max.Rsquared$Rsquared[skip:length(max.Rsquared$Rsquared)], type="o", xlab="Time Period", ylab="Maximum Rsquared", main="Goodness of fit (R^2) of the model with time period", ...)
   
     #Highlight highest interesting value
     points(x=best.fit$Time.period, y=best.fit$Rsquared, pch=21, col="red", bg="red")
