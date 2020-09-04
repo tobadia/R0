@@ -85,6 +85,6 @@ time.step=1, ##<< Optional. If date of first observation is specified, number of
   ### \item{$GT.mean}{Range of means used for tested GTs.}
   ### \item{$GT.sd}{Range of standard deviations used for tested GTs.}
   ### \item{$R}{Computed value for Reproduction Number given GT.type, GT.mean and GT.sd.}
-  ### \item{$conf.int[1]}{The lower limit of 95\% CI for R.}
-  ### \item{$conf.int[2]}{The upper limit of 95\% CI for R.}
+  ### \item{$conf.int[1]}{The lower limit of 95% CI for R.}
+  ### \item{$conf.int[2]}{The upper limit of 95% CI for R.}
 }

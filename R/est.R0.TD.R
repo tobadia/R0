@@ -234,7 +234,7 @@ est.R0.TD <- function#Estimate the time dependent reproduction number
 	
   ### A list with components:
   ### \item{R}{vector of R values.}
-  ### \item{conf.int}{95\% confidence interval for estimates.}
+  ### \item{conf.int}{95% confidence interval for estimates.}
 	### \item{P}{Matrix of who infected whom.}
   ### \item{p}{Probability of who infected whom (values achieved by normalizing P matrix).}
   ### \item{GT}{Generation time distribution used in the computation.}

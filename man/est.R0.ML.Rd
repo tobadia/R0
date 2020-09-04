@@ -42,7 +42,7 @@ cases in the future, and optimise to get R using a Poisson distribution.
 CI is achieved by profiling the likelihood.}
 \value{A list with components:
 \item{R}{The estimate of the reproduction ratio.}
-\item{conf.int}{The 95\\% confidence interval for the R estimate.}
+\item{conf.int}{The 95\% confidence interval for the R estimate.}
 \item{epid}{the epidemic curve} is set to FALSE or TRUE.}
 \item{epid.orig}{Original epidemic data.}
 \item{GT}{generation time distribution}
