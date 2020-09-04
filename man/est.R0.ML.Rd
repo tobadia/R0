@@ -2,9 +2,13 @@
 \alias{est.R0.ML}
 \title{Estimate the reproduction number by maximum likelihood}
 \description{Estimate the reproduction number by maximum likelihood}
-\usage{est.R0.ML(epid, GT, import = NULL, t = NULL, begin = NULL, end = NULL, 
-    date.first.obs = NULL, time.step = 1, range = c(0.01, 50), 
-    unknown.GT = FALSE, impute.values = FALSE, checked = FALSE, 
+\usage{est.R0.ML(epid, GT, import = NULL, 
+    t = NULL, begin = NULL, 
+    end = NULL, date.first.obs = NULL, 
+    time.step = 1, range = c(0.01, 
+        50), unknown.GT = FALSE, 
+    impute.values = FALSE, 
+    checked = FALSE, 
     ...)}
 \arguments{
   \item{epid}{the epidemic curve}
@@ -12,11 +16,11 @@
   \item{import}{Vector of imported cases.}
   \item{t}{Vector of dates at which incidence was calculated}
   \item{begin}{At what time estimation begins}
-  \item{end}{Time at which to end computation}
-  \item{date.first.obs}{Optional date of first observation, if t not specified}
+  \item{end}{Time at which to \code{end} computation}
+  \item{date.first.obs}{Optional date of first observation, if \code{t} not specified}
   \item{time.step}{Optional. If date of first observation is specified, number of day between each incidence observation}
   \item{range}{Range in which the maximum must be looked for}
-  \item{unknown.GT}{When GT distribution is unknown, it is estimated jointly. See details.}
+  \item{unknown.GT}{When \code{GT} distribution is unknown, it is estimated jointly. See details.}
   \item{impute.values}{Boolean value. If TRUE, will impute unobserved cases at the beginning of the epidemic to correct for censored data}
   \item{checked}{Internal flag used to check whether integrity checks were ran or not.}
   \item{\dots}{parameters passed to inner functions}
@@ -30,7 +34,7 @@ The second method can be used if the serial interval distribution is unknown: in
 follow a Gamma distribution with two parameters (size, shape), and the optimization routine finds the values of R, size and shape
 that maximize the likelihood. However, the epidemic curve must be long enough to account for a whole generation. The authors showed
 that this is achieved when the cumulated amount of incident cases reaches 150. 
-When using this method, the flag \code{unknown.GT} must be set to \code{TRUE}. GT must still be provided with a R0.GT-class object, however its mean and sd will be recycled as starting value for the optimization routine.
+When using this method, the flag \code{unknown.GT} must be set to \code{TRUE}. \code{GT} must still be provided with a R0.GT-class object, however its mean and sd will be recycled as starting value for the optimization routine.
 
 The principle of the methods described by White & all is to compute the expected number of 
 cases in the future, and optimise to get R using a Poisson distribution.
@@ -39,15 +43,15 @@ CI is achieved by profiling the likelihood.}
 \value{A list with components:
 \item{R}{The estimate of the reproduction ratio.}
 \item{conf.int}{The 95\% confidence interval for the R estimate.}
-\item{epid}{the epidemic curve}
+\item{epid}{the epidemic curve} is set to FALSE or TRUE.}
 \item{epid.orig}{Original epidemic data.}
 \item{GT}{generation time distribution}
 \item{begin}{At what time estimation begins}
 \item{begin.nb}{The number of the first day used in the fit.}
-\item{end}{Time at which to end computation}
+\item{end}{Time at which to \code{end} computation} date for the fit.}
 \item{end.nb}{The number of the las day used for the fit.}
 \item{pred}{Prediction on the period used for the fit.}
-\item{Rsquared}{Correlation coefficient between predicted curve (by fit.epid) and observed epidemic curve.}
+\item{Rsquared}{Correlation coefficient between predicted curve (by \code{\link{fit.epid}}) and observed epidemic curve.}
 \item{call}{Call used for the function.}
 \item{method}{Method used for fitting.}
 \item{method.code}{Internal code used to designate method.}}

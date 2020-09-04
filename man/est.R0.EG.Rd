@@ -2,15 +2,19 @@
 \alias{est.R0.EG}
 \title{Estimate R from exponential growth rate}
 \description{Estimate R from exponential growth rate.}
-\usage{est.R0.EG(epid, GT, t = NULL, begin = NULL, end = NULL, date.first.obs = NULL, 
-    time.step = 1, reg.met = "poisson", checked = FALSE, ...)}
+\usage{est.R0.EG(epid, GT, t = NULL, 
+    begin = NULL, end = NULL, 
+    date.first.obs = NULL, 
+    time.step = 1, reg.met = "poisson", 
+    checked = FALSE, 
+    ...)}
 \arguments{
   \item{epid}{object containing epidemic curve data. see Details.}
   \item{GT}{generation time distribution}
   \item{t}{Vector of dates at which incidence was calculated}
   \item{begin}{At what time estimation begins}
-  \item{end}{Time at which to end computation}
-  \item{date.first.obs}{Optional date of first observation, if t not specified}
+  \item{end}{Time at which to \code{end} computation}
+  \item{date.first.obs}{Optional date of first observation, if \code{t} not specified}
   \item{time.step}{Optional. If date of first observation is specified, number of day between each incidence observation}
   \item{reg.met}{Regression method used. Default is "poisson" (for GLM), but can be forced to "linear".}
   \item{checked}{Internal flag used to check whether integrity checks were ran or not.}
@@ -33,7 +37,7 @@ CI is computed from the 1/M(-r) formula using bounds on r from the Poisson regre
 \item{data.name}{Name of the data used in the fit.}
 \item{begin}{At what time estimation begins}
 \item{begin.nb}{The number of the first day used in the fit.}
-\item{end}{Time at which to end computation}
+\item{end}{Time at which to \code{end} computation} date for the fit.}
 \item{end.nb}{The number of the las day used for the fit.}
 \item{fit}{Method used for fitting.}
 \item{pred}{Prediction on the period used for the fit.}

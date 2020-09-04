@@ -2,7 +2,9 @@
 \alias{plot.R0.sR}
 \title{Plot the R0/Rt value along with confidence interval of all requested models to epidemic data}
 \description{Plot the R0/Rt value along with confidence interval of all requested models to epidemic data}
-\usage{\method{plot}{R0.sR}(x, xscale = "w", TD.split = FALSE, ...)}
+\usage{\method{plot}{R0.sR}(x, xscale = "w", 
+    TD.split = FALSE, 
+    ...)}
 \arguments{
   \item{x}{Result of est.R0 (class sR)}
   \item{xscale}{Scale to be adjusted on X axis. Can be "d" (day), "w" (week (default)), "f" (fornight), "m" (month).}

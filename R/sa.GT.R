@@ -13,7 +13,7 @@ sa.GT=function#Sensitivity analysis of reproduction ratio with varying GT distri
 ##details<< By using different Generation Time (GT) distribution, different estimates of reproduction ratio can be analyzed.
 
 (incid, ##<< incident cases
-GT.type, ##<< Type of distribution for GT (see GT.R for details)
+GT.type, ##<< Type of distribution for GT (see \code{\link{generation.time}} for details)
 GT.mean.range, ##<< mean used for all GT distributions throughout the simulation
 GT.sd.range, ##<< Range of standard deviation used for GT distributions. Must be provided as a vector.
 begin=NULL, ##<< begin date of the estimation of epidemic

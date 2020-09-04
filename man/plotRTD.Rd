@@ -2,7 +2,8 @@
 \alias{plotRTD}
 \title{Internal plot method for TD estimates}
 \description{Internal plot method for TD estimates}
-\usage{plotRTD(x, xscale, TD.split, ...)}
+\usage{plotRTD(x, xscale, TD.split, 
+    ...)}
 \arguments{
   \item{x}{
 }

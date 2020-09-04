@@ -2,7 +2,8 @@
 \alias{impute.incid}
 \title{Optimiziation routine for incidence imputation}
 \description{When first records of incidence are unavailable, tries to impute censored cases to rebuild longer epidemic vector}
-\usage{impute.incid(CD.optim.vect, CD.epid, CD.R0, CD.GT)}
+\usage{impute.incid(CD.optim.vect, 
+    CD.epid, CD.R0, CD.GT)}
 \arguments{
   \item{CD.optim.vect}{Vector of two elements (multiplicative factor, log(highest imputed data) to be optimized}
   \item{CD.epid}{Original epidemic vector, output of check.incid()}

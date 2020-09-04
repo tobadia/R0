@@ -2,7 +2,9 @@
 \alias{plotfit}
 \title{Generic S3 method to plot either "R0.R" and "R0.sR" objects}
 \description{Generic S3 method to plot either "R0.R" and "R0.sR" objects}
-\usage{plotfit(x, all = TRUE, xscale = "w", SB.dist = TRUE, ...)}
+\usage{plotfit(x, all = TRUE, 
+    xscale = "w", SB.dist = TRUE, 
+    ...)}
 \arguments{
   \item{x}{Object for which the fit should be plotted.}
   \item{all}{Should the whole epidemic curve be shown}
