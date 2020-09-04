@@ -31,7 +31,7 @@
 CI is computed by multinomial simulations at each time step with the expected value of R.}
 \value{A list with components:
 \item{R}{vector of R values.}
-\item{conf.int}{95\% confidence interval for estimates.}
+\item{conf.int}{95\\% confidence interval for estimates.}
 \item{P}{Matrix of who infected whom.}
 \item{p}{Probability of who infected whom (values achieved by normalizing P matrix).}
 \item{GT}{generation time distribution.}

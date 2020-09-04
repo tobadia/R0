@@ -133,7 +133,7 @@ est.R0.ML <- function#Estimate the reproduction number by maximum likelihood
   }
   ### A list with components:
 	### \item{R}{The estimate of the reproduction ratio.}
-	### \item{conf.int}{The 95% confidence interval for the R estimate.}
+	### \item{conf.int}{The 95\% confidence interval for the R estimate.}
 	### \item{epid}{Original or augmented epidemic data, depending whether impute.values is set to FALSE or TRUE.}
 	### \item{epid.orig}{Original epidemic data.}
   ### \item{GT}{Generation time distribution uised in the computation.}

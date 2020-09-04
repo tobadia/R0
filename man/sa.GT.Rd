@@ -10,7 +10,7 @@
     time.step = 1, ...)}
 \arguments{
   \item{incid}{incident cases}
-  \item{GT.type}{Type of distribution for GT (see generation.time.R for details)}
+  \item{GT.type}{Type of distribution for GT (see \code{\link{generation.time}} for details)}
   \item{GT.mean.range}{mean used for all GT distributions throughout the simulation}
   \item{GT.sd.range}{Range of standard deviation used for GT distributions. Must be provided as a vector.}
   \item{begin}{\code{begin} date of the estimation of epidemic}
@@ -27,8 +27,8 @@
 \item{$GT.mean}{Range of means used for tested GTs.}
 \item{$GT.sd}{Range of standard deviations used for tested GTs.}
 \item{$R}{Computed value for Reproduction Number given \code{GT.type}, GT.mean and GT.sd.}
-\item{$conf.int[1]}{The lower limit of 95\% CI for R.}
-\item{$conf.int[2]}{The upper limit of 95\% CI for R.}}
+\item{$conf.int[1]}{The lower limit of 95\\% CI for R.}
+\item{$conf.int[2]}{The upper limit of 95\\% CI for R.}}
 
 \author{Pierre-Yves Boelle, Thomas Obadia}
 

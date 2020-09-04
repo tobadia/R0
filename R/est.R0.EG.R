@@ -92,7 +92,7 @@ est.R0.EG <-function#Estimate R from exponential growth rate
   
   ### A list with components:
   ### \item{R}{The estimate of the reproduction ratio.}
-  ### \item{conf.int}{The 95% confidence interval for the R estimate.}
+  ### \item{conf.int}{The 95\% confidence interval for the R estimate.}
   ### \item{r}{Exponential growth rate of the epidemic.}
   ### \item{conf.int.r}{Confidence interval of the exponential growth rate of the epidemic.}
   ### \item{Rsquared}{The deviance R-squared measure for the considered dates and model.}
