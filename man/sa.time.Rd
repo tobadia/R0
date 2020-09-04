@@ -30,8 +30,8 @@ These values are not representative of the epidemic outbreak behaviour.}
 \item{df}{data.frame object with all results from sensitivity analysis.}
 \item{df.clean}{the same object, with NA rows removed. Used only for easy export of results.}
 \item{mat.sen}{Matrix with values of R0 given \code{begin} (rows) and \code{end} (columns) dates.}
-\item{begin}{Vector of begins date of the estimation of epidemic} dates in epidemic.}
-\item{end}{Vector of \code{end} dates of estimation of the epidemic} dates in epidemic.}}
+\item{begin}{A range of \code{begin} dates in epidemic.}
+\item{end}{A range of \code{end} dates in epidemic.}}
 
 \author{Pierre-Yves Boelle, Thomas Obadia}
 

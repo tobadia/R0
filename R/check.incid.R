@@ -158,5 +158,6 @@ time.step=1 ##<< Optional. If date of first observation is specified, number of 
   }
 
 	return(list(incid=as.vector(incid),t=t))
-  ### A list with components incid and t.
+  ##value<<
+  ## A list with components incid and t.
 }

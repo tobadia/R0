@@ -29,7 +29,7 @@ and so the CI for the reproduction number is computed with this extreme values.}
 \item{epid}{The vector of incidence, after being correctly formated by \code{\link{check.incid}}. Used only by plot.fit.}
 \item{R}{The estimate of the reproduction ratio.}
 \item{conf.int}{The 95\% confidence interval for the R estimate.}
-\item{AR}{Attack rate as a percentage from total population}
+\item{AR}{Original attack rate.}
 \item{begin.nb}{First date of incidence record. Used only by plot.fit.}
 \item{end.nb}{Last date of incidence record. Used only by plot.fit.}
 \item{method}{Method used for the estimation.}

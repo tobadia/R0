@@ -28,11 +28,11 @@
 \details{Currently, supported \code{methods} are Exponential Growth (EG), Maximum Likelihood (ML), Attack Rate (\code{AR}), Time-Dependant (TD), and Sequential Bayesian (SB). See references below.}
 \value{A list with components:
 \item{estimates}{List containing all results from called methods.}
-\item{epid}{Name of epidemic dataset}
-\item{GT}{Generation Time repartition function}
-\item{t}{Date vector}
-\item{begin}{Begin date for estimation. Can be an integer or a date (YYYY-mm-dd or YYYY/mm/dd)}
-\item{end}{End date for estimation. Can be an integer or a date (YYYY-mm-dd or YYYY/mm/dd)}}
+\item{epid}{Epidemic curve.}
+\item{GT}{Generation Time distribution function.}
+\item{t}{Date vector.}
+\item{begin}{Begin date for estimation.}
+\item{end}{End date for estimation.}}
 \references{\code{\link{est.R0.EG}}: Wallinga, J., and M. Lipsitch. "How Generation Intervals Shape the Relationship Between Growth Rates and Reproductive Numbers." Proceedings of the Royal Society B: Biological Sciences 274, no. 1609 (2007): 599.
 
 \code{\link{est.R0.ML}}: White, L.F., J. Wallinga, L. Finelli, C. Reed, S. Riley, M. Lipsitch, and M. Pagano. "Estimation of the Reproductive Number and the Serial Interval in Early Phase of the 2009 Influenza A/H1N1 Pandemic in the USA." Influenza and Other Respiratory Viruses 3, no. 6 (2009): 267-276.

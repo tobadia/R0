@@ -67,5 +67,7 @@ sensitivity.analysis=function#Sensitivity analysis of basic reproduction ratio t
   }
   
   return(sa.object)
-  ### An sensitivity analysis object of class "R0.S" with components depending on sensitivity analysis type.
+  
+  ##value<<
+  ## An sensitivity analysis object of class "R0.S" with components depending on sensitivity analysis type.
 }

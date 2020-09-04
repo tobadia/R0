@@ -32,12 +32,12 @@ CI is computed from the 1/M(-r) formula using bounds on r from the Poisson regre
 \item{r}{Exponential growth rate of the epidemic.}
 \item{conf.int.r}{Confidence interval of the exponential growth rate of the epidemic.}
 \item{Rsquared}{The deviance R-squared measure for the considered dates and model.}
-\item{epid}{object containing epidemic curve data. see Details.}
-\item{GT}{generation time distribution}
+\item{epid}{Original epidemic data.}
+\item{GT}{Generation time distribution used in the computation.}
 \item{data.name}{Name of the data used in the fit.}
-\item{begin}{At what time estimation begins}
+\item{begin}{Starting date for the fit.}
 \item{begin.nb}{The number of the first day used in the fit.}
-\item{end}{Time at which to \code{end} computation} date for the fit.}
+\item{end}{The \code{end} date for the fit.}
 \item{end.nb}{The number of the las day used for the fit.}
 \item{fit}{Method used for fitting.}
 \item{pred}{Prediction on the period used for the fit.}

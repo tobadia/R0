@@ -43,12 +43,12 @@ CI is achieved by profiling the likelihood.}
 \value{A list with components:
 \item{R}{The estimate of the reproduction ratio.}
 \item{conf.int}{The 95\% confidence interval for the R estimate.}
-\item{epid}{the epidemic curve} is set to FALSE or TRUE.}
+\item{epid}{Original or augmented epidemic data, depending whether \link{\code{impute.values}} is set to FALSE or TRUE.}
 \item{epid.orig}{Original epidemic data.}
-\item{GT}{generation time distribution}
-\item{begin}{At what time estimation begins}
+\item{GT}{Generation time distribution uised in the computation.}
+\item{begin}{Starting date for the fit.}
 \item{begin.nb}{The number of the first day used in the fit.}
-\item{end}{Time at which to \code{end} computation} date for the fit.}
+\item{end}{The \code{end} date for the fit.}
 \item{end.nb}{The number of the las day used for the fit.}
 \item{pred}{Prediction on the period used for the fit.}
 \item{Rsquared}{Correlation coefficient between predicted curve (by \code{\link{fit.epid}}) and observed epidemic curve.}

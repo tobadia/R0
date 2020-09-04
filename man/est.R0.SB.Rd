@@ -30,11 +30,11 @@ CI is achieved by a cumulated sum of the R posterior distribution, and correspon
 \item{R}{vector of R values.}
 \item{conf.int}{95\% confidence interval for estimates.}
 \item{proba.Rt}{A list with successive distribution for R throughout the outbreak.}
-\item{GT}{generation time distribution}
-\item{epid}{the epidemic curve}
-\item{begin}{At what time estimation begins. Just there for "plot" purposes, not actually used}
+\item{GT}{Generation time distribution used in the computation.}
+\item{epid}{Original epidemic data.}
+\item{begin}{Begin date for the fit.}
 \item{begin.nb}{Index of \code{begin} date for the fit.}
-\item{end}{At what time estimation ends. Just there for "plot" purposes, not actually used}
+\item{end}{End date for the fit.}
 \item{end.nb}{Index of \code{end} date for the fit.}
 \item{pred}{Predictive curve based on most-likely R value.}
 \item{data.name}{Name of the data used in the fit.}

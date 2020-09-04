@@ -145,5 +145,6 @@ est.GT <- function#Find the best-fitting GT distribution for a series of serial 
   
 	return(gt.distrib)
   
-  ### A \code{R0.GT} object that complies with \code{\link{generation.time}} distribution requirements of the R0 package
+  ##value<<
+  ## A \code{R0.GT} object that complies with \code{\link{generation.time}} distribution requirements of the R0 package
 }
