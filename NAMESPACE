@@ -4,7 +4,15 @@
 #exportPattern(".")
 
 # Selective export
-export(check.incid, integrity.checks, est.GT, estimate.R, est.R0.AR, est.R0.EG, est.R0.ML, est.R0.SB, est.R0.TD, generation.time, impute.incid, plotfit, sensitivity.analysis, sa.time, sa.GT, sim.epid, smooth.Rt)
+export(check.incid, 
+       integrity.checks, inspect.data, 
+       est.GT, estimate.R, est.R0.AR, est.R0.EG, est.R0.ML, est.R0.SB, est.R0.TD, 
+       smooth.Rt, 
+       generation.time, 
+       impute.incid, 
+       plotfit, 
+       sensitivity.analysis, sa.time, sa.GT, 
+       sim.epid)
 
 # Import fitdistr from package MASS
 importFrom(MASS, fitdistr)
