@@ -27,7 +27,7 @@ sim.epid <- function#Epidemic outbreak simulation
   ## by m rows (maximum length of an outbreak).
   
   #Various content integrity checks
-  if (class(GT) != "R0.GT") {
+  if (!inherits(GT, "R0.GT")) {
     stop("GT object must be of class R0.GT.")
   }
   

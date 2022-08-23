@@ -22,7 +22,7 @@ print.R0.R <- function#Print the R estimate
   
 {
 	#Make sure x is of the right class
-	if (class(x)!="R0.R") {
+	if (!inherits(x, "R0.R")) {
     stop("'x' must be of class 'R0.R'")
 	}
 

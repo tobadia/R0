@@ -23,7 +23,7 @@ plot.R0.S <- function#Plot objects from sensitivity.analysis
   
 {
 	#Make sure x is of the right class
-	if (class(x)!="R0.S") {
+	if (!inherits(x, "R0.S")) {
     stop("'x' must be of class 'R0.S'")
 	}
   

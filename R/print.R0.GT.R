@@ -22,7 +22,7 @@ print.R0.GT <- function#Print the characteristics of the generation time distrib
 
 {
   #Make sure x is of the right class
-	if (class(x) != "R0.GT") {
+	if (!inherits(x, "R0.GT")) {
     stop("x must be of class 'R0.GT'")
   }
 	

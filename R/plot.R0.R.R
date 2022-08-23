@@ -25,7 +25,7 @@ plot.R0.R <- function#Plot the R0/Rt value along with confidence interval
   
 {
 	#Make sure x is of class "R0.R"
-	if (class(x)!="R0.R") stop("'x' must be of class R0.R")
+	if (!inherits(x, "R0.R")) stop("'x' must be of class R0.R")
   
   do.call(paste("plotR",x$method.code,sep=""), args=list(x=x, xscale=xscale, TD.split=TD.split, ...) )
 

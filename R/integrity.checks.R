@@ -53,7 +53,7 @@ integrity.checks <- function#Input parameters integrity checks
     #check generation time (can be omitted if method is limited to AR)
     if (length(methods) == 1) {
       if (methods != "AR") {
-        if (class(GT) != "R0.GT") {
+        if (!inherits(GT, "R0.GT")) {
           stop("'GT' must be provided as a GT class object.")
         }
       }
@@ -68,7 +68,7 @@ integrity.checks <- function#Input parameters integrity checks
       }
     }
     
-    if ((class(begin) %in% c("character","Date") | class(end) %in% c("character","Date")) & class(tmp.epid$t) != "Date") {
+    if ((is.character(begin) | is.character(end) | inherits(begin, "Date") | inherits(end, "Date")) & !inherits(tmp.epid$t, "Date")) {
       # begin ou end ne peuvent ?tre des dates que si t est une date
       stop("'begin' or 'end' may be provided as dates only if 'epid' or 't' contains dates.")
       
@@ -84,13 +84,13 @@ integrity.checks <- function#Input parameters integrity checks
       if ((begin <1) | begin > length(tmp.epid$t)) begin=1
       begin.nb = begin
       begin = tmp.epid$t[begin]
-    } else if (class(begin)=="Date") {
+    } else if (inherits(begin, "Date")) {
       begin.nb= which(tmp.epid$t == begin)
     } else if (is.character(begin)) { # try to convert using standard formats
       tmp.begin = try(as.Date(begin,format="%Y-%m-%d"),silent=T)
-      if (class(tmp.begin) == "Date") begin = tmp.begin
+      if (inherits(tmp.begin, "Date")) begin = tmp.begin
       tmp.begin = try(as.Date(begin,format="%d/%m/%Y"),silent=T)
-      if (class(tmp.begin) == "Date") begin = tmp.begin
+      if (inherits(tmp.begin, "Date")) begin = tmp.begin
       begin.nb = which(tmp.epid$t == begin)
     } 
     if (is.null(begin)) {
@@ -118,13 +118,13 @@ integrity.checks <- function#Input parameters integrity checks
       if ((end.nb < begin.nb) | (end > length(tmp.epid$t))) end = end.nb
       if (end.nb <= begin.nb) end = length(tmp.epid$t)
       end = tmp.epid$t[end.nb]
-    } else if (class(end)=="Date") {
+    } else if (inherits(end, "Date")) {
       end.nb= which(tmp.epid$t == end)
     } else if (is.character(end)) { # try to convert using standard formats
       tmp.end = try(as.Date(end,format="%Y-%m-%d"),silent=T)
-      if (class(tmp.end) == "Date") end = tmp.end
+      if (inherits(tmp.end, "Date")) end = tmp.end
       tmp.end = try(as.Date(end,format="%d/%m/%Y"),silent=T)
-      if (class(tmp.end) == "Date") end = tmp.end
+      if (inherits(tmp.end, "Date")) end = tmp.end
       end.nb = which(tmp.epid$t == end)
     } 
     if (is.null(end)) {

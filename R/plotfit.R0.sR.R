@@ -25,7 +25,7 @@ plotfit.R0.sR <- function#Plot the fit of all requested models to epidemic data
   
 {
   #Make sure x is of the right class.
-  if (class(x)!="R0.sR") {
+  if (!inherits(x, "R0.sR")) {
     stop("'x' must be of class 'sR'")
   }
   

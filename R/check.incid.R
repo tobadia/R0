@@ -30,10 +30,10 @@ time.step=1 ##<< Optional. If date of first observation is specified, number of 
   ## format will result in erratic behavior and/or crash.
   
   #Various class and integrity checks
-  if (class(incid) == "numeric" | class(incid)=="integer" | class(incid)=="character" | class(incid)=="Date") {
+  if (is.numeric(incid) | is.character(incid) | inherits(incid, "Date")) {
     
     #Basic possibility is incidence provided by date of symptoms onset for each patient
-    if (class(incid)=="character" | class(incid) == "Date") {
+    if (is.character(incid) | inherits(incid, "Date")) {
       # try to convert incid to dates using standard formats "%Y-%m-%d" / "%Y/%m/%d"
       tmp = as.Date(incid)
       # if passed, incid was a vector of dates - convert to factor, making sure that levels correspond to min - max by time-step
@@ -66,7 +66,7 @@ time.step=1 ##<< Optional. If date of first observation is specified, number of 
 	  }
     
 	  #Try to determine if t is numeric or date
-	  if (!any(is.na(suppressWarnings(as.numeric(t)))) & (class(t) != "Date")) {
+	  if (!any(is.na(suppressWarnings(as.numeric(t)))) & !inherits(t, "Date")) {
 		  #names are numeric 
 		  t = as.numeric(t)
       incid = incid[order(t)]
@@ -111,7 +111,7 @@ time.step=1 ##<< Optional. If date of first observation is specified, number of 
   ## 
   ## E.g.: epicurve.weeks returns $dates, $weeks and $stratum3. $stratum3 object is a list of dates (correct syntax), where each date is repeated to reflect the incidence value at this time.
   
-  else if (!is.na(match("POSIXt",class(incid)))) {
+  else if (inherits(incid, "POSIXt")) {
     stop("incid was given as POSIXt object. Please convert to Date first using as.Date.")
   } else {
     

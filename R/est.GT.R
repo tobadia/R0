@@ -44,17 +44,19 @@ est.GT <- function#Find the best-fitting GT distribution for a series of serial 
     nb.obs = length(infector.onset.dates)
     
     #Content class
-    if (class(infector.onset.dates) != class(infector.onset.dates)) {
+    if (!identical(class(infector.onset.dates), class(infector.onset.dates))) {
       stop("onset.dates vector should be of the same class.")
       #from now on, they are assumed to be of same class
     }
     
-    if (class(infector.onset.dates) == "character") {
+
+    if (is.character(infector.onset.dates)) {
       infector.onset.dates <- as.Date(infector.onset.dates)
       infectee.onset.dates <- as.Date(infectee.onset.dates)
     }
     
-    else if ((class(infector.onset.dates) != "numeric") & (class(infector.onset.dates) != "integer") & (class(infector.onset.dates) != "Date")) {
+
+    else if (!is.numeric(infector.onset.dates) & !inherits(infector.onset.dates, "Date")) {
       stop("onset.dates vector does not contain a compatible format format (numeric, integer, character, Date)")
     }
     
@@ -77,17 +79,17 @@ est.GT <- function#Find the best-fitting GT distribution for a series of serial 
   # Finding best fitting distribution. This uses code from package MASS 
   # (Venables, W. N. & Ripley, B. D. (2002) Modern Applied Statistics with S. Fourth Edition. Springer, New York. ISBN 0-387-95457-0)
   fit.gamma <- try(fitdistr(serial.interval,"gamma"))
-  if (class(fit.gamma) == "try-error") {
+  if (inherits(fit.gamma,  "try-error")) {
     fit.gamma$loglik <- NA
   }
   
   fit.weib <- try(fitdistr(serial.interval,"weibull"))
-  if (class(fit.weib) == "try-error") {
+  if (inherits(fit.weib, "try-error")) {
     fit.weib$loglik <- NA
   }
   
   fit.lognorm <- try(fitdistr(serial.interval,"log-normal"))
-  if (class(fit.lognorm) == "try-error") {
+  if (inherits(fit.lognorm, "try-error")) {
     fit.lognorm$loglik <- NA
   }
   

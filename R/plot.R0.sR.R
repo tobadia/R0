@@ -24,7 +24,7 @@ plot.R0.sR <- function#Plot the R0/Rt value along with confidence interval of al
   
 {
 	#Make sure x is of the right class.
-	if (class(x)!="R0.sR") {
+	if (!inherits(x, "R0.sR")) {
     stop("'x' must be of class 'R0.sR'")
 	}
   

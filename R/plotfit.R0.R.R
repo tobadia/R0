@@ -26,7 +26,7 @@ plotfit.R0.R <- function#Plot the fit of a model to epidemic data
   
 {
   #Make sure x is of class "R0.R"
-  if (class(x)!="R0.R") stop("'x' must be of class R0.R")
+  if (!inherits(x, "R0.R")) stop("'x' must be of class R0.R")
   
   if (x$method.code %in% c("EG","ML","TD")) {
     do.call(plotfitRxx, args=list(x=x, xscale=xscale, ...) )
