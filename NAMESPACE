@@ -9,6 +9,17 @@ export(check.incid, integrity.checks, est.GT, estimate.R, est.R0.AR, est.R0.EG, 
 # Import fitdistr from package MASS
 importFrom(MASS, fitdistr)
 
+importFrom(graphics, abline, arrows, axis, close.screen,
+           contour, curve, filled.contour, hist, legend,
+           lines, points, polygon, screen, split.screen,
+           text, title)
+importFrom(grDevices, dev.new, heat.colors)
+importFrom(stats, coefficients, density, dgamma, dlnorm,
+           dpois, dweibull, glm, lm, na.omit, optim,
+           optimize, pgamma, plnorm, poisson, predict,
+           pweibull, qchisq, quantile, rgamma, rmultinom,
+           rnbinom, rpois, runif, uniroot)
+
 # Registering S3 Methods
 #plot
 S3method(plot, R0.R)
