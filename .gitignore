@@ -4,5 +4,6 @@
 .Rhistory
 .Rproj.user/
 .svn/
+R/.project
 R0-package.Rproj
 Read-and-delete-me
