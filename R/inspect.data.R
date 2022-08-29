@@ -26,7 +26,7 @@ inspect.data = function#Inspect input data for common issues
   epid <- try(check.incid(incid = incid, 
                           t = t))
   
-  if (class(epid) == "try-error") warning("check.incid() failed to process inputs and should have provided an explanation.")
+  if (inherits(epid, "try-error")) warning("check.incid() failed to process inputs and should have provided an explanation.")
   
   # The interesting bits: when check.incid() succeeds, look for non-obvious issues
   else {
@@ -62,7 +62,7 @@ inspect.data = function#Inspect input data for common issues
       # If GT is provided, check that NAs do not exceed its length, which would result in failed optimization routines.
       if (!is.null(GT)) {
         # Confirm first that GT is of the proper class, fail otherwise
-        if (class(GT) != "R0.GT") {
+        if (!inherits(GT, "R0.GT")) {
           stop("GT was not provided as an object of class R0.GT. See ?generation.time for more detail.")
         } else {
           longest.missing.length <- unlist(lapply(split(!is.na(incid)[is.na(incid)], cumsum(!is.na(incid))[is.na(incid)]), 
@@ -94,7 +94,7 @@ inspect.data = function#Inspect input data for common issues
       # If GT is provided, check that consecutive 0s do not exceed its length
       if (!is.null(GT)) {
         # Confirm first that GT is of the proper class, fail otherwise
-        if (class(GT) != "R0.GT") {
+        if (!inherits(GT, "R0.GT")) {
           stop("GT was not provided as an object of class R0.GT. See ?generation.time for more detail.")
         } else {
           longest.zero.length <- unlist(lapply(split(epid$incid[epid$incid == 0], cumsum(epid$incid != 0)[epid$incid == 0]), 
@@ -111,7 +111,7 @@ inspect.data = function#Inspect input data for common issues
     ##downwards and should be taken into account when interpreting results.
     if (!is.null(GT)) {
       # Confirm first that GT is of the proper class, fail otherwise
-      if (class(GT) != "R0.GT") {
+      if (!inherits(GT, "R0.GT")) {
         stop("GT was not provided as an object of class R0.GT. See ?generation.time for more detail.")
       } else {
         # Check vector length since first non-0 value and compare to length of GT
