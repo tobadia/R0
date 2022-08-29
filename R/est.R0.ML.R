@@ -25,7 +25,7 @@ est.R0.ML <- function#Estimate the reproduction number by maximum likelihood
   time.step=1, ##<< Optional. If date of first observation is specified, number of day between each incidence observation
   range=c(0.01,50), ##<< Range in which the maximum must be looked for
   unknown.GT=FALSE, ##<< When GT distribution is unknown, it is estimated jointly. See details.
-  impute.values=FALSE, ##<< Boolean value. If TRUE, will impute unobserved cases at the beginning of the epidemic to correct for censored data
+  impute.incid=FALSE, ##<< Boolean value. If TRUE, will impute unobserved cases at the beginning of the epidemic to correct for censored data
   checked=FALSE, ##<< Internal flag used to check whether integrity checks were ran or not. 
   ... ##<< parameters passed to inner functions
 ) 
@@ -56,16 +56,16 @@ est.R0.ML <- function#Estimate the reproduction number by maximum likelihood
   if(!is.null(import) & length(import) != length(epid$incid)) stop("Import vector and incidence vector do not have the same length.")
   if (is.null(import)) import <- rep(0, length(epid$incid))
   
-#  if (impute.values == TRUE) {
+#  if (impute.incid == TRUE) {
 #    begin.nb = 1
 #    end.nb = length(epid$incid)
 #  }
   
   #Backup of original epidemic data
-	epid.orig = epid
-	
-	#Truncate at end if necessary
-	epid = list(incid=epid$incid[begin.nb:end.nb],t=epid$t[begin.nb:end.nb])
+  epid.orig = epid
+  
+  #Truncate at end if necessary
+  epid = list(incid=epid$incid[begin.nb:end.nb],t=epid$t[begin.nb:end.nb])
   import <- import[begin.nb:end.nb]
   
   #Make a likelihood that can be optimized
@@ -78,18 +78,18 @@ est.R0.ML <- function#Estimate the reproduction number by maximum likelihood
   }
   res.R <- optimize(fit.epid,log(range),GT=GT,epid=epid,import=import,maximum=TRUE)
 
-	if ((exp(res.R$maximum) == range[1]) | (exp(res.R$maximum) == range[2])) { 
-		warning("Algorithm converged to boundary. Try increasing 'range'")
-	}
-	
-	# Should get the confidence interval by solving likelihood. 
-	# Use uniroot starting from current estimate.
-	R.max <-  uniroot(fit.epid,lower=res.R$maximum, upper = log(range[2]), offset=res.R$objective-qchisq(0.95,df=1),epid=epid,GT=GT,import=import)
-	R.min <-  uniroot(fit.epid,lower=log(range[1]), upper=res.R$maximum, offset=res.R$objective-qchisq(0.95,df=1),epid=epid,GT=GT,import=import)
-	##details<< CI is achieved by profiling the likelihood.
+  if ((exp(res.R$maximum) == range[1]) | (exp(res.R$maximum) == range[2])) { 
+    warning("Algorithm converged to boundary. Try increasing 'range'")
+  }
   
-	# Compute prediction
-	pred = fit.epid(res.R$maximum,epid,GT,import=import,pred=TRUE)
+  # Should get the confidence interval by solving likelihood. 
+  # Use uniroot starting from current estimate.
+  R.max <-  uniroot(fit.epid,lower=res.R$maximum, upper = log(range[2]), offset=res.R$objective-qchisq(0.95,df=1),epid=epid,GT=GT,import=import)
+  R.min <-  uniroot(fit.epid,lower=log(range[1]), upper=res.R$maximum, offset=res.R$objective-qchisq(0.95,df=1),epid=epid,GT=GT,import=import)
+  ##details<< CI is achieved by profiling the likelihood.
+  
+  # Compute prediction
+  pred = fit.epid(res.R$maximum,epid,GT,import=import,pred=TRUE)
   
   #We check how prediction and observed data match to compute a deviance-measured R-squared value
   tmp<-glm(epid$incid~pred, family=poisson())
@@ -97,11 +97,11 @@ est.R0.ML <- function#Estimate the reproduction number by maximum likelihood
   Rsquared = (tmp$null.deviance-tmp$deviance)/(tmp$null.deviance)
   
   #If data are censored and need to be imputed, recursive call of ML method
-  if (impute.values == TRUE) {
+  if (impute.incid == TRUE) {
     R0.val.i <- vector()
     R0.val.i[1] <- exp(res.R$maximum)
     new.incid <- impute.incid(c(0,0), epid.orig, R0.val.i[1], GT)
-    R0.val.i[2] <- est.R0.ML(epid=new.incid, GT, begin=1, end=as.numeric(end.nb+length(GT$GT)), impute.values=FALSE)$R
+    R0.val.i[2] <- est.R0.ML(epid=new.incid, GT, begin=1, end=as.numeric(end.nb+length(GT$GT)), impute.incid=FALSE)$R
     i <- 2
     while (abs(R0.val.i[i] - R0.val.i[i-1]) > 0.0001) {
       
@@ -113,7 +113,7 @@ est.R0.ML <- function#Estimate the reproduction number by maximum likelihood
       }
       
       new.incid <- impute.incid(c(0,0), epid.orig, R0.val.i[i], GT)
-      tmp.res <- est.R0.ML(epid=new.incid, GT, begin=1, end=as.numeric(end.nb+length(GT$GT)), impute.values=FALSE)
+      tmp.res <- est.R0.ML(epid=new.incid, GT, begin=1, end=as.numeric(end.nb+length(GT$GT)), impute.incid=FALSE)
       R0.val.i[i+1] <- tmp.res$R
       tmp.conf.int <- tmp.res$conf.int
       tmp.pred <- tmp.res$pred
@@ -125,8 +125,8 @@ est.R0.ML <- function#Estimate the reproduction number by maximum likelihood
     new.epid=check.incid(incid=new.incid, time.step=time.step, date.first.obs=(epid$t[1]-length(GT$GT)))
   }
   
-  if (impute.values == FALSE) {
-	  return (structure(list(R=exp(res.R$maximum), conf.int=c(exp(R.min$root), exp(R.max$root)), epid=epid.orig, GT=GT, begin=begin, begin.nb=begin.nb, end=end, end.nb=end.nb, pred=pred, Rsquared=Rsquared, call=CALL, method="Maximum Likelihood", method.code="ML"),class="R0.R"))
+  if (impute.incid == FALSE) {
+    return (structure(list(R=exp(res.R$maximum), conf.int=c(exp(R.min$root), exp(R.max$root)), epid=epid.orig, GT=GT, begin=begin, begin.nb=begin.nb, end=end, end.nb=end.nb, pred=pred, Rsquared=Rsquared, call=CALL, method="Maximum Likelihood", method.code="ML"),class="R0.R"))
   }
   else {
     return (structure(list(R=R0.best, conf.int=conf.int, epid=new.epid, epid.orig=epid.orig, GT=GT, begin=new.epid$t[1], begin.nb=1, end=end, end.nb=which(new.epid$t == end), pred=pred, Rsquared=Rsquared, call=CALL, method="Maximum Likelihood", method.code="ML"),class="R0.R"))
@@ -134,12 +134,12 @@ est.R0.ML <- function#Estimate the reproduction number by maximum likelihood
   
   ##value<<
   ## A list with components:
-	## \item{R}{The estimate of the reproduction ratio.}
-	## \item{conf.int}{The 95% confidence interval for the R estimate.}
-	## \item{epid}{Original or augmented epidemic data, depending whether \link{\code{impute.values}} is set to FALSE or TRUE.}
-	## \item{epid.orig}{Original epidemic data.}
+  ## \item{R}{The estimate of the reproduction ratio.}
+  ## \item{conf.int}{The 95% confidence interval for the R estimate.}
+  ## \item{epid}{Original or augmented epidemic data, depending whether \link{\code{impute.incid}} is set to FALSE or TRUE.}
+  ## \item{epid.orig}{Original epidemic data.}
   ## \item{GT}{Generation time distribution uised in the computation.}
-	## \item{begin}{Starting date for the fit.}
+  ## \item{begin}{Starting date for the fit.}
   ## \item{begin.nb}{The number of the first day used in the fit.}
   ## \item{end}{The end date for the fit.}
   ## \item{end.nb}{The number of the las day used for the fit.}
