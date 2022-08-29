@@ -7,7 +7,7 @@
     end = NULL, date.first.obs = NULL, 
     time.step = 1, range = c(0.01, 
         50), unknown.GT = FALSE, 
-    impute.values = FALSE, 
+    impute.incid = FALSE, 
     checked = FALSE, 
     ...)}
 \arguments{
@@ -21,7 +21,7 @@
   \item{time.step}{Optional. If date of first observation is specified, number of day between each incidence observation}
   \item{range}{Range in which the maximum must be looked for}
   \item{unknown.GT}{When \code{GT} distribution is unknown, it is estimated jointly. See details.}
-  \item{impute.values}{Boolean value. If TRUE, will impute unobserved cases at the beginning of the epidemic to correct for censored data}
+  \item{impute.incid}{Boolean value. If TRUE, will impute unobserved cases at the beginning of the epidemic to correct for censored data}
   \item{checked}{Internal flag used to check whether integrity checks were ran or not.}
   \item{\dots}{parameters passed to inner functions}
 }
@@ -43,7 +43,7 @@ CI is achieved by profiling the likelihood.}
 \value{A list with components:
 \item{R}{The estimate of the reproduction ratio.}
 \item{conf.int}{The 95\% confidence interval for the R estimate.}
-\item{epid}{Original or augmented epidemic data, depending whether \link{\code{impute.values}} is set to FALSE or TRUE.}
+\item{epid}{Original or augmented epidemic data, depending whether \link{\code{impute.incid}} is set to FALSE or TRUE.}
 \item{epid.orig}{Original epidemic data.}
 \item{GT}{Generation time distribution uised in the computation.}
 \item{begin}{Starting date for the fit.}
