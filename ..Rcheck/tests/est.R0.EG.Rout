@@ -1,0 +1,38 @@
+
+R version 4.2.1 (2022-06-23) -- "Funny-Looking Kid"
+Copyright (C) 2022 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin21.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> #Loading package
+> library(R0)
+Loading required package: MASS
+> 
+> ## Data is taken from the paper by Nishiura for key transmission parameters of an institutional
+> ## outbreak during 1918 influenza pandemic in Germany)
+> 
+> data(Germany.1918)
+> mGT<-generation.time("gamma", c(3, 1.5))
+> 
+> est.R0.EG(Germany.1918, mGT, begin=1, end=27)
+Waiting for profiling to be done...
+Reproduction number estimate using  Exponential Growth  method.
+R :  1.525895[ 1.494984 , 1.557779 ]
+
+> ## Reproduction number estimate using  Exponential Growth 
+> ## R :  1.525895[ 1.494984 , 1.557779 ]
+> 
+> proc.time()
+   user  system elapsed 
+  0.191   0.060   0.248 

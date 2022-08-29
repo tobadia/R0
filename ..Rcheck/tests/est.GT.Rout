@@ -1,0 +1,61 @@
+
+R version 4.2.1 (2022-06-23) -- "Funny-Looking Kid"
+Copyright (C) 2022 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin21.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> #Loading package
+> library(R0)
+Loading required package: MASS
+> 
+> # Data taken from traced cases of H1N1 viruses.
+> data(H1N1.serial.interval)
+> est.GT(serial.interval=H1N1.serial.interval)
+Best fitting GT distribution is a gamma distribution with mean = 3.039437 and sd = 1.676551 .
+Discretized Generation Time distribution
+mean: 3.070303 , sd: 1.676531 
+ [1] 0.0000000000 0.1621208802 0.2704857362 0.2358751176 0.1561845680
+ [6] 0.0888997193 0.0459909903 0.0222778094 0.0102848887 0.0045773285
+[11] 0.0019791984 0.0008360608 0.0003464431 0.0001412594
+
+Warning messages:
+1: In densfun(x, parm[1], parm[2], ...) : NaNs produced
+2: In densfun(x, parm[1], parm[2], ...) : NaNs produced
+> 
+> ## Best fitting GT distribution is a gamma distribution with mean = 3.039437 and sd = 1.676551 .
+> ## Discretized Generation Time distribution
+> ## mean: 3.070303 , sd: 1.676531 
+> ## [1] 0.0000000000 0.1621208802 0.2704857362 0.2358751176 0.1561845680 0.0888997193 0.0459909903 
+> ## 0.0222778094 0.0102848887 0.0045773285 0.0019791984 0.0008360608 0.0003464431 0.0001412594
+> 
+> 
+> # The same result can be achieved with two vectors of dates of onset.
+> # Here we use the same data, but trick the function into thinking onset dates are all "0".
+> data(H1N1.serial.interval)
+> est.GT(infector.onset.dates=rep(0,length(H1N1.serial.interval)), 
++        infectee.onset.dates=H1N1.serial.interval)
+Best fitting GT distribution is a gamma distribution with mean = 3.039437 and sd = 1.676551 .
+Discretized Generation Time distribution
+mean: 3.070303 , sd: 1.676531 
+ [1] 0.0000000000 0.1621208802 0.2704857362 0.2358751176 0.1561845680
+ [6] 0.0888997193 0.0459909903 0.0222778094 0.0102848887 0.0045773285
+[11] 0.0019791984 0.0008360608 0.0003464431 0.0001412594
+
+Warning messages:
+1: In densfun(x, parm[1], parm[2], ...) : NaNs produced
+2: In densfun(x, parm[1], parm[2], ...) : NaNs produced
+> 
+> proc.time()
+   user  system elapsed 
+  0.160   0.053   0.207 
