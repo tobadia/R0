@@ -14,20 +14,21 @@ plot.R0.GT <- function#Print the characteristics of the generation time distribu
 ##keyword<< internal
 
 (x, ##<< the generation time distribution.
-... ##<< extra parameters passed to plot.
+ ... ##<< extra parameters passed to plot.
 ) 
-
   
-# Code
+  
+  # Code
   
 {
   #Only check is that GT is of class "R0.GT"
-	if (class(x)!="R0.GT") {
+  if (class(x)!="R0.GT") {
     stop("GT must be of class 'R0.GT'")
-	}
+  }
   
   #We plot GT=f(time)
-	plot(x$time,x$GT,xlab="Time",ylab="PDF",t='l', main="Generation Time distribution",...)
+  plot(x$time,x$GT,xlab="Time",ylab="PDF",t='l', main="Generation Time distribution",...)
   
-### Called for side effect. Shows a plot of the generation time distribution.	
+  ##value<<
+  ## Called for side effect. Shows a plot of the generation time distribution.	
 }

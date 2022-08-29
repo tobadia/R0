@@ -232,21 +232,22 @@ est.R0.TD <- function#Estimate the time dependent reproduction number
 	
 	return(structure(list(R=R,conf.int=conf.int, P=P, p=p, GT=GT, epid=epid.bak, import=import, pred=pred, begin=begin, begin.nb=begin.nb, end=end, end.nb=end.nb, data.name=DNAME, call=CALL, method="Time-Dependent", method.code="TD"),class="R0.R"))    #return everything
 	
-  ### A list with components:
-  ### \item{R}{vector of R values.}
-  ### \item{conf.int}{95% confidence interval for estimates.}
-	### \item{P}{Matrix of who infected whom.}
-  ### \item{p}{Probability of who infected whom (values achieved by normalizing P matrix).}
-  ### \item{GT}{Generation time distribution used in the computation.}
-	### \item{epid}{Original epidemic data.}
-  ### \item{import}{Vector of imported cases.}
-  ### \item{pred}{Theoretical epidemic data, computed with estimated values of R.}
-  ### \item{begin}{Starting date for the fit.}
-  ### \item{begin.nb}{The number of the first day used in the fit.}
-  ### \item{end}{The end date for the fit.}
-  ### \item{end.nb}{The number of the las day used for the fit.}
-  ### \item{data.name}{Name of the data used in the fit.}
-  ### \item{call}{Call used for the function.}
-	### \item{method}{Method for estimation.}
-  ### \item{method.code}{Internal code used to designate method.}
+	##value<<
+  ## A list with components:
+  ## \item{R}{vector of R values.}
+  ## \item{conf.int}{95% confidence interval for estimates.}
+	## \item{P}{Matrix of who infected whom.}
+  ## \item{p}{Probability of who infected whom (values achieved by normalizing P matrix).}
+  ## \item{GT}{Generation time distribution used in the computation.}
+	## \item{epid}{Original epidemic data.}
+  ## \item{import}{Vector of imported cases.}
+  ## \item{pred}{Theoretical epidemic data, computed with estimated values of R.}
+  ## \item{begin}{Starting date for the fit.}
+  ## \item{begin.nb}{The number of the first day used in the fit.}
+  ## \item{end}{The end date for the fit.}
+  ## \item{end.nb}{The number of the last day used for the fit.}
+  ## \item{data.name}{Name of the data used in the fit.}
+  ## \item{call}{Call used for the function.}
+	## \item{method}{Method for estimation.}
+  ## \item{method.code}{Internal code used to designate method.}
 }

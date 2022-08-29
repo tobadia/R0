@@ -7,7 +7,7 @@
   \item{r}{exponential growth ratio}
   \item{GT}{discretized generation time distribution}
 }
-\details{For internal use. Called by est.R0.EG.}
+\details{For internal use. Called by \code{\link{est.R0.EG}}.}
 \value{An R value corresponding to inverse of discretized Laplace transform.}
 
 \author{Pierre-Yves Boelle, Thomas Obadia}

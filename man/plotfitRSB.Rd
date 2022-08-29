@@ -1,8 +1,9 @@
 \name{plotfitRSB}
 \alias{plotfitRSB}
 \title{Internal plot method for SB estimates}
-\description{Internal plotfit method for SB estimates}
-\usage{plotfitRSB(x, xscale, SB.dist, ...)}
+\description{Internal \code{\link{plotfit}} method for SB estimates}
+\usage{plotfitRSB(x, xscale, 
+    SB.dist, ...)}
 \arguments{
   \item{x}{
 }

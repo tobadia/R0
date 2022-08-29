@@ -73,17 +73,18 @@ time.period ##<< Time period to be used for computations.
   #return everything
   return(structure(list(R=R, conf.int=conf.int, GT=res$GT, epid=epid, begin=res$begin, begin.nb=1, end=res$end, end.nb=length(epid$t), data.name=res$data.name, call=res$call, method=res$method, method.code=res$method.code),class="R0.R"))
 
-  ### A list with components:
-  ### \item{R}{The estimate of the reproduction ratio.}
-  ### \item{conf.int}{The 95% confidence interval for the R estimate.}
-  ### \item{GT}{Generation time distribution uised in the computation.}
-  ### \item{epid}{Original or augmented epidemic data, depending whether impute.values is set to FALSE or TRUE.}
-  ### \item{begin}{Starting date for the fit.}
-  ### \item{begin.nb}{The number of the first day used in the fit.}
-  ### \item{end}{The end date for the fit.}
-  ### \item{end.nb}{The number of the las day used for the fit.}
-  ### \item{data.name}{The name of the dataset used.}
-  ### \item{call}{Call used for the function.}
-  ### \item{method}{Method used for fitting.}
-  ### \item{method.code}{Internal code used to designate method.}
+  ##value<<
+  ## A list with components:
+  ## \item{R}{The estimate of the reproduction ratio.}
+  ## \item{conf.int}{The 95% confidence interval for the R estimate.}
+  ## \item{GT}{Generation time distribution uised in the computation.}
+  ## \item{epid}{Original or augmented epidemic data, depending whether impute.values is set to FALSE or TRUE.}
+  ## \item{begin}{Starting date for the fit.}
+  ## \item{begin.nb}{The number of the first day used in the fit.}
+  ## \item{end}{The end date for the fit.}
+  ## \item{end.nb}{The number of the las day used for the fit.}
+  ## \item{data.name}{The name of the dataset used.}
+  ## \item{call}{Call used for the function.}
+  ## \item{method}{Method used for fitting.}
+  ## \item{method.code}{Internal code used to designate method.}
 }

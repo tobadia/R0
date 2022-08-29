@@ -139,19 +139,20 @@ est.R0.SB <- function#Estimate the time dependent reproduction number using a Ba
   rownames(conf.int) = as.character(epid$t[1:(end.nb-begin.nb)])
   return(structure(list(R=R, conf.int=conf.int, proba.Rt=proba.Rt, GT=GT, epid=epid.orig, begin=begin, begin.nb=begin.nb, end=end, end.nb=end.nb, pred=pred, data.name=DNAME, call=CALL, method="Sequential Bayesian", method.code="SB"),class="R0.R"))    #return everything
 
-  ### A list with components:
-	### \item{R}{vector of R values.}
-	### \item{conf.int}{95% confidence interval for estimates.}
-  ### \item{proba.Rt}{A list with successive distribution for R throughout the outbreak.}
-	### \item{GT}{Generation time distribution used in the computation.}
-	### \item{epid}{Original epidemic data.}
-	### \item{begin}{Begin date for the fit.}
-  ### \item{begin.nb}{Index of begin date for the fit.}
-	### \item{end}{End date for the fit.}
-  ### \item{end.nb}{Index of end date for the fit.}
-	### \item{pred}{Predictive curve based on most-likely R value.}
-  ### \item{data.name}{Name of the data used in the fit.}
-  ### \item{call}{Complete call used to generate results.}
-	### \item{method}{Method for estimation.}
-	### \item{method.code}{Internal code used to designate method.}
+  ##value<<
+  ## A list with components:
+	## \item{R}{vector of R values.}
+	## \item{conf.int}{95% confidence interval for estimates.}
+  ## \item{proba.Rt}{A list with successive distribution for R throughout the outbreak.}
+	## \item{GT}{Generation time distribution used in the computation.}
+	## \item{epid}{Original epidemic data.}
+	## \item{begin}{Begin date for the fit.}
+  ## \item{begin.nb}{Index of begin date for the fit.}
+	## \item{end}{End date for the fit.}
+  ## \item{end.nb}{Index of end date for the fit.}
+	## \item{pred}{Predictive curve based on most-likely R value.}
+  ## \item{data.name}{Name of the data used in the fit.}
+  ## \item{call}{Complete call used to generate results.}
+	## \item{method}{Method for estimation.}
+	## \item{method.code}{Internal code used to designate method.}
 }

@@ -37,5 +37,6 @@ CD.GT ##<< Generation time distribution to be used for computations
     
     return(round(c(censored.incidence,CD.epid$incid)))
     
-    ### A vector with both imputed incidence and source available data.
+    ##value<<
+    ## A vector with both imputed incidence and source available data.
 }

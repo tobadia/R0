@@ -2,15 +2,19 @@
 \alias{est.R0.SB}
 \title{Estimate the time dependent reproduction number using a Bayesian approach}
 \description{Estimate the time dependent reproduction number using a Bayesian approach. All known data are used as a prior for next iteration (see Details).}
-\usage{est.R0.SB(epid, GT, t = NULL, begin = NULL, end = NULL, date.first.obs = NULL, 
-    time.step = 1, force.prior = FALSE, checked = FALSE, ...)}
+\usage{est.R0.SB(epid, GT, t = NULL, 
+    begin = NULL, end = NULL, 
+    date.first.obs = NULL, 
+    time.step = 1, force.prior = FALSE, 
+    checked = FALSE, 
+    ...)}
 \arguments{
   \item{epid}{the epidemic curve}
   \item{GT}{generation time distribution}
   \item{t}{Time at which epidemic was observed}
   \item{begin}{At what time estimation begins. Just there for "plot" purposes, not actually used}
   \item{end}{At what time estimation ends. Just there for "plot" purposes, not actually used}
-  \item{date.first.obs}{Optional date of first observation, if t not specified}
+  \item{date.first.obs}{Optional date of first observation, if \code{t} not specified}
   \item{time.step}{Optional. If date of first observation is specified, number of day between each incidence observation}
   \item{force.prior}{Set to any custom value to force the initial prior as a uniform distribution on [0;value]}
   \item{checked}{Internal flag used to check whether integrity checks were ran or not.}
@@ -18,7 +22,7 @@
 }
 \details{For internal use. Called by est.R0.
 
-Initial prior is an unbiased uniform distribution for R, between 0 and the maximum of incid(t+1) - incid(t). 
+Initial prior is an unbiased uniform distribution for R, between 0 and the maximum of incid(t+1) - incid(\code{t}). 
 For each subsequent iteration, a new distribution is computed for R, using the previous output as new prior.
 
 CI is achieved by a cumulated sum of the R posterior distribution, and corresponds to the 2.5\% and 97.5\% thresholds}
@@ -26,12 +30,12 @@ CI is achieved by a cumulated sum of the R posterior distribution, and correspon
 \item{R}{vector of R values.}
 \item{conf.int}{95\% confidence interval for estimates.}
 \item{proba.Rt}{A list with successive distribution for R throughout the outbreak.}
-\item{GT}{generation time distribution}
-\item{epid}{the epidemic curve}
-\item{begin}{At what time estimation begins. Just there for "plot" purposes, not actually used}
-\item{begin.nb}{Index of begin date for the fit.}
-\item{end}{At what time estimation ends. Just there for "plot" purposes, not actually used}
-\item{end.nb}{Index of end date for the fit.}
+\item{GT}{Generation time distribution used in the computation.}
+\item{epid}{Original epidemic data.}
+\item{begin}{Begin date for the fit.}
+\item{begin.nb}{Index of \code{begin} date for the fit.}
+\item{end}{End date for the fit.}
+\item{end.nb}{Index of \code{end} date for the fit.}
 \item{pred}{Predictive curve based on most-likely R value.}
 \item{data.name}{Name of the data used in the fit.}
 \item{call}{Complete call used to generate results.}

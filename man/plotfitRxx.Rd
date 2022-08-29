@@ -1,8 +1,9 @@
 \name{plotfitRxx}
 \alias{plotfitRxx}
 \title{Internal plotfit method for EG, ML and TD estimates}
-\description{Internal plotfit method for EG, ML and TD estimates}
-\usage{plotfitRxx(x, xscale, ...)}
+\description{Internal \code{\link{plotfit}} method for EG, ML and TD estimates}
+\usage{plotfitRxx(x, xscale, 
+    ...)}
 \arguments{
   \item{x}{
 }

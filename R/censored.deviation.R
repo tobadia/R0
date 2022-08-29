@@ -69,5 +69,6 @@ censored.deviation = function#Impute censored cases to rebuild longer epidemic v
   #cat(N.avt.0,"\n")
   return(val)
   
-  ### The deviation between sum((E(Nt)-Nt)^2)
+  ##value<<
+  ## The deviation between sum((E(Nt)-Nt)^2)
 }

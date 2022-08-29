@@ -131,19 +131,21 @@ est.R0.ML <- function#Estimate the reproduction number by maximum likelihood
   else {
     return (structure(list(R=R0.best, conf.int=conf.int, epid=new.epid, epid.orig=epid.orig, GT=GT, begin=new.epid$t[1], begin.nb=1, end=end, end.nb=which(new.epid$t == end), pred=pred, Rsquared=Rsquared, call=CALL, method="Maximum Likelihood", method.code="ML"),class="R0.R"))
   }
-  ### A list with components:
-	### \item{R}{The estimate of the reproduction ratio.}
-	### \item{conf.int}{The 95% confidence interval for the R estimate.}
-	### \item{epid}{Original or augmented epidemic data, depending whether impute.values is set to FALSE or TRUE.}
-	### \item{epid.orig}{Original epidemic data.}
-  ### \item{GT}{Generation time distribution uised in the computation.}
-	### \item{begin}{Starting date for the fit.}
-  ### \item{begin.nb}{The number of the first day used in the fit.}
-  ### \item{end}{The end date for the fit.}
-  ### \item{end.nb}{The number of the las day used for the fit.}
-  ### \item{pred}{Prediction on the period used for the fit.}
-  ### \item{Rsquared}{Correlation coefficient between predicted curve (by fit.epid) and observed epidemic curve.}
-  ### \item{call}{Call used for the function.}
-  ### \item{method}{Method used for fitting.}
-  ### \item{method.code}{Internal code used to designate method.}
+  
+  ##value<<
+  ## A list with components:
+	## \item{R}{The estimate of the reproduction ratio.}
+	## \item{conf.int}{The 95% confidence interval for the R estimate.}
+	## \item{epid}{Original or augmented epidemic data, depending whether \link{\code{impute.values}} is set to FALSE or TRUE.}
+	## \item{epid.orig}{Original epidemic data.}
+  ## \item{GT}{Generation time distribution uised in the computation.}
+	## \item{begin}{Starting date for the fit.}
+  ## \item{begin.nb}{The number of the first day used in the fit.}
+  ## \item{end}{The end date for the fit.}
+  ## \item{end.nb}{The number of the las day used for the fit.}
+  ## \item{pred}{Prediction on the period used for the fit.}
+  ## \item{Rsquared}{Correlation coefficient between predicted curve (by fit.epid) and observed epidemic curve.}
+  ## \item{call}{Call used for the function.}
+  ## \item{method}{Method used for fitting.}
+  ## \item{method.code}{Internal code used to designate method.}
 }

@@ -86,11 +86,12 @@ estimate.R <- function#Estimate R0 for one incidence dataset using several metho
   
   return(structure(res,class="R0.sR"))
   
-  ### A list with components:
-  ### \item{estimates}{List containing all results from called methods.}
-  ### \item{epid}{Epidemic curve.}
-  ### \item{GT}{Generation Time distribution function.}
-  ### \item{t}{Date vector.}
-  ### \item{begin}{Begin date for estimation.}
-  ### \item{end}{End date for estimation.}
+  ##value<<
+  ## A list with components:
+  ## \item{estimates}{List containing all results from called methods.}
+  ## \item{epid}{Epidemic curve.}
+  ## \item{GT}{Generation Time distribution function.}
+  ## \item{t}{Date vector.}
+  ## \item{begin}{Begin date for estimation.}
+  ## \item{end}{End date for estimation.}
 }

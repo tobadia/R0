@@ -2,26 +2,29 @@
 \alias{generation.time}
 \title{Generation Time distribution}
 \description{Create an object of class GT representing a discretized Generation Time distribution.}
-\usage{generation.time(type = c("empirical", "gamma", "weibull", "lognormal"), 
-    val = NULL, truncate = NULL, step = 1, first.half = TRUE, 
+\usage{generation.time(type = c("empirical", 
+    "gamma", "weibull", 
+    "lognormal"), val = NULL, 
+    truncate = NULL, 
+    step = 1, first.half = TRUE, 
     p0 = TRUE)}
 \arguments{
   \item{type}{Type of distribution.}
   \item{val}{Vector of values used for the empirical distribution, or c(mean, sd) if parametric.}
   \item{truncate}{Maximum extent of the GT distribution.}
-  \item{step}{Time step used in discretization.}
+  \item{step}{Time \code{step} used in discretization.}
   \item{first.half}{First probability computed on half period.}
   \item{p0}{Is probability on day 0 0}
 }
 \details{How the GT is discretized may have some impact on the shape of the distribution.
-For example, the distribution may be discretized in intervals of 1 time step starting 
+For example, the distribution may be discretized in intervals of 1 time \code{step} starting 
 at time 0, i.e. [0,1), [1,2), and so on. Or it may be discretized as [0,0.5), [0.5, 1.5), ... (the default).
 
 If the GT is discretized from a given continuous distribution, 
 the expected duration of the Generation Time will be less than the nominal, 
 it will be in better agreement in the second discretization.
 
-If p0 is TRUE (default) then the generation time distribution 
+If \code{p0} is TRUE (default) then the generation time distribution 
 is set to 0 for day 0.
 
 If no truncation is provided, the distribution will be truncated at 99.99 percent probability.}

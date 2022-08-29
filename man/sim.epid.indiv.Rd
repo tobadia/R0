@@ -2,13 +2,15 @@
 \alias{sim.epid.indiv}
 \title{Influenza-like illness simulation (individual-based model)}
 \description{Generates several epidemic curves on a individual-based model}
-\usage{sim.epid.indiv(beta, Tmax, n = 1, family = "poisson", negbin.size = NULL)}
+\usage{sim.epid.indiv(beta, 
+    Tmax, n = 1, family = "poisson", 
+    negbin.size = NULL)}
 \arguments{
   \item{beta}{Contact rate in the SEIR model.}
   \item{Tmax}{Maximum length of the epidemic (cases infected after this length will be truncated).}
   \item{n}{Number of epidemics to be simulated (default is 1)}
   \item{family}{Distribution of offspring (default is "poisson").}
-  \item{negbin.size}{If family is set to "negbin", sets the size parameter of the negative binomial distribution.}
+  \item{negbin.size}{If \code{family} is set to "negbin", sets the size parameter of the negative binomial distribution.}
 }
 
 \value{A matrix with epidemics stored as columns (incidence count)}

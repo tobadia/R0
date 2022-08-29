@@ -91,5 +91,7 @@ sim.epid.indiv <- function#Influenza-like illness simulation (individual-based m
     epid.matrix[,i] <- table(cut(epid[1:(idx.max-1),"tinf"], seq(0,Tmax,1), include.lowest=TRUE))
   }
   return(epid.matrix)
-  ### A matrix with epidemics stored as columns (incidence count)
+  
+  ##value<<
+  ## A matrix with epidemics stored as columns (incidence count)
 }

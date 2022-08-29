@@ -2,7 +2,9 @@
 \alias{plot.R0.R}
 \title{Plot the R0/Rt value along with confidence interval}
 \description{Plot the R0/Rt value along with confidence interval}
-\usage{\method{plot}{R0.R}(x, all = TRUE, xscale = "w", TD.split = FALSE, ...)}
+\usage{\method{plot}{R0.R}(x, all = TRUE, 
+    xscale = "w", TD.split = FALSE, 
+    ...)}
 \arguments{
   \item{x}{Result of est.R (class R)}
   \item{all}{Should the whole epidemic curve be shown}
@@ -12,7 +14,7 @@
 }
 \details{For internal use. Called by plot.}
 \value{Called for its side effect :
-Draws all R0 or R(t) value from one estimation methods.}
+Draws \code{all} R0 or R(t) value from one estimation methods.}
 
 \author{Pierre-Yves Boelle, Thomas Obadia}
 
