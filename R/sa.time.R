@@ -35,7 +35,7 @@ sa.time=function#Sensitivity analysis of basic reproduction ratio to begin/end d
   #Warning note and integrity check
   warning("If 'begin' and 'end' overlap, cases where begin >= end are skipped.\nThese cases often return Rsquared = 1 and are thus ignored.", call. = FALSE)
     if (!is.null(res)) {
-      if (class(res) != "R0.R") {
+      if (!inherits(res, "R0.R")) {
         stop("Currently, sensitivity analysis from a result object only supports 'R0.R' class objects. Try using res$estimates$EG or res$estimates$ML if they are defined.")
       }
       else if ((res$method %in% c("Exponential Growth","Maximum Likelihood")) == FALSE) {
