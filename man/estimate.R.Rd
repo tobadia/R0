@@ -1,33 +1,38 @@
 \name{estimate.R}
 \alias{estimate.R}
 \title{Estimate R0 for one incidence dataset using several methods}
-\description{Estimate R0 for one incidence dataset using several methods.}
-\usage{estimate.R(epid = NULL, GT = NULL, t = NULL, begin = NULL, end = NULL, 
-    date.first.obs = NULL, time.step = 1, AR = NULL, pop.size = NULL, 
-    S0 = 1, methods = NULL, checked = TRUE, ...)}
+\description{Estimate R0 for one incidence dataset using several \code{methods}.}
+\usage{estimate.R(epid = NULL, 
+    GT = NULL, t = NULL, 
+    begin = NULL, end = NULL, 
+    date.first.obs = NULL, 
+    time.step = 1, AR = NULL, 
+    pop.size = NULL, 
+    S0 = 1, methods = NULL, 
+    checked = TRUE, ...)}
 \arguments{
   \item{epid}{Name of epidemic dataset}
   \item{GT}{Generation Time repartition function}
   \item{t}{Date vector}
   \item{begin}{Begin date for estimation. Can be an integer or a date (YYYY-mm-dd or YYYY/mm/dd)}
   \item{end}{End date for estimation. Can be an integer or a date (YYYY-mm-dd or YYYY/mm/dd)}
-  \item{date.first.obs}{Optional date of first observation, if t not specified}
+  \item{date.first.obs}{Optional date of first observation, if \code{t} not specified}
   \item{time.step}{Optional. If date of first observation is specified, number of day between each incidence observation}
   \item{AR}{Attack rate as a percentage from total population}
-  \item{pop.size}{Population size in which the incident cases were observed. See more details in est.R0.AR documentation}
+  \item{pop.size}{Population size in which the incident cases were observed. See more details in \code{\link{est.R0.AR}} documentation}
   \item{S0}{Initial proportion of the population considered susceptible}
-  \item{methods}{List of methods to be used for R0 estimation/comparison. Must be provided as c("method 1", "method 2", ...)}
+  \item{methods}{List of \code{methods} to be used for R0 estimation/comparison. Must be provided as c("method 1", "method 2", \code{...})}
   \item{checked}{Internal flag used to check whether integrity checks were ran or not.}
   \item{\dots}{Parameters passed to inner functions}
 }
-\details{Currently, supported methods are Exponential Growth (EG), Maximum Likelihood (ML), Attack Rate (AR), Time-Dependant (TD), and Sequential Bayesian (SB). See references below.}
+\details{Currently, supported \code{methods} are Exponential Growth (EG), Maximum Likelihood (ML), Attack Rate (\code{AR}), Time-Dependant (TD), and Sequential Bayesian (SB). See references below.}
 \value{A list with components:
 \item{estimates}{List containing all results from called methods.}
-\item{epid}{Name of epidemic dataset}
-\item{GT}{Generation Time repartition function}
-\item{t}{Date vector}
-\item{begin}{Begin date for estimation. Can be an integer or a date (YYYY-mm-dd or YYYY/mm/dd)}
-\item{end}{End date for estimation. Can be an integer or a date (YYYY-mm-dd or YYYY/mm/dd)}}
+\item{epid}{Epidemic curve.}
+\item{GT}{Generation Time distribution function.}
+\item{t}{Date vector.}
+\item{begin}{Begin date for estimation.}
+\item{end}{End date for estimation.}}
 \references{\code{\link{est.R0.EG}}: Wallinga, J., and M. Lipsitch. "How Generation Intervals Shape the Relationship Between Growth Rates and Reproductive Numbers." Proceedings of the Royal Society B: Biological Sciences 274, no. 1609 (2007): 599.
 
 \code{\link{est.R0.ML}}: White, L.F., J. Wallinga, L. Finelli, C. Reed, S. Riley, M. Lipsitch, and M. Pagano. "Estimation of the Reproductive Number and the Serial Interval in Early Phase of the 2009 Influenza A/H1N1 Pandemic in the USA." Influenza and Other Respiratory Viruses 3, no. 6 (2009): 267-276.

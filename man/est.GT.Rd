@@ -2,8 +2,11 @@
 \alias{est.GT}
 \title{Find the best-fitting GT distribution for a series of serial interval}
 \description{Find the best-fitting GT distribution for a series of serial interval}
-\usage{est.GT(infector.onset.dates = NULL, infectee.onset.dates = NULL, 
-    serial.interval = NULL, request.plot = FALSE, ...)}
+\usage{est.GT(infector.onset.dates = NULL, 
+    infectee.onset.dates = NULL, 
+    serial.interval = NULL, 
+    request.plot = FALSE, 
+    ...)}
 \arguments{
   \item{infector.onset.dates}{Vector of dates for infector symptoms onset.}
   \item{infectee.onset.dates}{Vector of dates for infectee symptoms onset.}
@@ -14,9 +17,9 @@
 \details{Generation Time distribution can be estimated by two inputs methods.
 User can either provide two vectors of dates or a unique vector of reported serial intervals.
 If two vectors are provided, both onset.dates vectors should be of same length. Element i is the onset date for individual i. This means that infector k (symptoms on day infector.onset.dates[k]) infected infectee k (symptoms on day infectee.onset.dates[k])
-If only serial.interval is provided, each record is assumed to be the time elapsed between each pair of infector and infectee.
+If only \code{serial.interval} is provided, each record is assumed to be the time elapsed between each pair of infector and infectee.
 
-When request.plot is set to TRUE, a graphical output provides standardized histogram of observed data along with
+When \code{request.plot} is set to TRUE, a graphical output provides standardized histogram of observed data along with
 the best-fitting adjusted model.}
 \value{A \code{R0.GT} object that complies with \code{\link{generation.time}} distribution requirements of the R0 package}
 

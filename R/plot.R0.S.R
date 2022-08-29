@@ -84,7 +84,9 @@ plot.R0.S <- function#Plot objects from sensitivity.analysis
   
   #Return the max.Rsquared data, as extracted from x$df.clean
   return(list(max.Rsquared=max.Rsquared, best.R0.values=x$df.clean[opt.df,4], best.fit=best.fit))
-  ### A data frame with best R0 measure for each possible time period, along with corresponding begin/end dates
-  ### \item{$max.Rsquared}{Best R0 measure for each time period, as measured by their Rsquared value.}
+  
+	##value<<
+	## A data frame with best R0 measure for each possible time period, along with corresponding begin/end dates
+  ## \item{$max.Rsquared}{Best R0 measure for each time period, as measured by their Rsquared value.}
   
 }

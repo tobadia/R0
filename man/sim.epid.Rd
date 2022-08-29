@@ -2,7 +2,9 @@
 \alias{sim.epid}
 \title{Epidemic outbreak simulation}
 \description{Generates several epidemic curves with specified distribution and reproduction number.}
-\usage{sim.epid(epid.nb, GT, R0, epid.length, family, negbin.size = NULL, 
+\usage{sim.epid(epid.nb, GT, 
+    R0, epid.length, 
+    family, negbin.size = NULL, 
     peak.value = 50)}
 \arguments{
   \item{epid.nb}{Number of outbreaks to be generated.}
@@ -10,14 +12,14 @@
   \item{R0}{Basic reproduction number.}
   \item{epid.length}{Length of the epidemic.}
   \item{family}{Distribution type for the new cases, either "poisson" or "negbin".}
-  \item{negbin.size}{Over-dispersion parameter, if family is set to "negbin".}
+  \item{negbin.size}{Over-dispersion parameter, if \code{family} is set to "negbin".}
   \item{peak.value}{Threashold value for incidence before epidemics begins decreasing}
 }
 \details{This function is only used for simulation purposes. The output is a matrix of n columns (number of outbreaks)
 by m rows (maximum length of an outbreak).
 
 When using rnbinom with "mean" and "size" moments, the variance is given by mean + mean^2/size (see ?rnbinom).
-One should determine the size accordingly to the R0 value to increase the dispersion.
+One should determine the size accordingly to the \code{R0} value to increase the dispersion.
 From the previous variance formula, if Var(X) = k*R0, size = R0/(k-1)}
 
 

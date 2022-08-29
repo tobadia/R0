@@ -13,7 +13,7 @@ sa.GT=function#Sensitivity analysis of reproduction ratio with varying GT distri
 ##details<< By using different Generation Time (GT) distribution, different estimates of reproduction ratio can be analyzed.
 
 (incid, ##<< incident cases
-GT.type, ##<< Type of distribution for GT (see GT.R for details)
+GT.type, ##<< Type of distribution for GT (see \code{\link{generation.time}} for details)
 GT.mean.range, ##<< mean used for all GT distributions throughout the simulation
 GT.sd.range, ##<< Range of standard deviation used for GT distributions. Must be provided as a vector.
 begin=NULL, ##<< begin date of the estimation of epidemic
@@ -80,11 +80,12 @@ time.step=1, ##<< Optional. If date of first observation is specified, number of
   
   return(s.a=s.a)
   
-  ### A data frame s.a with following components :
-  ### \item{$GT.type}{Distribution law for GT.}
-  ### \item{$GT.mean}{Range of means used for tested GTs.}
-  ### \item{$GT.sd}{Range of standard deviations used for tested GTs.}
-  ### \item{$R}{Computed value for Reproduction Number given GT.type, GT.mean and GT.sd.}
-  ### \item{$conf.int[1]}{The lower limit of 95% CI for R.}
-  ### \item{$conf.int[2]}{The upper limit of 95% CI for R.}
+  ##value<<
+  ## A data frame s.a with following components :
+  ## \item{$GT.type}{Distribution law for GT.}
+  ## \item{$GT.mean}{Range of means used for tested GTs.}
+  ## \item{$GT.sd}{Range of standard deviations used for tested GTs.}
+  ## \item{$R}{Computed value for Reproduction Number given GT.type, GT.mean and GT.sd.}
+  ## \item{$conf.int[1]}{The lower limit of 95% CI for R.}
+  ## \item{$conf.int[2]}{The upper limit of 95% CI for R.}
 }

@@ -90,21 +90,22 @@ est.R0.EG <-function#Estimate R from exponential growth rate
   #return(structure(list(R=R, conf.int = c(R.inf,R.sup), r=r, conf.int.r=confint,epid=epid.orig, GT=GT, data.name =DNAME, begin=begin,end=end,method="Exponential Growth",pred=pred,fit=met),class="R"))
   return(structure(list(R=R, conf.int = c(R.inf,R.sup), r=r, conf.int.r=confint, Rsquared=Rsquared, epid=epid.orig, GT=GT, data.name=DNAME, call=CALL, begin=begin, begin.nb=begin.nb, end=end, end.nb=end.nb, method="Exponential Growth",pred=pred,fit=reg.met, method.code="EG"),class="R0.R"))
   
-  ### A list with components:
-  ### \item{R}{The estimate of the reproduction ratio.}
-  ### \item{conf.int}{The 95% confidence interval for the R estimate.}
-  ### \item{r}{Exponential growth rate of the epidemic.}
-  ### \item{conf.int.r}{Confidence interval of the exponential growth rate of the epidemic.}
-  ### \item{Rsquared}{The deviance R-squared measure for the considered dates and model.}
-  ### \item{epid}{Original epidemic data.}
-  ### \item{GT}{Generation time distribution uised in the computation.}
-  ### \item{data.name}{Name of the data used in the fit.}
-  ### \item{begin}{Starting date for the fit.}
-  ### \item{begin.nb}{The number of the first day used in the fit.}
-  ### \item{end}{The end date for the fit.}
-  ### \item{end.nb}{The number of the las day used for the fit.}
-  ### \item{fit}{Method used for fitting.}
-  ### \item{pred}{Prediction on the period used for the fit.}
-  ### \item{method}{Method for estimation.}
-  ### \item{method.code}{Internal code used to designate method.}
+	##value<<
+  ## A list with components:
+  ## \item{R}{The estimate of the reproduction ratio.}
+  ## \item{conf.int}{The 95% confidence interval for the R estimate.}
+  ## \item{r}{Exponential growth rate of the epidemic.}
+  ## \item{conf.int.r}{Confidence interval of the exponential growth rate of the epidemic.}
+  ## \item{Rsquared}{The deviance R-squared measure for the considered dates and model.}
+  ## \item{epid}{Original epidemic data.}
+  ## \item{GT}{Generation time distribution used in the computation.}
+  ## \item{data.name}{Name of the data used in the fit.}
+  ## \item{begin}{Starting date for the fit.}
+  ## \item{begin.nb}{The number of the first day used in the fit.}
+  ## \item{end}{The end date for the fit.}
+  ## \item{end.nb}{The number of the las day used for the fit.}
+  ## \item{fit}{Method used for fitting.}
+  ## \item{pred}{Prediction on the period used for the fit.}
+  ## \item{method}{Method for estimation.}
+  ## \item{method.code}{Internal code used to designate method.}
 }

@@ -114,9 +114,10 @@ p0=TRUE ##<< Is probability on day 0 0
 	sigma = sqrt(sum(GT*time^2) - mu^2)
 	return(structure(list(GT=GT,time=time,mean=mu,sd=sigma),class="R0.GT"))
   
-  ### A list with components:
-  ### \item{GT}{The probabilities for each time unit, starting at time 0.}
-  ### \item{time}{The time at which probabilities are calculated.}
-  ### \item{mean}{The mean of the discretized GT.}
-  ### \item{sd}{The standard deviation of the discretized GT.}
+	##value<<
+  ## A list with components:
+  ## \item{GT}{The probabilities for each time unit, starting at time 0.}
+  ## \item{time}{The time at which probabilities are calculated.}
+  ## \item{mean}{The mean of the discretized GT.}
+  ## \item{sd}{The standard deviation of the discretized GT.}
 }

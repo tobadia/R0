@@ -2,9 +2,13 @@
 \alias{est.R0.TD}
 \title{Estimate the time dependent reproduction number}
 \description{Estimate the time dependent reproduction number according to Wallinga & Teunis.}
-\usage{est.R0.TD(epid, GT, import = NULL, n.t0 = NULL, t = NULL, begin = NULL, 
-    end = NULL, date.first.obs = NULL, time.step = 1, q = c(0.025, 
-        0.975), correct = TRUE, nsim = 10000, checked = FALSE, 
+\usage{est.R0.TD(epid, GT, import = NULL, 
+    n.t0 = NULL, t = NULL, 
+    begin = NULL, end = NULL, 
+    date.first.obs = NULL, 
+    time.step = 1, q = c(0.025, 
+        0.975), correct = TRUE, 
+    nsim = 10000, checked = FALSE, 
     ...)}
 \arguments{
   \item{epid}{epidemic curve.}
@@ -14,11 +18,11 @@
   \item{t}{Vector of dates at which incidence was measured.}
   \item{begin}{At what time estimation begins. Just here for "plot" purposes, not actually used}
   \item{end}{At what time estimation ends. Just here for "plot" purposes, not actually used}
-  \item{date.first.obs}{Optional date of first observation, if t not specified}
+  \item{date.first.obs}{Optional date of first observation, if \code{t} not specified}
   \item{time.step}{Optional. If date of first observation is specified, number of day between each incidence observation.}
-  \item{q}{Quantiles for R(t). By default, 5\% and 95\%}
+  \item{q}{Quantiles for R(\code{t}). By default, 5\% and 95\%}
   \item{correct}{Correction for cases not yet observed (real time).}
-  \item{nsim}{Number of simulations to be run to compute quantiles for R(t)}
+  \item{nsim}{Number of simulations to be run to compute quantiles for R(\code{t})}
   \item{checked}{Internal flag used to check whether integrity checks were ran or not.}
   \item{\dots}{parameters passed to inner functions}
 }
@@ -30,14 +34,14 @@ CI is computed by multinomial simulations at each time step with the expected va
 \item{conf.int}{95\% confidence interval for estimates.}
 \item{P}{Matrix of who infected whom.}
 \item{p}{Probability of who infected whom (values achieved by normalizing P matrix).}
-\item{GT}{generation time distribution.}
-\item{epid}{epidemic curve.}
+\item{GT}{Generation time distribution used in the computation.}
+\item{epid}{Original epidemic data.}
 \item{import}{Vector of imported cases.}
 \item{pred}{Theoretical epidemic data, computed with estimated values of R.}
-\item{begin}{At what time estimation begins. Just here for "plot" purposes, not actually used}
+\item{begin}{Starting date for the fit.}
 \item{begin.nb}{The number of the first day used in the fit.}
-\item{end}{At what time estimation ends. Just here for "plot" purposes, not actually used}
-\item{end.nb}{The number of the las day used for the fit.}
+\item{end}{The \code{end} date for the fit.}
+\item{end.nb}{The number of the last day used for the fit.}
 \item{data.name}{Name of the data used in the fit.}
 \item{call}{Call used for the function.}
 \item{method}{Method for estimation.}

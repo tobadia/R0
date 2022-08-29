@@ -1,12 +1,14 @@
 \name{check.incid}
 \alias{check.incid}
 \title{Check incid in the input}
-\description{Checks incid in the input. For internal use only.}
-\usage{check.incid(incid, t = NULL, date.first.obs = NULL, time.step = 1)}
+\description{Checks \code{incid} in the input. For internal use only.}
+\usage{check.incid(incid, t = NULL, 
+    date.first.obs = NULL, 
+    time.step = 1)}
 \arguments{
   \item{incid}{An object (vector, data.frame, list) storing incidence}
   \item{t}{An optional vector of dates.}
-  \item{date.first.obs}{Optional date of first observation, if t not specified}
+  \item{date.first.obs}{Optional date of first observation, if \code{t} not specified}
   \item{time.step}{Optional. If date of first observation is specified, number of day between each incidence observation}
 }
 \details{For internal use. Called by estimation methods to format incidence input.
@@ -14,12 +16,12 @@
 check.incid handles everything related to incidence content integrity. It is designed to generate an
 output which comply with estimation functions requirements. Epidemic data can be provided as an epitools object (see below)
 or as vectors (incidence, dates, or both).
-When dates are provided, they can be in a separate t vector, or computed with the first value and a time step.
+When dates are provided, they can be in a separate \code{t} vector, or computed with the first value and a time step.
 In the end, the function returns a list with "epid" and "t" values.
 If you plan on using estimation functions on their own (and not throught est.R0), be aware that any incorrect input
 format will result in erratic behavior and/or crash.
 
-Object incid is either a list or data.frame. Expect item/column "$dates"" and/or "$stratum3". This is expected to work with objects created by epitools package (tested with v0.5-6).
+Object \code{incid} is either a list or data.frame. Expect item/column "$dates"" and/or "$stratum3". This is expected to work with objects created by epitools package (tested with v0.5-6).
 
 Epicurve.dates returns (among other things) a list with $dates object. This list gives incidence per day.
 Other epicurve methods return $dates along with a $<time_period> object and a $stratum3, which contains
@@ -31,7 +33,7 @@ E.g.: epicurve.weeks returns $dates, $weeks and $stratum3. $stratum3 object is a
 Incidence data should not contain negative or missing values.
 
 Incidence data and time vector should have the same length.}
-\value{A list with components incid and t.}
+\value{A list with components \code{incid} and \code{t}.}
 
 \author{Pierre-Yves Boelle, Thomas Obadia}
 

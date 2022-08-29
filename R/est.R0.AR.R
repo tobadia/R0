@@ -92,13 +92,14 @@ est.R0.AR <- function#Estimate R0 from attack rate of an epidemic
  
   return(structure(list(epid=epid, R=R0, var=var.R0, conf.int = CI95, begin.nb=1, end.nb=length(incid), AR=AR, method="Attack Rate", method.code="AR"),class="R0.R"))
   
-  ### A list with components:
-  ### \item{epid}{The vector of incidence, after being correctly formated by check.incid. Used only by plot.fit.}
-  ### \item{R}{The estimate of the reproduction ratio.}
-  ### \item{conf.int}{The 95% confidence interval for the R estimate.}
-  ### \item{AR}{Original attack rate.}
-  ### \item{begin.nb}{First date of incidence record. Used only by plot.fit.}
-  ### \item{end.nb}{Last date of incidence record. Used only by plot.fit.}
-  ### \item{method}{Method used for the estimation.}
-  ### \item{method.code}{Internal code used to designate method.}
+  ##value<<
+  ## A list with components:
+  ## \item{epid}{The vector of incidence, after being correctly formated by check.incid. Used only by plot.fit.}
+  ## \item{R}{The estimate of the reproduction ratio.}
+  ## \item{conf.int}{The 95% confidence interval for the R estimate.}
+  ## \item{AR}{Original attack rate.}
+  ## \item{begin.nb}{First date of incidence record. Used only by plot.fit.}
+  ## \item{end.nb}{Last date of incidence record. Used only by plot.fit.}
+  ## \item{method}{Method used for the estimation.}
+  ## \item{method.code}{Internal code used to designate method.}
 }
