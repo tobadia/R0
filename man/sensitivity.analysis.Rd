@@ -70,7 +70,7 @@ arrows(x0=as.numeric(tmp[,"GT.Mean"]), y0=as.numeric(tmp[,"CI.lower"]),
 ## sa.type="time"
 
 mGT<-generation.time("gamma", c(2.6,1))
-sen=sensitivity.analysis(sa.type="time", incid=Germany.1918, GT=mGT, begin=1:15, end=16:30, 
+sen=sensitivity.analysis(sa.type="time", incid=Germany.1918, GT=mGT, begin=1:10, end=16:25, 
                          est.method="EG")
 # ...
 # Warning message:
