@@ -9,3 +9,4 @@
 ^.*\.Rproj$
 ^Read-and-delete-me$
 ^README\.md$
+^\.github$
