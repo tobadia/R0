@@ -8,6 +8,84 @@
 
 # Function declaration
 
+
+
+#' Estimate the time dependent reproduction number
+#' 
+#' Estimate the time dependent reproduction number according to Wallinga &
+#' Teunis.
+#' 
+#' For internal use. Called by est.R0.
+#' 
+#' CI is computed by multinomial simulations at each time step with the
+#' expected value of R.
+#' 
+#' @param epid epidemic curve.
+#' @param GT generation time distribution.
+#' @param import Vector of imported cases.
+#' @param n.t0 Number of cases at time 0.
+#' @param t Vector of dates at which incidence was measured.
+#' @param begin At what time estimation begins. Just here for "plot" purposes,
+#' not actually used
+#' @param end At what time estimation ends. Just here for "plot" purposes, not
+#' actually used
+#' @param date.first.obs Optional date of first observation, if \code{t} not
+#' specified
+#' @param time.step Optional. If date of first observation is specified, number
+#' of day between each incidence observation.
+#' @param q Quantiles for R(\code{t}). By default, 5\% and 95\%
+#' @param correct Correction for cases not yet observed (real time).
+#' @param nsim Number of simulations to be run to compute quantiles for
+#' R(\code{t})
+#' @param checked Internal flag used to check whether integrity checks were ran
+#' or not.
+#' @param \dots parameters passed to inner functions
+#' @return A list with components: \item{R}{vector of R values.}
+#' \item{conf.int}{95\% confidence interval for estimates.} \item{P}{Matrix of
+#' who infected whom.} \item{p}{Probability of who infected whom (values
+#' achieved by normalizing P matrix).} \item{GT}{Generation time distribution
+#' used in the computation.} \item{epid}{Original epidemic data.}
+#' \item{import}{Vector of imported cases.} \item{pred}{Theoretical epidemic
+#' data, computed with estimated values of R.} \item{begin}{Starting date for
+#' the fit.} \item{begin.nb}{The number of the first day used in the fit.}
+#' \item{end}{The \code{end} date for the fit.} \item{end.nb}{The number of the
+#' last day used for the fit.} \item{data.name}{Name of the data used in the
+#' fit.} \item{call}{Call used for the function.} \item{method}{Method for
+#' estimation.} \item{method.code}{Internal code used to designate method.}
+#' @note This is the implementation of the method provided by Wallinga & Teunis
+#' (2004). Correction for estimation in real time is implemented as in
+#' Cauchemez et al, AJE (2006).
+#' 
+#' If imported cases are provided, they are counted in addition to autonomous
+#' cases. The final plot will show overall incidence.
+#' @author Pierre-Yves Boelle, Thomas Obadia
+#' @references Wallinga, J., and P. Teunis. "Different Epidemic Curves for
+#' Severe Acute Respiratory Syndrome Reveal Similar Impacts of Control
+#' Measures." American Journal of Epidemiology 160, no. 6 (2004): 509.
+#' @examples
+#' #Loading package
+#' library(R0)
+#' 
+#' ## Data is taken from the paper by Nishiura for key transmission parameters of an institutional
+#' ## outbreak during 1918 influenza pandemic in Germany)
+#' 
+#' data(Germany.1918)
+#' mGT<-generation.time("gamma", c(3, 1.5))
+#' TD <- est.R0.TD(Germany.1918, mGT, begin=1, end=126, nsim=100)
+#' # Warning messages:
+#' # 1: In est.R0.TD(Germany.1918, mGT) : Simulations may take several minutes.
+#' # 2: In est.R0.TD(Germany.1918, mGT) : Using initial incidence as initial number of cases.
+#' TD
+#' # Reproduction number estimate using  Time-Dependent  method.
+#' # 2.322239 2.272013 1.998474 1.843703 2.019297 1.867488 1.644993 1.553265 1.553317 1.601317 ...
+#' 
+#' ## An interesting way to look at these results is to agregate initial data by longest time unit,
+#' ## such as weekly incidence. This gives a global overview of the epidemic.
+#' TD.weekly <- smooth.Rt(TD, 7)
+#' TD.weekly
+#' # Reproduction number estimate using  Time-Dependant  method.
+#' # 1.878424 1.580976 1.356918 1.131633 0.9615463 0.8118902 0.8045254 0.8395747 0.8542518 0.8258094..
+#' plot(TD.weekly)
 est.R0.TD <- function#Estimate the time dependent reproduction number
 ### Estimate the time dependent reproduction number according to Wallinga & Teunis.
 ##details<< For internal use. Called by est.R0.

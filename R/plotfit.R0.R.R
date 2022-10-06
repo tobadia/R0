@@ -8,6 +8,27 @@
 
 # Function declaration
 
+
+
+#' Plot the fit of a model to epidemic data
+#' 
+#' Plots the fit of a model to epidemic data
+#' 
+#' For internal use. Called by \code{\link{plotfit}}.
+#' 
+#' For internal use. Called by \code{\link{plotfit.R0.sR}}.
+#' 
+#' @param x Result of est.R (class R0.R)
+#' @param all Should the whole epidemic curve be shown
+#' @param xscale Scale to be adjusted on X axis. Can be "d" (day), "w" (week
+#' (default)), "f" (fornight), "m" (month).
+#' @param SB.dist Should R distribution throughout the epidemic be plotted for
+#' SB method? (default: TRUE)
+#' @param \dots Parameters passed to plot
+#' @return Called for its side effect : Draws the fit of one estimation method
+#' to the data.
+#' @author Pierre-Yves Boelle, Thomas Obadia
+#' @keywords internal
 plotfit.R0.R <- function#Plot the fit of a model to epidemic data
 ### Plots the fit of a model to epidemic data
 ##details<< For internal use. Called by plotfit.
@@ -39,6 +60,18 @@ plotfit.R0.R <- function#Plot the fit of a model to epidemic data
 }
 
 
+
+
+#' Internal plotfit method for EG, ML and TD estimates
+#' 
+#' Internal \code{\link{plotfit}} method for EG, ML and TD estimates
+#' 
+#' 
+#' @param x
+#' @param xscale
+#' @param \dots
+#' @author Pierre-Yves Boelle, Thomas Obadia
+#' @keywords internal
 plotfitRxx <- function(x, xscale,...)#Internal plotfit method for EG, ML and TD estimates
 ###Internal plotfit method for EG, ML and TD estimates
 {
@@ -72,6 +105,18 @@ plotfitRxx <- function(x, xscale,...)#Internal plotfit method for EG, ML and TD 
   
 }
 
+
+
+#' Internal plotfit method for AR estimates
+#' 
+#' Internal \code{\link{plotfit}} method for AR estimates
+#' 
+#' 
+#' @param x
+#' @param xscale
+#' @param \dots
+#' @author Pierre-Yves Boelle, Thomas Obadia
+#' @keywords internal
 plotfitRAR <- function(x, xscale,...)#Internal plotfit method for AR estimates
 ###Internal plotfit method for AR estimates
 {
@@ -95,6 +140,19 @@ plotfitRAR <- function(x, xscale,...)#Internal plotfit method for AR estimates
   axis(1, at=atLab, labels=lab)
 }
 
+
+
+#' Internal plot method for SB estimates
+#' 
+#' Internal \code{\link{plotfit}} method for SB estimates
+#' 
+#' 
+#' @param x
+#' @param xscale
+#' @param SB.dist
+#' @param \dots
+#' @author Pierre-Yves Boelle, Thomas Obadia
+#' @keywords internal
 plotfitRSB <- function(x, xscale, SB.dist,...)#Internal plot method for SB estimates
 ###Internal plotfit method for SB estimates
 {

@@ -8,6 +8,19 @@
 
 # Function declaration
 
+
+
+#' Print the R estimate
+#' 
+#' Prints the R estimate
+#' 
+#' For internal use. Called by print.
+#' 
+#' @param x Result of est.R0.xx (class R0.R)
+#' @param \dots Parameters passed to inner functions
+#' @return Called for side effect.
+#' @author Pierre-Yves Boelle, Thomas Obadia
+#' @keywords internal
 print.R0.R <- function#Print the R estimate
 ### Prints the R estimate
 ##details<< For internal use. Called by print.

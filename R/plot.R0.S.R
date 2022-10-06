@@ -8,6 +8,26 @@
 
 # Function declaration
 
+
+
+#' Plot objects from sensitivity.analysis
+#' 
+#' Plots objects from \code{\link{sensitivity.analysis}}
+#' 
+#' For internal use. Called by plot.
+#' 
+#' @param x Result of \code{\link{sensitivity.analysis}} (class R0.S)
+#' @param what Specify the desired output. Can be "heatmap" (default),
+#' "criterion", or both.
+#' @param time.step Optional. If date of first observation is specified, number
+#' of day between each incidence observation
+#' @param skip Number of results to ignore (time period of X days) when looking
+#' for highest Rsquared value.
+#' @param \dots Parameters passed to inner functions
+#' @return A data frame with best R0 measure for each possible time period,
+#' along with corresponding begin/end dates \item{$max.Rsquared}{Best R0
+#' measure for each time period, as measured by their Rsquared value.}
+#' @author Pierre-Yves Boelle, Thomas Obadia
 plot.R0.S <- function#Plot objects from sensitivity.analysis
 ### Plots objects from sensitivity.analysis
 ##details<< For internal use. Called by plot.

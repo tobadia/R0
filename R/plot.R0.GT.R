@@ -8,6 +8,20 @@
 
 # Function declaration
 
+
+
+#' Print the characteristics of the generation time distribution
+#' 
+#' Prints the characteristics of the generation time distribution
+#' 
+#' For internal use. Called by print.
+#' 
+#' @param x the generation time distribution.
+#' @param \dots extra parameters passed to plot.
+#' @return Called for side effect. Shows a plot of the generation time
+#' distribution.
+#' @author Pierre-Yves Boelle, Thomas Obadia
+#' @keywords internal
 plot.R0.GT <- function#Print the characteristics of the generation time distribution
 ### Prints the characteristics of the generation time distribution
 ##details<< For internal use. Called by print.

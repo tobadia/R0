@@ -7,6 +7,27 @@
 
 # Function declaration
 
+
+
+#' Optimiziation routine for incidence imputation
+#' 
+#' When first records of incidence are unavailable, tries to impute censored
+#' cases to rebuild longer epidemic vector
+#' 
+#' This function is not intended for stand-alone use. It optimizes the values
+#' of vect, based upon minimization of deviation between actual epidemics data
+#' and observed generation time. The optimized function is
+#' \code{\link{censored.deviation}}, which returns the deviation used for
+#' minimization. Stand-alone use can be conducted, however this assumes data
+#' are all of the correct format.
+#' 
+#' @param CD.optim.vect Vector of two elements (multiplicative factor,
+#' log(highest imputed data) to be optimized
+#' @param CD.epid Original epidemic vector, output of check.incid()
+#' @param CD.R0 Assumed R0 value for the original epidemic vector
+#' @param CD.GT Generation time distribution to be used for computations
+#' @return A vector with both imputed incidence and source available data.
+#' @author Pierre-Yves Boelle, Thomas Obadia
 impute.incid = function#Optimiziation routine for incidence imputation
 ###When first records of incidence are unavailable, tries to impute censored cases to rebuild longer epidemic vector
 

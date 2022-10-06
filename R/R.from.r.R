@@ -8,6 +8,24 @@
 
 # Function declaration
 
+
+
+#' Compute the discretized Laplace Transform using a discretized Generation
+#' Time distribution
+#' 
+#' Computes the discretized Laplace Transform using a discretized Generation
+#' Time distribution.
+#' 
+#' For internal use. Called by \code{\link{est.R0.EG}}.
+#' 
+#' @param r exponential growth ratio
+#' @param GT discretized generation time distribution
+#' @return An R value corresponding to inverse of discretized Laplace
+#' transform.
+#' @note The formula for the discretized Laplace transform is taken from
+#' Wallinga.
+#' @author Pierre-Yves Boelle, Thomas Obadia
+#' @keywords internal
 R.from.r = function#Compute the discretized Laplace Transform using a discretized Generation Time distribution
 ### Computes the discretized Laplace Transform using a discretized Generation Time distribution.
 ##details<< For internal use. Called by est.R0.EG.

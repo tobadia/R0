@@ -8,6 +8,101 @@
 
 # Function declaration
 
+
+
+#' Estimate R0 for one incidence dataset using several methods
+#' 
+#' Estimate R0 for one incidence dataset using several \code{methods}.
+#' 
+#' Currently, supported \code{methods} are Exponential Growth (EG), Maximum
+#' Likelihood (ML), Attack Rate (\code{AR}), Time-Dependant (TD), and
+#' Sequential Bayesian (SB). See references below.
+#' 
+#' @param epid Name of epidemic dataset
+#' @param GT Generation Time repartition function
+#' @param t Date vector
+#' @param begin Begin date for estimation. Can be an integer or a date
+#' (YYYY-mm-dd or YYYY/mm/dd)
+#' @param end End date for estimation. Can be an integer or a date (YYYY-mm-dd
+#' or YYYY/mm/dd)
+#' @param date.first.obs Optional date of first observation, if \code{t} not
+#' specified
+#' @param time.step Optional. If date of first observation is specified, number
+#' of day between each incidence observation
+#' @param AR Attack rate as a percentage from total population
+#' @param pop.size Population size in which the incident cases were observed.
+#' See more details in \code{\link{est.R0.AR}} documentation
+#' @param S0 Initial proportion of the population considered susceptible
+#' @param methods List of \code{methods} to be used for R0
+#' estimation/comparison. Must be provided as c("method 1", "method 2",
+#' \code{...})
+#' @param checked Internal flag used to check whether integrity checks were ran
+#' or not.
+#' @param \dots Parameters passed to inner functions
+#' @return A list with components: \item{estimates}{List containing all results
+#' from called methods.} \item{epid}{Epidemic curve.} \item{GT}{Generation Time
+#' distribution function.} \item{t}{Date vector.} \item{begin}{Begin date for
+#' estimation.} \item{end}{End date for estimation.}
+#' @author Pierre-Yves Boelle, Thomas Obadia
+#' @references \code{\link{est.R0.EG}}: Wallinga, J., and M. Lipsitch. "How
+#' Generation Intervals Shape the Relationship Between Growth Rates and
+#' Reproductive Numbers." Proceedings of the Royal Society B: Biological
+#' Sciences 274, no. 1609 (2007): 599.
+#' 
+#' \code{\link{est.R0.ML}}: White, L.F., J. Wallinga, L. Finelli, C. Reed, S.
+#' Riley, M. Lipsitch, and M. Pagano. "Estimation of the Reproductive Number
+#' and the Serial Interval in Early Phase of the 2009 Influenza A/H1N1 Pandemic
+#' in the USA." Influenza and Other Respiratory Viruses 3, no. 6 (2009):
+#' 267-276.
+#' 
+#' \code{\link{est.R0.AR}}: Dietz, K. "The Estimation of the Basic Reproduction
+#' Number for Infectious Diseases." Statistical Methods in Medical Research 2,
+#' no. 1 (March 1, 1993): 23-41.
+#' 
+#' \code{\link{est.R0.TD}}: Wallinga, J., and P. Teunis. "Different Epidemic
+#' Curves for Severe Acute Respiratory Syndrome Reveal Similar Impacts of
+#' Control Measures." American Journal of Epidemiology 160, no. 6 (2004): 509.
+#' 
+#' \code{\link{est.R0.SB}}: Bettencourt, L.M.A., and R.M. Ribeiro. "Real Time
+#' Bayesian Estimation of the Epidemic Potential of Emerging Infectious
+#' Diseases." PLoS One 3, no. 5 (2008): e2185.
+#' @examples
+#' #Loading package
+#' library(R0)
+#' 
+#' ## Outbreak during 1918 influenza pandemic in Germany)
+#' data(Germany.1918)
+#' mGT<-generation.time("gamma", c(3, 1.5))
+#' estR0<-estimate.R(Germany.1918, mGT, begin=1, end=27, methods=c("EG", "ML", "TD", "AR", "SB"), 
+#'                   pop.size=100000, nsim=100)
+#' 
+#' attributes(estR0)
+#' ## $names
+#' ## [1] "epid"      "GT"        "begin"     "end"       "estimates"
+#' ## 
+#' ## $class
+#' ## [1] "R0.sR"
+#' 
+#' ## Estimates results are stored in the $estimates object
+#' estR0
+#' ## Reproduction number estimate using  Exponential Growth  method.
+#' ## R :  1.525895[ 1.494984 , 1.557779 ]
+#' ## 
+#' ## Reproduction number estimate using  Maximum Likelihood  method.
+#' ## R :  1.383996[ 1.309545 , 1.461203 ]
+#' ## 
+#' ## Reproduction number estimate using  Attack Rate  method.
+#' ## R :  1.047392[ 1.046394 , 1.048393 ]
+#' ## 
+#' ## Reproduction number estimate using  Time-Dependent  method.
+#' ## 2.322239 2.272013 1.998474 1.843703 2.019297 1.867488 1.644993 1.553265 1.553317 1.601317 ...
+#' ## 
+#' ## Reproduction number estimate using  Sequential Bayesian  method.
+#' ## 0 0 2.22 0.66 1.2 1.84 1.43 1.63 1.34 1.52 ...
+#' 
+#' 
+#' ## If no date vector nor date of first observation are provided, results are the same
+#' ## except time values in $t are replaced by index
 estimate.R <- function#Estimate R0 for one incidence dataset using several methods
 ### Estimate R0 for one incidence dataset using several methods.
 ##details<< Currently, supported methods are Exponential Growth (EG), Maximum Likelihood (ML), Attack Rate (AR), Time-Dependant (TD), and Sequential Bayesian (SB). See references below.

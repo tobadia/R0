@@ -7,6 +7,28 @@
 
 # Function declaration
 
+
+
+#' Plot the fit of all requested models to epidemic data
+#' 
+#' Plots the fit of \code{all} requested models to epidemic data
+#' 
+#' For internal use. Called by \code{\link{plotfit}}.
+#' 
+#' Tweaked plot() function that draws the epidemic data and model fit of each
+#' method contained in the object constructed by est.RO().
+#' 
+#' @param x Result of est.R (class R0.R)
+#' @param all Should the whole epidemic curve be shown
+#' @param xscale Scale to be adjusted on X axis. Can be "d" (day), "w" (week
+#' (default)), "f" (fornight), "m" (month).
+#' @param SB.dist Should R distribution throughout the epidemic be plotted for
+#' SB method? (default: TRUE)
+#' @param \dots Parameters passed to plot
+#' @return Called for its side effect : Draws \code{all} the epidemic curves
+#' and associated fit data computed by est.R0
+#' @author Pierre-Yves Boelle, Thomas Obadia
+#' @keywords internal
 plotfit.R0.sR <- function#Plot the fit of all requested models to epidemic data
 ### Plots the fit of all requested models to epidemic data
 ##details<< For internal use. Called by plotfit.

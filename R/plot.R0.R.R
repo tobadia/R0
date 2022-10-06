@@ -8,6 +8,25 @@
 
 # Function declaration
 
+
+
+#' Plot the R0/Rt value along with confidence interval
+#' 
+#' Plot the R0/Rt value along with confidence interval
+#' 
+#' For internal use. Called by plot.
+#' 
+#' @param x Result of est.R (class R)
+#' @param all Should the whole epidemic curve be shown
+#' @param xscale Scale to be adjusted on X axis. Can be "d" (day), "w" (week
+#' (default)), "f" (fornight), "m" (month).
+#' @param TD.split Parameter to force the display of both R(t) and the epidemic
+#' curve in the same window for TD method
+#' @param \dots Parameters passed to plot
+#' @return Called for its side effect : Draws \code{all} R0 or R(t) value from
+#' one estimation methods.
+#' @author Pierre-Yves Boelle, Thomas Obadia
+#' @keywords internal
 plot.R0.R <- function#Plot the R0/Rt value along with confidence interval
 ###Plot the R0/Rt value along with confidence interval
 ##details<< For internal use. Called by plot.
@@ -36,6 +55,17 @@ plot.R0.R <- function#Plot the R0/Rt value along with confidence interval
 
 # plot for EG : 
 # this plot the exponential growth parameter r, along with R
+
+
+#' Internal plot method for EG estimates
+#' 
+#' Internal plot method for EG estimates
+#' 
+#' 
+#' @param x
+#' @param \dots
+#' @author Pierre-Yves Boelle, Thomas Obadia
+#' @keywords internal
 plotREG <- function(x, ...)#Internal plot method for EG estimates
 ###Internal plot method for EG estimates
   
@@ -62,6 +92,17 @@ plotREG <- function(x, ...)#Internal plot method for EG estimates
       col=c("black", "black", "blue"), lty=c("dashed", "solid", "blank"), merge=TRUE)
 }
 
+
+
+#' Internal plot method for AR estimates
+#' 
+#' Internal plot method for AR estimates
+#' 
+#' 
+#' @param x
+#' @param \dots
+#' @author Pierre-Yves Boelle, Thomas Obadia
+#' @keywords internal
 plotRAR <- function(x, ...)#Internal plot method for AR estimates
 ###Internal plot method for AR estimates
 {
@@ -77,6 +118,17 @@ plotRAR <- function(x, ...)#Internal plot method for AR estimates
 }
 
 
+
+
+#' Internal plot method for ML estimates
+#' 
+#' Internal plot method for ML estimates
+#' 
+#' 
+#' @param x
+#' @param \dots
+#' @author Pierre-Yves Boelle, Thomas Obadia
+#' @keywords internal
 plotRML <- function(x, ...)#Internal plot method for ML estimates
 ###Internal plot method for ML estimates
 {
@@ -90,6 +142,19 @@ plotRML <- function(x, ...)#Internal plot method for ML estimates
     arrows(1,conf.int[2], 1, conf.int[1], angle=90, code=3, col="blue", length=0.03)   
 }
 
+
+
+#' Internal plot method for TD estimates
+#' 
+#' Internal plot method for TD estimates
+#' 
+#' 
+#' @param x
+#' @param xscale
+#' @param TD.split
+#' @param \dots
+#' @author Pierre-Yves Boelle, Thomas Obadia
+#' @keywords internal
 plotRTD <- function(x, xscale, TD.split,...)#Internal plot method for TD estimates
 ###Internal plot method for TD estimates
 {
@@ -134,6 +199,18 @@ plotRTD <- function(x, xscale, TD.split,...)#Internal plot method for TD estimat
     }
 }
 
+
+
+#' Internal plot method for SB estimates
+#' 
+#' Internal plot method for SB estimates
+#' 
+#' 
+#' @param x
+#' @param xscale
+#' @param \dots
+#' @author Pierre-Yves Boelle, Thomas Obadia
+#' @keywords internal
 plotRSB <- function(x, xscale,...)#Internal plot method for SB estimates
 ###Internal plot method for SB estimates
 {
@@ -163,6 +240,16 @@ plotRSB <- function(x, xscale,...)#Internal plot method for SB estimates
 }
 
 
+
+
+#' Internal scaling function to display proper X-Axis labels
+#' 
+#' Internal scaling function to display proper X-Axis labels
+#' 
+#' 
+#' @param scale
+#' @author Pierre-Yves Boelle, Thomas Obadia
+#' @keywords internal
 get.scale <- function(scale)#Internal scaling function to display proper X-Axis labels
 ###Internal scaling function to display proper X-Axis labels
 {

@@ -7,6 +7,25 @@
 
 # Function declaration
 
+
+
+#' Plot the R0/Rt value along with confidence interval of all requested models
+#' to epidemic data
+#' 
+#' Plot the R0/Rt value along with confidence interval of all requested models
+#' to epidemic data
+#' 
+#' For internal use. Called by print.
+#' 
+#' Tweaked print() function that prints the reproduction number values for each
+#' method contained in the object constructed by est.RO().
+#' 
+#' @param x Result of est.R0 (class sR))
+#' @param \dots Parameters passed to inner functions
+#' @return Called for its side effect : Prints all R0 or R(t) values from
+#' requested estimation methods.
+#' @author Pierre-Yves Boelle, Thomas Obadia
+#' @keywords internal
 print.R0.sR <- function#Plot the R0/Rt value along with confidence interval of all requested models to epidemic data
 ### Plot the R0/Rt value along with confidence interval of all requested models to epidemic data
 ##details<< For internal use. Called by print.

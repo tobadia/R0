@@ -8,6 +8,39 @@
 
 # Function declaration
 
+
+
+#' Sensitivity analysis of reproduction ratio with varying GT distribution
+#' 
+#' Sensitivity analysis of reproduction ratio with varying GT distribution.
+#' 
+#' By using different Generation Time (GT) distribution, different estimates of
+#' reproduction ratio can be analyzed.
+#' 
+#' @param incid incident cases
+#' @param GT.type Type of distribution for GT (see
+#' \code{\link{generation.time}} for details)
+#' @param GT.mean.range mean used for all GT distributions throughout the
+#' simulation
+#' @param GT.sd.range Range of standard deviation used for GT distributions.
+#' Must be provided as a vector.
+#' @param begin \code{begin} date of the estimation of epidemic
+#' @param end \code{end} date of estimation of the epidemic
+#' @param est.method Estimation method used for sensitivity analysis. Requires
+#' a method computing a proper R0 value (and not an instantaneous R(\code{t}))
+#' @param t Dates vector to be passed to estimation function
+#' @param date.first.obs Optional date of first observation, if \code{t} not
+#' specified
+#' @param time.step Optional. If date of first observation is specified, number
+#' of day between each incidence observation
+#' @param \dots parameters passed to inner functions
+#' @return A data frame s.a with following components :
+#' \item{$GT.type}{Distribution law for GT.} \item{$GT.mean}{Range of means
+#' used for tested GTs.} \item{$GT.sd}{Range of standard deviations used for
+#' tested GTs.} \item{$R}{Computed value for Reproduction Number given
+#' \code{GT.type}, GT.mean and GT.sd.} \item{$conf.int[1]}{The lower limit of
+#' 95\% CI for R.} \item{$conf.int[2]}{The upper limit of 95\% CI for R.}
+#' @author Pierre-Yves Boelle, Thomas Obadia
 sa.GT=function#Sensitivity analysis of reproduction ratio with varying GT distribution
 ### Sensitivity analysis of reproduction ratio with varying GT distribution.
 ##details<< By using different Generation Time (GT) distribution, different estimates of reproduction ratio can be analyzed.

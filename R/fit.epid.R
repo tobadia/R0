@@ -8,6 +8,29 @@
 
 # Function declaration
 
+
+
+#' Compute the Poisson log - likelihood between epid and epidemic simulated
+#' with R and GT
+#' 
+#' Compute the Poisson log - likelihood between \code{epid} and epidemic
+#' simulated with R and \code{GT}.
+#' 
+#' For internal use. Called by \code{\link{est.R0.ML}}.
+#' 
+#' For internal use. Called from est.ML.R0.  Compute the Poisson likelihood of
+#' epidemic.
+#' 
+#' @param log.R log Reproduction ratio
+#' @param epid epidemic
+#' @param GT Generation time distribution.
+#' @param import Vector of imported cases.
+#' @param pred Returns either the predictive curve or the log-likelihood value
+#' (default)
+#' @param offset to \code{offset} (confidence interval)
+#' @return Returns a Poisson log-likelihood with given R and \code{GT}
+#' @author Pierre-Yves Boelle, Thomas Obadia
+#' @keywords internal
 fit.epid <- function#Compute the Poisson log - likelihood between epid and epidemic simulated with R and GT
 ### Compute the Poisson log - likelihood between epid and epidemic simulated with R and GT.
 ##details<< For internal use. Called by est.R0.ML.
@@ -57,6 +80,24 @@ offset=0 ##<< to offset (confidence interval)
 
 # Function declaration
 
+
+
+#' Joint estimation of GT distribution and R
+#' 
+#' Compute the Poisson log - likelihood between epid and epidemic simulated
+#' with R and GT.
+#' 
+#' For internal use. Called by \code{\link{est.R0.ML}}. This is a wrapper
+#' function used to pass proper arguments to \code{\link{fit.epid}} when the ML
+#' method is used to estimate simultaneously R and GT. It is used by the
+#' \code{optim} routine to find the best-fitting parameters for R and GT
+#' (following a Gamma dsitribution)
+#' 
+#' @param par vector of parameters to be optimised. This should be provided as
+#' c(R0, GT.mean, GT.sd)
+#' @param \dots parameters passed to inner functions
+#' @author Pierre-Yves Boelle, Thomas Obadia
+#' @keywords internal
 fit.epid.optim <- function#Joint estimation of GT distribution and R
 ### Compute the Poisson log - likelihood between epid and epidemic simulated with R and GT.
 ##details<< For internal use. Called by est.R0.ML.
