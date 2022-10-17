@@ -129,7 +129,7 @@ estimate.R <- function
     stop("Invalid 'methods' argument. Supported methods are 'EG',' ML', 'TD', 'AR', 'SB'.")
   }
   
-  #'estimates' will contain results objects in a list, associated to their name
+  # estimates will contain results objects in a list, associated to their name
   estimates = as.list(rep(NA,length(methods)))
   names(estimates) = methods
 
