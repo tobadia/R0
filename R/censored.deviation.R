@@ -1,15 +1,3 @@
-# Name   : censored.deviation
-# Desc   : Computes the difference between theoretical incidence (from Ni = R0*sum(Nj*w(t-j))) and
-#          observed data. The squared-sum of this difference is returned, for the first incidence values.
-# Date   : 2012/02/20
-# Author : Boelle, Obadia
-###############################################################################
-
-
-# Function declaration
-
-
-
 #' Impute censored cases to rebuild longer epidemic vector
 #' 
 #' When first records of incidence are unavailable, tries to impute censored
@@ -30,25 +18,13 @@
 #' @return The deviation between sum((E(Nt)-Nt)^2)
 #' @author Pierre-Yves Boelle, Thomas Obadia
 #' @keywords internal
-censored.deviation = function#Impute censored cases to rebuild longer epidemic vector
-###When first records of incidence are unavailable, tries to impute censored cases to rebuild longer epidemic vector
-##details<< For internal use. Called by impute.incid.
-##keyword<< internal
-
-(optim.vect, ##<< Vector of two elements (multiplicative factor, log(highest imputed data) correspondig to initial values
-  epid, ##<< Original epidemic vector, output of check.incid()
-  R0, ##<< Assumed R0 value for the original epidemic vector
-  GT ##<< Generation time distribution to be used for computations
+censored.deviation = function
+(optim.vect,
+  epid,
+  R0,
+  GT 
 ) 
-
-# Code
-
 {
-  
-  ##details<< This function is not intended for stand-alone use. It computes the difference between theoretical
-  ## incidence and observed epidemics, for a given vector of initial values. 
-  ## To find the find best-fitting incidence values, this same vector must be optimized, to minimize the
-  ## value returned by SCE
   
   #Various content integrity checks
   if (!inherits(GT, "R0.GT")) {
@@ -90,7 +66,4 @@ censored.deviation = function#Impute censored cases to rebuild longer epidemic v
   #cat(val,"\n")
   #cat(N.avt.0,"\n")
   return(val)
-  
-  ##value<<
-  ## The deviation between sum((E(Nt)-Nt)^2)
 }

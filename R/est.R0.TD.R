@@ -1,15 +1,3 @@
-# Name   : est.R0.TD
-# Desc   : Estimation of time-Dependent Reproduction Number using an infectious-infected
-#          network, as presented by Wallinga & Teunis
-# Date   : 2011/11/09
-# Author : Boelle, Obadia, Cauchemez
-###############################################################################
-
-
-# Function declaration
-
-
-
 #' Estimate the time dependent reproduction number
 #' 
 #' Estimate the time dependent reproduction number according to Wallinga &
@@ -86,31 +74,22 @@
 #' # Reproduction number estimate using  Time-Dependant  method.
 #' # 1.878424 1.580976 1.356918 1.131633 0.9615463 0.8118902 0.8045254 0.8395747 0.8542518 0.8258094..
 #' plot(TD.weekly)
-est.R0.TD <- function#Estimate the time dependent reproduction number
-### Estimate the time dependent reproduction number according to Wallinga & Teunis.
-##details<< For internal use. Called by est.R0.
-##note<< This is the implementation of the method provided by Wallinga & Teunis (2004). Correction for estimation in real time is implemented as in Cauchemez et al, AJE (2006).
-##references<< Wallinga, J., and P. Teunis. "Different Epidemic Curves for Severe Acute Respiratory Syndrome Reveal Similar Impacts of Control Measures." American Journal of Epidemiology 160, no. 6 (2004): 509.
-
-(epid, ##<< epidemic curve.
-  GT, ##<< generation time distribution.
-  import=NULL, ##<< Vector of imported cases.
-  n.t0=NULL, ##<< Number of cases at time 0.
-  t=NULL, ##<< Vector of dates at which incidence was measured. 
-  begin=NULL, ##<< At what time estimation begins. Just here for "plot" purposes, not actually used
-  end = NULL, ##<< At what time estimation ends. Just here for "plot" purposes, not actually used
-  date.first.obs=NULL, ##<< Optional date of first observation, if t not specified
-  time.step=1, ##<< Optional. If date of first observation is specified, number of day between each incidence observation.
-  q = c(0.025, 0.975), ##<< Quantiles for R(t). By default, 5% and 95%
-  correct=TRUE, ##<< Correction for cases not yet observed (real time).
-  nsim = 10000, ##<< Number of simulations to be run to compute quantiles for R(t)
-  checked=FALSE, ##<< Internal flag used to check whether integrity checks were ran or not.
-  ... ##<< parameters passed to inner functions
+est.R0.TD <- function
+(epid,
+  GT,
+  import=NULL,
+  n.t0=NULL,
+  t=NULL,
+  begin=NULL,
+  end = NULL,
+  date.first.obs=NULL,
+  time.step=1, 
+  q = c(0.025, 0.975),
+  correct=TRUE,
+  nsim = 10000,
+  checked=FALSE,
+  ...
 )
-  
-
-# Code
-
 {
 
   if (nsim < 1000) warning("Accurate confidence interval for R(t) requires a large number of simulations. Consider increasing 'nsim'")
@@ -148,9 +127,6 @@ est.R0.TD <- function#Estimate the time dependent reproduction number
   if (is.null(import)) {
     import<-rep(0, length(epid$incid))
   }
-  ##note<<If imported cases are provided, they are counted in addition 
-  ## to autonomous cases. The final plot  
-  ## will show overall incidence.
   
   if (!is.null(import) & (length(import) != length(epid$incid))) {
     stop("Vector of imported cases should have the same length as 'epid' data.")
@@ -274,7 +250,6 @@ est.R0.TD <- function#Estimate the time dependent reproduction number
   }
   
   # changed Tmax to end
-  ##details<< CI is computed by multinomial simulations at each time step with the expected value of R.
   conf.int = matrix(data=NA, nrow=end.nb, ncol=2)
   colnames(conf.int)=c("lower", "upper")
   
@@ -309,23 +284,4 @@ est.R0.TD <- function#Estimate the time dependent reproduction number
 	pred = pred[1:end.nb]
 	
 	return(structure(list(R=R,conf.int=conf.int, P=P, p=p, GT=GT, epid=epid.bak, import=import, pred=pred, begin=begin, begin.nb=begin.nb, end=end, end.nb=end.nb, data.name=DNAME, call=CALL, method="Time-Dependent", method.code="TD"),class="R0.R"))    #return everything
-	
-	##value<<
-  ## A list with components:
-  ## \item{R}{vector of R values.}
-  ## \item{conf.int}{95% confidence interval for estimates.}
-	## \item{P}{Matrix of who infected whom.}
-  ## \item{p}{Probability of who infected whom (values achieved by normalizing P matrix).}
-  ## \item{GT}{Generation time distribution used in the computation.}
-	## \item{epid}{Original epidemic data.}
-  ## \item{import}{Vector of imported cases.}
-  ## \item{pred}{Theoretical epidemic data, computed with estimated values of R.}
-  ## \item{begin}{Starting date for the fit.}
-  ## \item{begin.nb}{The number of the first day used in the fit.}
-  ## \item{end}{The end date for the fit.}
-  ## \item{end.nb}{The number of the last day used for the fit.}
-  ## \item{data.name}{Name of the data used in the fit.}
-  ## \item{call}{Call used for the function.}
-	## \item{method}{Method for estimation.}
-  ## \item{method.code}{Internal code used to designate method.}
 }

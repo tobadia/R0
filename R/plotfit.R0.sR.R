@@ -1,14 +1,3 @@
-# Name   : plotfit.R0.sR
-# Desc   : A tweaked "plot" function designed to easily plot all R objects from
-#          a sR-class list (result of est.R0).
-# Date   : 2011/11/09
-# Author : Boelle, Obadia
-###############################################################################
-
-# Function declaration
-
-
-
 #' Plot the fit of all requested models to epidemic data
 #' 
 #' Plots the fit of \code{all} requested models to epidemic data
@@ -29,22 +18,13 @@
 #' and associated fit data computed by est.R0
 #' @author Pierre-Yves Boelle, Thomas Obadia
 #' @keywords internal
-plotfit.R0.sR <- function#Plot the fit of all requested models to epidemic data
-### Plots the fit of all requested models to epidemic data
-##details<< For internal use. Called by plotfit.
-##keyword<< internal
-
-(x, ##<< Result of est.R (class R0.R)
- all=TRUE, ##<< Should the whole epidemic curve be shown
- xscale="w", ##<< Scale to be adjusted on X axis. Can be "d" (day), "w" (week (default)), "f" (fornight), "m" (month).
- SB.dist=TRUE, ##<< Should R distribution throughout the epidemic be plotted for SB method? (default: TRUE)
- ... ##<< Parameters passed to plot
+plotfit.R0.sR <- function
+(x,
+ all=TRUE,
+ xscale="w",
+ SB.dist=TRUE,
+ ...
  ) 
-  ##details<< Tweaked plot() function that draws the epidemic data and model fit of each method contained in the object constructed by est.RO().
-  
-  
-  # Code
-  
 {
   #Make sure x is of the right class.
   if (!inherits(x, "R0.sR")) {
@@ -78,7 +58,4 @@ plotfit.R0.sR <- function#Plot the fit of all requested models to epidemic data
     dev.new()
     plotfit(x$estimates$SB, xscale=xscale, SB.dist = SB.dist, ...)
   }
-  
-  ### Called for its side effect :
-  ### Draws all the epidemic curves and associated fit data computed by est.R0
 }

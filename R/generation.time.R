@@ -1,15 +1,3 @@
-# Name   : GT
-# Desc   : Generate a discrete Generation Time distribution given a distribution type
-#          and specifications (mean, sd)
-# Date   : 2011/11/09
-# Author : Boelle, Obadia
-###############################################################################
-
-
-# Function declaration
-
-
-
 #' Generation Time distribution
 #' 
 #' Create an object of class GT representing a discretized Generation Time
@@ -73,29 +61,15 @@
 #' plot(GT.chld.hsld1, ylim=c(0,0.5), col="red")
 #' par(new=TRUE)
 #' plot(GT.chld.hsld2, xlim=c(0,7), ylim=c(0,0.5), col="black")
-generation.time <- function#Generation Time distribution
-### Create an object of class GT representing a discretized Generation Time distribution.
-
-(type=c("empirical","gamma","weibull","lognormal"),##<< Type of distribution.
-val=NULL, ##<< Vector of values used for the empirical distribution, or c(mean, sd) if parametric.
-truncate=NULL,##<< Maximum extent of the GT distribution.
-step = 1,##<< Time step used in discretization.
-first.half=TRUE,##<< First probability computed on half period.
-p0=TRUE ##<< Is probability on day 0 0
+generation.time <- function
+(type=c("empirical","gamma","weibull","lognormal"),
+val=NULL, 
+truncate=NULL,
+step = 1,
+first.half=TRUE,
+p0=TRUE 
 ) 
-
-  
-# Code
-  
 {
-##details<< How the GT is discretized may have some impact on the shape of the distribution.
-## For example, the distribution may be discretized in intervals of 1 time step starting 
-## at time 0, i.e. [0,1), [1,2), and so on. Or it may be discretized as [0,0.5), [0.5, 1.5), ... (the default).
-##details<< If the GT is discretized from a given continuous distribution, 
-## the expected duration of the Generation Time will be less than the nominal, 
-## it will be in better agreement in the second discretization.
-##details<< If p0 is TRUE (default) then the generation time distribution 
-## is set to 0 for day 0.
 
 # all tests required 
 	type=match.arg(type)
@@ -161,7 +135,6 @@ p0=TRUE ##<< Is probability on day 0 0
 		}
 		if (is.null(truncate)) {
 			# truncate when GI distribution >0.9999
-			##details<< If no truncation is provided, the distribution will be truncated at 99.99 percent probability.
 			GT.cum = cumsum(GT)
       if(length(GT.cum[GT.cum>0.9999])!=0){
   			truncate = (GT.cum > 0.9999)*(1:length(GT.cum))
@@ -178,11 +151,4 @@ p0=TRUE ##<< Is probability on day 0 0
 	mu=sum(GT * time) 
 	sigma = sqrt(sum(GT*time^2) - mu^2)
 	return(structure(list(GT=GT,time=time,mean=mu,sd=sigma),class="R0.GT"))
-  
-	##value<<
-  ## A list with components:
-  ## \item{GT}{The probabilities for each time unit, starting at time 0.}
-  ## \item{time}{The time at which probabilities are calculated.}
-  ## \item{mean}{The mean of the discretized GT.}
-  ## \item{sd}{The standard deviation of the discretized GT.}
 }

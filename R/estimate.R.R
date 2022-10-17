@@ -1,15 +1,3 @@
-# Name   : est.R0
-# Desc   : Key function, used to trigger R0 or R(t) estimations with any supported
-#          method.
-# Date   : 2011/11/09
-# Author : Boelle, Obadia
-###############################################################################
-
-
-# Function declaration
-
-
-
 #' Estimate R0 for one incidence dataset using several methods
 #' 
 #' Estimate R0 for one incidence dataset using several \code{methods}.
@@ -103,33 +91,21 @@
 #' 
 #' ## If no date vector nor date of first observation are provided, results are the same
 #' ## except time values in $t are replaced by index
-estimate.R <- function#Estimate R0 for one incidence dataset using several methods
-### Estimate R0 for one incidence dataset using several methods.
-##details<< Currently, supported methods are Exponential Growth (EG), Maximum Likelihood (ML), Attack Rate (AR), Time-Dependant (TD), and Sequential Bayesian (SB). See references below.
-##references<< \code{\link{est.R0.EG}}: Wallinga, J., and M. Lipsitch. "How Generation Intervals Shape the Relationship Between Growth Rates and Reproductive Numbers." Proceedings of the Royal Society B: Biological Sciences 274, no. 1609 (2007): 599.
-##references<< \code{\link{est.R0.ML}}: White, L.F., J. Wallinga, L. Finelli, C. Reed, S. Riley, M. Lipsitch, and M. Pagano. "Estimation of the Reproductive Number and the Serial Interval in Early Phase of the 2009 Influenza A/H1N1 Pandemic in the USA." Influenza and Other Respiratory Viruses 3, no. 6 (2009): 267-276.
-##references<< \code{\link{est.R0.AR}}: Dietz, K. "The Estimation of the Basic Reproduction Number for Infectious Diseases." Statistical Methods in Medical Research 2, no. 1 (March 1, 1993): 23-41.
-##references<< \code{\link{est.R0.TD}}: Wallinga, J., and P. Teunis. "Different Epidemic Curves for Severe Acute Respiratory Syndrome Reveal Similar Impacts of Control Measures." American Journal of Epidemiology 160, no. 6 (2004): 509.
-##references<< \code{\link{est.R0.SB}}: Bettencourt, L.M.A., and R.M. Ribeiro. "Real Time Bayesian Estimation of the Epidemic Potential of Emerging Infectious Diseases." PLoS One 3, no. 5 (2008): e2185.
-
-(epid=NULL, ##<< Name of epidemic dataset
- GT=NULL,  ##<< Generation Time repartition function
- t=NULL, ##<< Date vector
- begin=NULL, ##<< Begin date for estimation. Can be an integer or a date (YYYY-mm-dd or YYYY/mm/dd)
- end=NULL,  ##<< End date for estimation. Can be an integer or a date (YYYY-mm-dd or YYYY/mm/dd)
- date.first.obs=NULL, ##<< Optional date of first observation, if t not specified
- time.step=1, ##<< Optional. If date of first observation is specified, number of day between each incidence observation
- AR=NULL, ##<< Attack rate as a percentage from total population
- pop.size=NULL, ##<< Population size in which the incident cases were observed. See more details in est.R0.AR documentation
- S0=1, ##<< Initial proportion of the population considered susceptible
- methods=NULL, ##<< List of methods to be used for R0 estimation/comparison. Must be provided as c("method 1", "method 2", ...)
- checked=TRUE, ##<< Internal flag used to check whether integrity checks were ran or not.
- ... ##<< Parameters passed to inner functions
+estimate.R <- function
+(epid=NULL,
+ GT=NULL, 
+ t=NULL,
+ begin=NULL,
+ end=NULL,
+ date.first.obs=NULL, 
+ time.step=1, 
+ AR=NULL, 
+ pop.size=NULL,
+ S0=1, 
+ methods=NULL,
+ checked=TRUE,
+ ...
 ) 
-
-
-# Code
-
 {
   #Check if at least one method was provided
   if (is.null(methods)) {
@@ -180,13 +156,4 @@ estimate.R <- function#Estimate R0 for one incidence dataset using several metho
   
   
   return(structure(res,class="R0.sR"))
-  
-  ##value<<
-  ## A list with components:
-  ## \item{estimates}{List containing all results from called methods.}
-  ## \item{epid}{Epidemic curve.}
-  ## \item{GT}{Generation Time distribution function.}
-  ## \item{t}{Date vector.}
-  ## \item{begin}{Begin date for estimation.}
-  ## \item{end}{End date for estimation.}
 }

@@ -1,15 +1,3 @@
-# Name   : plot.R
-# Desc   : A tweaked "plot" function designed to easily plot R objects from
-#          any of the supported estimation methods.
-# Date   : 2011/11/09
-# Author : Boelle, Obadia
-###############################################################################
-
-
-# Function declaration
-
-
-
 #' Plot the fit of a model to epidemic data
 #' 
 #' Plots the fit of a model to epidemic data
@@ -29,22 +17,13 @@
 #' to the data.
 #' @author Pierre-Yves Boelle, Thomas Obadia
 #' @keywords internal
-plotfit.R0.R <- function#Plot the fit of a model to epidemic data
-### Plots the fit of a model to epidemic data
-##details<< For internal use. Called by plotfit.
-##keyword<< internal
-
-(x, ##<< Result of est.R (class R0.R)
- all=TRUE, ##<< Should the whole epidemic curve be shown
- xscale="w", ##<< Scale to be adjusted on X axis. Can be "d" (day), "w" (week (default)), "f" (fornight), "m" (month).
- SB.dist=TRUE, ##<< Should R distribution throughout the epidemic be plotted for SB method? (default: TRUE)
- ... ##<< Parameters passed to plot
+plotfit.R0.R <- function
+(x,
+ all=TRUE,
+ xscale="w",
+ SB.dist=TRUE,
+ ...
  ) 
-  ##details<< For internal use. Called by plotfit.R0.sR.
-  
-  
-  # Code
-  
 {
   #Make sure x is of class "R0.R"
   if (!inherits(x, "R0.R")) stop("'x' must be of class R0.R")
@@ -55,8 +34,6 @@ plotfit.R0.R <- function#Plot the fit of a model to epidemic data
   else {
     do.call(paste("plotfitR",x$method.code,sep=""), args=list(x=x, xscale=xscale, SB.dist=SB.dist, ...) )
   }
-  ### Called for its side effect :
-  ### Draws the fit of one estimation method to the data.
 }
 
 
@@ -72,10 +49,8 @@ plotfit.R0.R <- function#Plot the fit of a model to epidemic data
 #' @param \dots
 #' @author Pierre-Yves Boelle, Thomas Obadia
 #' @keywords internal
-plotfitRxx <- function(x, xscale,...)#Internal plotfit method for EG, ML and TD estimates
-###Internal plotfit method for EG, ML and TD estimates
+plotfitRxx <- function(x, xscale,...)
 {
-  ##keyword<< internal
   epid = x$epid
   
   #Get data used for the fit
@@ -117,10 +92,8 @@ plotfitRxx <- function(x, xscale,...)#Internal plotfit method for EG, ML and TD 
 #' @param \dots
 #' @author Pierre-Yves Boelle, Thomas Obadia
 #' @keywords internal
-plotfitRAR <- function(x, xscale,...)#Internal plotfit method for AR estimates
-###Internal plotfit method for AR estimates
+plotfitRAR <- function(x, xscale,...)
 {
-  ##keyword<< internal
   epid <- x$epid
   epid.orig <- x$epid.orig
   epid.used.for.fit = list(incid=epid.orig$incid, t=epid.orig$t)
@@ -153,10 +126,8 @@ plotfitRAR <- function(x, xscale,...)#Internal plotfit method for AR estimates
 #' @param \dots
 #' @author Pierre-Yves Boelle, Thomas Obadia
 #' @keywords internal
-plotfitRSB <- function(x, xscale, SB.dist,...)#Internal plot method for SB estimates
-###Internal plotfit method for SB estimates
+plotfitRSB <- function(x, xscale, SB.dist,...)
 {
-  ##keyword<< internal
   epid = x$epid
   
   #Get data used for the fit

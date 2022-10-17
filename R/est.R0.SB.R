@@ -1,15 +1,3 @@
-# Name   : est.R0.SB
-# Desc   : Estimation of Reproduction Number distribution using previous R(t)
-#          distribution as a Bayesian prior, as presented by Bettencourt & Ribeiro
-# Date   : 2011/11/09
-# Author : Boelle, Obadia
-###############################################################################
-
-
-# Function declaration
-
-
-
 #' Estimate the time dependent reproduction number using a Bayesian approach
 #' 
 #' Estimate the time dependent reproduction number using a Bayesian approach.
@@ -92,31 +80,19 @@
 #' plot(SB)
 #' ## "Plotfit" will show the complete distribution of R for 9 time unit throughout the outbreak
 #' plotfit(SB)
-est.R0.SB <- function#Estimate the time dependent reproduction number using a Bayesian approach
-### Estimate the time dependent reproduction number using a Bayesian approach. All known data are used as a prior for next iteration (see Details).
-##details<< For internal use. Called by est.R0.
-##note<< This is the implementation of the method provided by Bettencourt & Ribeiro (2008).
-##references<< Bettencourt, L.M.A., and R.M. Ribeiro. "Real Time Bayesian Estimation of the Epidemic Potential of Emerging Infectious Diseases." PLoS One 3, no. 5 (2008): e2185.
-
-(epid, ##<< the epidemic curve
-  GT, ##<< generation time distribution
-  t=NULL, ##<< Time at which epidemic was observed
-  begin=NULL, ##<< At what time estimation begins. Just there for "plot" purposes, not actually used
-  end = NULL, ##<< At what time estimation ends. Just there for "plot" purposes, not actually used
-  date.first.obs=NULL, ##<< Optional date of first observation, if t not specified
-  time.step=1, ##<< Optional. If date of first observation is specified, number of day between each incidence observation
-  force.prior = FALSE, ##<< Set to any custom value to force the initial prior as a uniform distribution on [0;value]
-  checked=FALSE, ##<< Internal flag used to check whether integrity checks were ran or not.
-  ... ##<< parameters passed to inner functions
+est.R0.SB <- function
+(epid,
+  GT,
+  t=NULL,
+  begin=NULL,
+  end = NULL,
+  date.first.obs=NULL,
+  time.step=1,
+  force.prior = FALSE,
+  checked=FALSE,
+  ...
 )
-  
-
-# Code
-
 {
-  ##details<< Initial prior is an unbiased uniform distribution for R, between 0 and the maximum of incid(t+1) - incid(t). 
-  ## For each subsequent iteration, a new distribution is computed for R, using the previous output as new prior.
-
   #We should think of imports and how to deal with this.
 	DNAME =  deparse(substitute(epid))
 	CALL = match.call()
@@ -189,7 +165,6 @@ est.R0.SB <- function#Estimate the time dependent reproduction number using a Ba
     most.likely.Rt[s] = Rt.range[which.max(proba.Rt[[s]])]
     
     #Computing Confidence Interval around most plausible value
-    ##details<< CI is achieved by a cumulated sum of the R posterior distribution, and corresponds to the 2.5% and 97.5% thresholds
     Rt.quant[s-1,1] <- epid$t[s-1]
     Rt.quant[s-1,2] <- most.likely.Rt[s]
     cumsum.proba <- cumsum(proba.Rt[[s]])
@@ -222,21 +197,4 @@ est.R0.SB <- function#Estimate the time dependent reproduction number using a Ba
 	conf.int=Rt.quant[1:(end.nb-begin.nb),3:4]
   rownames(conf.int) = as.character(epid$t[1:(end.nb-begin.nb)])
   return(structure(list(R=R, conf.int=conf.int, proba.Rt=proba.Rt, GT=GT, epid=epid.orig, begin=begin, begin.nb=begin.nb, end=end, end.nb=end.nb, pred=pred, data.name=DNAME, call=CALL, method="Sequential Bayesian", method.code="SB"),class="R0.R"))    #return everything
-
-  ##value<<
-  ## A list with components:
-	## \item{R}{vector of R values.}
-	## \item{conf.int}{95% confidence interval for estimates.}
-  ## \item{proba.Rt}{A list with successive distribution for R throughout the outbreak.}
-	## \item{GT}{Generation time distribution used in the computation.}
-	## \item{epid}{Original epidemic data.}
-	## \item{begin}{Begin date for the fit.}
-  ## \item{begin.nb}{Index of begin date for the fit.}
-	## \item{end}{End date for the fit.}
-  ## \item{end.nb}{Index of end date for the fit.}
-	## \item{pred}{Predictive curve based on most-likely R value.}
-  ## \item{data.name}{Name of the data used in the fit.}
-  ## \item{call}{Complete call used to generate results.}
-	## \item{method}{Method for estimation.}
-	## \item{method.code}{Internal code used to designate method.}
 }

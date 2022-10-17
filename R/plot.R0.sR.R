@@ -1,14 +1,3 @@
-# Name   : plot.sR
-# Desc   : A tweaked "plot" function designed to easily plot all R objects from
-#          a R0.sR-class list (result of est.R0).
-# Date   : 2011/11/09
-# Author : Boelle, Obadia
-###############################################################################
-
-# Function declaration
-
-
-
 #' Plot the R0/Rt value along with confidence interval of all requested models
 #' to epidemic data
 #' 
@@ -30,21 +19,12 @@
 #' requested estimation methods.
 #' @author Pierre-Yves Boelle, Thomas Obadia
 #' @keywords internal
-plot.R0.sR <- function#Plot the R0/Rt value along with confidence interval of all requested models to epidemic data
-### Plot the R0/Rt value along with confidence interval of all requested models to epidemic data
-##details<< For internal use. Called by plot.
-##keyword<< internal
-
-(x, ##<<  Result of est.R0 (class sR)
- xscale="w", ##<< Scale to be adjusted on X axis. Can be "d" (day), "w" (week (default)), "f" (fornight), "m" (month).
- TD.split=FALSE, ##<< Parameter to force the display of both R(t) and the epidemic curve in the same window for TD method
- ... ##<< parameters passed to plot.R
+plot.R0.sR <- function
+(x,
+ xscale="w",
+ TD.split=FALSE,
+ ...
 ) 
-##details<< Tweaked plot() function that draws the reproduction number values for each method contained in the object constructed by est.RO().
-
-  
-# Code
-  
 {
 	#Make sure x is of the right class.
 	if (!inherits(x, "R0.sR")) {
@@ -85,6 +65,4 @@ plot.R0.sR <- function#Plot the R0/Rt value along with confidence interval of al
   plot(x$estimates$SB, xscale=xscale, ...)
   }
   
-  ### Called for its side effect :
-  ### Draws all R0 or R(t) values from requested estimation methods.
 }

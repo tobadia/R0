@@ -1,15 +1,3 @@
-# Name   : plot.R0.S
-# Desc   : A tweaked "plot" function designed to easily plot S objects from
-#          sensitivity.analysis.
-# Date   : 2011/11/09
-# Author : Boelle, Obadia
-###############################################################################
-
-
-# Function declaration
-
-
-
 #' Plot objects from sensitivity.analysis
 #' 
 #' Plots objects from \code{\link{sensitivity.analysis}}
@@ -28,19 +16,13 @@
 #' along with corresponding begin/end dates \item{$max.Rsquared}{Best R0
 #' measure for each time period, as measured by their Rsquared value.}
 #' @author Pierre-Yves Boelle, Thomas Obadia
-plot.R0.S <- function#Plot objects from sensitivity.analysis
-### Plots objects from sensitivity.analysis
-##details<< For internal use. Called by plot.
-
-(x, ##<< Result of sensitivity.analysis (class R0.S)
- what="heatmap", ##<< Specify the desired output. Can be "heatmap" (default), "criterion", or both.
- time.step=1, ##<< Optional. If date of first observation is specified, number of day between each incidence observation
- skip = 5, ##<< Number of results to ignore (time period of X days) when looking for highest Rsquared value.
- ... ##<< Parameters passed to inner functions
+plot.R0.S <- function
+(x,
+ what="heatmap",
+ time.step=1,
+ skip = 5,
+ ... 
 )
-
-# Code
-  
 {
 	#Make sure x is of the right class
 	if (!inherits(x, "R0.S")) {
@@ -104,9 +86,5 @@ plot.R0.S <- function#Plot objects from sensitivity.analysis
   
   #Return the max.Rsquared data, as extracted from x$df.clean
   return(list(max.Rsquared=max.Rsquared, best.R0.values=x$df.clean[opt.df,4], best.fit=best.fit))
-  
-	##value<<
-	## A data frame with best R0 measure for each possible time period, along with corresponding begin/end dates
-  ## \item{$max.Rsquared}{Best R0 measure for each time period, as measured by their Rsquared value.}
   
 }

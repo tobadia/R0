@@ -21,18 +21,10 @@
 #' @return Called for side effect.
 #' @author Pierre-Yves Boelle, Thomas Obadia
 #' @keywords internal
-print.R0.R <- function#Print the R estimate
-### Prints the R estimate
-##details<< For internal use. Called by print.
-##keyword<< internal
-
-(x, ##<<  Result of est.R0.xx (class R0.R)
- ... ##<< Parameters passed to inner functions
+print.R0.R <- function
+(x,
+ ... 
  ) 
-  
-
-# Code
-  
 {
 	#Make sure x is of the right class
 	if (!inherits(x, "R0.R")) {
@@ -61,5 +53,4 @@ print.R0.R <- function#Print the R estimate
 	}
 	
   cat("\n")
-  ### Called for side effect.
 }

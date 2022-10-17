@@ -1,14 +1,3 @@
-# Name   : smooth.Rt
-# Desc   : Allows for regrouping real-time reproduction number by a given time period
-# Date   : 2011/16/09
-# Author : Boelle, Obadia
-###############################################################################
-
-
-# Function declaration
-
-
-
 #' Smooth real-time reproduction number over larger time period
 #' 
 #' Smooth real-time reproduction number over larger time period
@@ -85,20 +74,11 @@
 #' # 16  106 0.9508951 0.5000000 1.6670455
 #' # 17  113 0.9827432 0.5281989 1.8122157
 #' # 18  120 0.5843895 0.1103040 0.9490928
-smooth.Rt <- function#Smooth real-time reproduction number over larger time period
-### Smooth real-time reproduction number over larger time period
-
-(res, ##<< An object of class "R0.R", created by any real-time method (currently implemented: TD and SB)
-time.period ##<< Time period to be used for computations.
+smooth.Rt <- function
+(res,
+time.period
 )
-  
-  
-# Code
-  
 {
-  ##details<<Regrouping Time-Dependant R(t) values, or even Real Time Bayesian most-likely R values (according to R distributions)
-  ## should take into account the Generation Time.
-  ## Results can be plotted exactly the same was as input estimations, except they won't show any goodness of fit curve.
   
   if (!inherits(res, "R0.R")) {
     stop("Currently, sensitivity analysis from a result object only supports 'R0.R' class objects. Try using res$estimates$TD or res$estimates$SB if they are defined.")
@@ -151,18 +131,4 @@ time.period ##<< Time period to be used for computations.
   #return everything
   return(structure(list(R=R, conf.int=conf.int, GT=res$GT, epid=epid, begin=res$begin, begin.nb=1, end=res$end, end.nb=length(epid$t), data.name=res$data.name, call=res$call, method=res$method, method.code=res$method.code),class="R0.R"))
 
-  ##value<<
-  ## A list with components:
-  ## \item{R}{The estimate of the reproduction ratio.}
-  ## \item{conf.int}{The 95% confidence interval for the R estimate.}
-  ## \item{GT}{Generation time distribution uised in the computation.}
-  ## \item{epid}{Original or augmented epidemic data, depending whether impute.values is set to FALSE or TRUE.}
-  ## \item{begin}{Starting date for the fit.}
-  ## \item{begin.nb}{The number of the first day used in the fit.}
-  ## \item{end}{The end date for the fit.}
-  ## \item{end.nb}{The number of the las day used for the fit.}
-  ## \item{data.name}{The name of the dataset used.}
-  ## \item{call}{Call used for the function.}
-  ## \item{method}{Method used for fitting.}
-  ## \item{method.code}{Internal code used to designate method.}
 }

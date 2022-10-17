@@ -1,14 +1,3 @@
-# Name   : inspect.data
-# Desc   : Convert primary input as an array with incidence and related date
-# Date   : 2020/07/28
-# Author : Boelle, Obadia
-###############################################################################
-
-
-# Function declaration
-
-
-
 #' Inspect input data for common issues
 #' 
 #' Inspect input data and look for common mistakes. The function does not
@@ -50,19 +39,11 @@
 #' @param t An optional vector of dates
 #' @param GT Generation Time repartition function
 #' @author Pierre-Yves Boelle, Thomas Obadia
-inspect.data = function#Inspect input data for common issues
-### Inspect input data and look for common mistakes. The function does not return any object but yields warnings with suggestions as to how to clean inputs before running estimation routines.
-##details<< \code{inspect.data} looks for common issues that could affect estimation routines. 
-## Such issues include too low incidence counts, leading/trailing zeros, non-integer values...
-## Before any checks are conducted, the data are passed to \code{\link{check.incid}} that will try and guess the format of the data.
-
-(incid,    ##<< An object (vector, data.frame, list) storing incidence
- t=NULL,   ##<< An optional vector of dates
- GT=NULL   ##<< Generation Time repartition function
+inspect.data = function
+(incid,
+ t=NULL,
+ GT=NULL
 )
-  
-  # Code
-  
 {
   
   # Start by guessing the input format with check.incid
@@ -73,18 +54,10 @@ inspect.data = function#Inspect input data for common issues
   
   # The interesting bits: when check.incid() succeeds, look for non-obvious issues
   else {
-    ##details<< A not-so-uncommon issue is to provide non-integer counts for incidence, for example when working with
-    ## aggregated data that represent averaged number of cases across different communities. This however does not agree well with
-    ## parametric likelihood that assume exponential growth over the early stage of an epidemic or Poisson distribution of cases, 
-    ## where non-integer values will cause calculations to fail.
     if (any(round(epid$incid) != epid$incid)) {
       warning("Data does not consist only of integer values. Consider rounding to avoid computational issues.")
     }
     
-    ##details<< Missing values may cause issues if not handled properly. By default, check.incid() will recast missing values to zero.
-    ## Leading and trailing NA's should be omitted entirely from the input.
-    ## Gaps found between available data may also cause issues if they span over a period that's longer than the total generation time.
-    ## A warning is raised to inform on these possible issues.
     if (any(is.na(incid))) {
       warning("Warning: your data contains missing values. These will be automatically converted to zeros by check.incid() and may affect your estimates.")
       
@@ -117,8 +90,6 @@ inspect.data = function#Inspect input data for common issues
       }
     }
     
-    ##details<< Likewise, leading and tailing zeros would cause similar issues. Begin will default to the first value and end to the peak one.
-    ## Just in case, these will be inspected here too. Sequence of 0s exceeding the length of the generation time will also yield a warning.
     if (any(epid$incid == 0)) {
       # Leading zeros may cause an issue
       if (epid$incid[1] == 0) {
@@ -149,9 +120,6 @@ inspect.data = function#Inspect input data for common issues
       }
     }
     
-    ##details<< Scarce data may also cause errors when optimizing likelihood functions. A time-series of incidence spanning for a duration shorter 
-    ##than that of the generation time distribution is likely to correspond to an index case that hasn't yet infected all its offsprings. This would biais estimates
-    ##downwards and should be taken into account when interpreting results.
     if (!is.null(GT)) {
       # Confirm first that GT is of the proper class, fail otherwise
       if (!inherits(GT, "R0.GT")) {

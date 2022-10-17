@@ -1,15 +1,3 @@
-# Name   : est.GT
-# Desc   : Computes the best fitting generation time distribution with provided
-#          dates of onset
-# Date   : 2012/01/26
-# Author : Boelle, Obadia
-###############################################################################
-
-
-# Function declaration
-
-
-
 #' Find the best-fitting GT distribution for a series of serial interval
 #' 
 #' Find the best-fitting GT distribution for a series of serial interval
@@ -56,27 +44,14 @@
 #' data(H1N1.serial.interval)
 #' est.GT(infector.onset.dates=rep(0,length(H1N1.serial.interval)), 
 #'        infectee.onset.dates=H1N1.serial.interval)
-est.GT <- function#Find the best-fitting GT distribution for a series of serial interval
-### Find the best-fitting GT distribution for a series of serial interval
-
-(infector.onset.dates=NULL,##<< Vector of dates for infector symptoms onset.
- infectee.onset.dates=NULL,##<< Vector of dates for infectee symptoms onset.
- serial.interval=NULL, ##<< Vector of reported serial interval.
- request.plot=FALSE, ##<< Should data adjsument be displayed at the end?
- ...##<< Parameters passed to other functions (useful for hidden parameters of \code{\link{generation.time}})
+est.GT <- function
+(infector.onset.dates=NULL,
+ infectee.onset.dates=NULL,
+ serial.interval=NULL,
+ request.plot=FALSE,
+ ...
 )
-
-  
-# Code
-  
 {
-##details<< Generation Time distribution can be estimated by two inputs methods.
-## User can either provide two vectors of dates or a unique vector of reported serial intervals.
-## If two vectors are provided, both onset.dates vectors should be of same length. Element i is the onset date for individual i. This means that infector k (symptoms on day infector.onset.dates[k]) infected infectee k (symptoms on day infectee.onset.dates[k])
-## If only serial.interval is provided, each record is assumed to be the time elapsed between each pair of infector and infectee.
-##
-## When request.plot is set to TRUE, a graphical output provides standardized histogram of observed data along with
-## the best-fitting adjusted model.
 
   # Data integrity check
   
@@ -194,7 +169,4 @@ est.GT <- function#Find the best-fitting GT distribution for a series of serial 
   cat("Best fitting GT distribution is a", distribution.type, "distribution with mean =", mean, "and sd =", sd,".\n")
   
 	return(gt.distrib)
-  
-  ##value<<
-  ## A \code{R0.GT} object that complies with \code{\link{generation.time}} distribution requirements of the R0 package
 }

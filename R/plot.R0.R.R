@@ -1,15 +1,3 @@
-# Name   : plot.R
-# Desc   : A tweaked "plot" function designed to easily plot R objects from
-#          any of the supported estimation methods.
-# Date   : 2011/11/09
-# Author : Boelle, Obadia
-###############################################################################
-
-
-# Function declaration
-
-
-
 #' Plot the R0/Rt value along with confidence interval
 #' 
 #' Plot the R0/Rt value along with confidence interval
@@ -27,29 +15,18 @@
 #' one estimation methods.
 #' @author Pierre-Yves Boelle, Thomas Obadia
 #' @keywords internal
-plot.R0.R <- function#Plot the R0/Rt value along with confidence interval
-###Plot the R0/Rt value along with confidence interval
-##details<< For internal use. Called by plot.
-##keyword<< internal
-
-(x, ##<< Result of est.R (class R)
- all=TRUE, ##<< Should the whole epidemic curve be shown
- xscale="w", ##<< Scale to be adjusted on X axis. Can be "d" (day), "w" (week (default)), "f" (fornight), "m" (month).
- TD.split=FALSE, ##<< Parameter to force the display of both R(t) and the epidemic curve in the same window for TD method
- ... ##<< Parameters passed to plot
+plot.R0.R <- function
+(x,
+ all=TRUE,
+ xscale="w",
+ TD.split=FALSE,
+ ...
 ) 
-
-  
-# Code
-  
 {
 	#Make sure x is of class "R0.R"
 	if (!inherits(x, "R0.R")) stop("'x' must be of class R0.R")
   
   do.call(paste("plotR",x$method.code,sep=""), args=list(x=x, xscale=xscale, TD.split=TD.split, ...) )
-
-### Called for its side effect :
-### Draws all R0 or R(t) value from one estimation methods.
 }
 
 
@@ -66,11 +43,8 @@ plot.R0.R <- function#Plot the R0/Rt value along with confidence interval
 #' @param \dots
 #' @author Pierre-Yves Boelle, Thomas Obadia
 #' @keywords internal
-plotREG <- function(x, ...)#Internal plot method for EG estimates
-###Internal plot method for EG estimates
-  
+plotREG <- function(x, ...)#
 {
-  ##keyword<< internal
     R <- x$R
     conf.int <- x$conf.int
     r <- x$r
@@ -103,10 +77,8 @@ plotREG <- function(x, ...)#Internal plot method for EG estimates
 #' @param \dots
 #' @author Pierre-Yves Boelle, Thomas Obadia
 #' @keywords internal
-plotRAR <- function(x, ...)#Internal plot method for AR estimates
-###Internal plot method for AR estimates
+plotRAR <- function(x, ...)
 {
-  ##keyword<< internal
    	R <- x$R
     conf.int <- x$conf.int
     
@@ -129,10 +101,8 @@ plotRAR <- function(x, ...)#Internal plot method for AR estimates
 #' @param \dots
 #' @author Pierre-Yves Boelle, Thomas Obadia
 #' @keywords internal
-plotRML <- function(x, ...)#Internal plot method for ML estimates
-###Internal plot method for ML estimates
+plotRML <- function(x, ...)
 {
-  ##keyword<< internal
    	R <- x$R
     conf.int <- x$conf.int
     
@@ -155,10 +125,8 @@ plotRML <- function(x, ...)#Internal plot method for ML estimates
 #' @param \dots
 #' @author Pierre-Yves Boelle, Thomas Obadia
 #' @keywords internal
-plotRTD <- function(x, xscale, TD.split,...)#Internal plot method for TD estimates
-###Internal plot method for TD estimates
+plotRTD <- function(x, xscale, TD.split,...)
 {
-  ##keyword<< internal
     #We plot R(t) values along with 95CI
     R = x$R
     epid = x$epid
@@ -211,10 +179,8 @@ plotRTD <- function(x, xscale, TD.split,...)#Internal plot method for TD estimat
 #' @param \dots
 #' @author Pierre-Yves Boelle, Thomas Obadia
 #' @keywords internal
-plotRSB <- function(x, xscale,...)#Internal plot method for SB estimates
-###Internal plot method for SB estimates
+plotRSB <- function(x, xscale,...)
 {
-  ##keyword<< internal
 	  #We plot R(t) values along with 95CI
 	  R= x$R
 	  epid = x$epid
@@ -250,10 +216,8 @@ plotRSB <- function(x, xscale,...)#Internal plot method for SB estimates
 #' @param scale
 #' @author Pierre-Yves Boelle, Thomas Obadia
 #' @keywords internal
-get.scale <- function(scale)#Internal scaling function to display proper X-Axis labels
-###Internal scaling function to display proper X-Axis labels
+get.scale <- function(scale)
 {
-  ##keyword<< internal
   #Scale parameters are used to adjust dates on X-Axis labels
   if (scale == "d") {
     div = 1

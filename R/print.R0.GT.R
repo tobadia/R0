@@ -1,15 +1,3 @@
-# Name   : print.GT
-# Desc   : A tweaked "print" function designed to print useful data on GT objects 
-#          from GT function
-# Date   : 2011/11/09
-# Author : Boelle, Obadia
-###############################################################################
-
-
-# Function declaration
-
-
-
 #' Print the characteristics of the generation time distribution
 #' 
 #' Prints the characteristics of the generation time distribution.
@@ -21,18 +9,10 @@
 #' @return Called for side effect. Displays GT and mean/sd.
 #' @author Pierre-Yves Boelle, Thomas Obadia
 #' @keywords internal
-print.R0.GT <- function#Print the characteristics of the generation time distribution
-### Prints the characteristics of the generation time distribution.
-##details<< For internal use. Called by print.
-##keyword<< internal
-
-(x, ##<< the GT distribution.
-... ##<< Parameters passed to inner functions
+print.R0.GT <- function
+(x,
+...
  ) 
-  
-  
-# Code
-
 {
   #Make sure x is of the right class
 	if (!inherits(x, "R0.GT")) {
@@ -43,6 +23,4 @@ print.R0.GT <- function#Print the characteristics of the generation time distrib
 	cat("mean:",x$mean,", sd:",x$sd,"\n")
 	print.default(x$GT)
 	cat("\n")
-  
-  ### Called for side effect. Displays GT and mean/sd.
 }

@@ -1,14 +1,3 @@
-# Name   : sim.epid
-# Desc   : Simulate epidemic outbreaks of specified R0 and generation time distribution
-# Date   : 2012/04/11
-# Author : Boelle, Obadia
-###############################################################################
-
-
-# Function declaration
-
-
-
 #' Epidemic outbreak simulation
 #' 
 #' Generates several epidemic curves with specified distribution and
@@ -47,24 +36,16 @@
 #'          epid.length=30, family="poisson", peak.value=150)
 #' 
 #' # Here, a 30*100 matrix is returned. Each column is a single epidemic.
-sim.epid <- function#Epidemic outbreak simulation
-### Generates several epidemic curves with specified distribution and reproduction number.
-
-(epid.nb, ##<< Number of outbreaks to be generated.
- GT, ##<< Generation time distribution for the pathogen. Must be a R0.GT-class object.
- R0, ##<< Basic reproduction number.
- epid.length, ##<< Length of the epidemic.
- family, ##<< Distribution type for the new cases, either "poisson" or "negbin".
- negbin.size=NULL, ##<< Over-dispersion parameter, if family is set to "negbin".
- peak.value=50 ##<< Threashold value for incidence before epidemics begins decreasing
+sim.epid <- function
+(epid.nb,
+ GT,
+ R0,
+ epid.length,
+ family,
+ negbin.size=NULL,
+ peak.value=50
 )
-  
-  
-  # Code
-  
 {
-  ##details<< This function is only used for simulation purposes. The output is a matrix of n columns (number of outbreaks)
-  ## by m rows (maximum length of an outbreak).
   
   #Various content integrity checks
   if (!inherits(GT, "R0.GT")) {
@@ -95,9 +76,6 @@ sim.epid <- function#Epidemic outbreak simulation
         new <- rpois(sim.epid[t], R0)
       }
       else if (family=="negbin") {
-        ##details<< When using rnbinom with "mean" and "size" moments, the variance is given by mean + mean^2/size (see ?rnbinom).
-        ## One should determine the size accordingly to the R0 value to increase the dispersion.
-        ## From the previous variance formula, if Var(X) = k*R0, size = R0/(k-1)
         new <- rnbinom(sim.epid[t], size=negbin.size, mu=R0)
       }
       newd <-  rmultinom(1, sum(new), GT)[,1]

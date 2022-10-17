@@ -1,14 +1,3 @@
-# Name   : sim.epid.indiv
-# Desc   : Individual-based model used to simulate epidemic 
-# Date   : 2012/10/20 (last edit 2015/05/21)
-# Author : Boelle, Obadia
-###############################################################################
-
-
-# Function declaration
-
-
-
 #' Influenza-like illness simulation (individual-based model)
 #' 
 #' Generates several epidemic curves on a individual-based model
@@ -35,25 +24,15 @@
 #' \eqn{beta*I} and variance \eqn{negbin.size*beta*I}, to allow for
 #' overdispersion.
 #' @author Pierre-Yves Boelle, Thomas Obadia
-sim.epid.indiv <- function#Influenza-like illness simulation (individual-based model)
-### Generates several epidemic curves on a individual-based model
+sim.epid.indiv <- function
 (
-  beta, ##<< Contact rate in the SEIR model.
-  Tmax, ##<< Maximum length of the epidemic (cases infected after this length will be truncated).
-  n=1, ##<< Number of epidemics to be simulated (default is 1)
-  family="poisson", ##<< Distribution of offspring (default is "poisson").
-  negbin.size=NULL ##<< If family is set to "negbin", sets the size parameter of the negative binomial distribution.
+  beta,
+  Tmax,
+  n=1,
+  family="poisson",
+  negbin.size=NULL
 ) 
-  
 {
-  
-  ##note<< This is not the final version. This is the exact function as used in the manuscript (Obadia et al., 2012).
-  ##It will be properly implemented to conform with other objects of the package in future releases.
-  ##
-  ##The epidemic is simulated using a branching process, with infinite number of susceptibles to allow for exponential growth. 
-  ##The model used follows the Crump-Mode-Jagers description, with S/E/I/R description of the natural history.
-  ##Latent and infectious period follow parametrized Gamma distributions typical of influenza. 
-  ##An index case is first introduced, and offspring is sampled from a negative binomial distribution, with mean \eqn{beta*I} and variance \eqn{negbin.size*beta*I}, to allow for overdispersion.
   
   #epidemic matrix. Each column is an epidemic
   epid.matrix = matrix(data=0, nrow=Tmax, ncol=n)
@@ -119,7 +98,4 @@ sim.epid.indiv <- function#Influenza-like illness simulation (individual-based m
     epid.matrix[,i] <- table(cut(epid[1:(idx.max-1),"tinf"], seq(0,Tmax,1), include.lowest=TRUE))
   }
   return(epid.matrix)
-  
-  ##value<<
-  ## A matrix with epidemics stored as columns (incidence count)
 }

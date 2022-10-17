@@ -1,15 +1,3 @@
-# Name   : fit.epid
-# Desc   : Computes a fitted model that accomodates the incidence values provided
-#          in the Maximum Likelihood method implementation
-# Date   : 2011/11/09
-# Author : Boelle, Obadia
-###############################################################################
-
-
-# Function declaration
-
-
-
 #' Compute the Poisson log - likelihood between epid and epidemic simulated
 #' with R and GT
 #' 
@@ -31,23 +19,15 @@
 #' @return Returns a Poisson log-likelihood with given R and \code{GT}
 #' @author Pierre-Yves Boelle, Thomas Obadia
 #' @keywords internal
-fit.epid <- function#Compute the Poisson log - likelihood between epid and epidemic simulated with R and GT
-### Compute the Poisson log - likelihood between epid and epidemic simulated with R and GT.
-##details<< For internal use. Called by est.R0.ML.
-##keyword<< internal
-
-(log.R, ##<< log Reproduction ratio
-epid, ##<< epidemic
-GT, ##<< Generation time distribution.
-import, ##<< Vector of imported cases.
-pred=FALSE, ##<< Returns either the predictive curve or the log-likelihood value (default)
-offset=0 ##<< to offset (confidence interval)
+fit.epid <- function
+(log.R,
+epid,
+GT, 
+import, 
+pred=FALSE, 
+offset=0 
 )
-  
-# Code
-  
 {
-  ##details<< For internal use. Called from est.ML.R0.	
   ## Compute the Poisson likelihood of epidemic.
 	R = exp(log.R)
   T = length(epid$incid)
@@ -73,14 +53,7 @@ offset=0 ##<< to offset (confidence interval)
     return(logV-offset)
 	}
   
-### Returns a Poisson log-likelihood with given R and GT
 }
-
-
-
-# Function declaration
-
-
 
 #' Joint estimation of GT distribution and R
 #' 
@@ -98,18 +71,10 @@ offset=0 ##<< to offset (confidence interval)
 #' @param \dots parameters passed to inner functions
 #' @author Pierre-Yves Boelle, Thomas Obadia
 #' @keywords internal
-fit.epid.optim <- function#Joint estimation of GT distribution and R
-### Compute the Poisson log - likelihood between epid and epidemic simulated with R and GT.
-##details<< For internal use. Called by est.R0.ML.
-##This is a wrapper function used to pass proper arguments to fit.epid when the ML method is used to estimate simultaneously R and GT.
-##It is used by the \code{optim} routine to find the best-fitting parameters for R and GT (following a Gamma dsitribution)
-##keyword<< internal
-
-( par=c(1,1,1), ##<< vector of parameters to be optimised. This should be provided as c(R0, GT.mean, GT.sd)
-  ... ##<< parameters passed to inner functions
+fit.epid.optim <- function
+( par=c(1,1,1),
+  ... 
 ) 
-  # Code
-  
 {
   GT <- generation.time("gamma", c(par[2], par[3]))
   return(fit.epid(log.R=par[1], GT=GT, ...))
