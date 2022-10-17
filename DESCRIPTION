@@ -22,3 +22,4 @@ Description: Estimation of reproduction numbers for disease outbreak, based on
     varying Generation Time distribution or time window on estimates.
 License: GPL (>= 2)
 LazyLoad: yes
+RoxygenNote: 7.2.1
