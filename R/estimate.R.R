@@ -91,6 +91,8 @@
 #' 
 #' ## If no date vector nor date of first observation are provided, results are the same
 #' ## except time values in $t are replaced by index
+#' 
+#' @export
 estimate.R <- function
 (epid=NULL,
  GT=NULL, 

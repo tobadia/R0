@@ -20,7 +20,8 @@
 #' @param \dots Parameters passed to inner functions
 #' @return Called for side effect.
 #' @author Pierre-Yves Boelle, Thomas Obadia
-#' @keywords internal
+#'
+#' @export
 print.R0.R <- function
 (x,
  ... 

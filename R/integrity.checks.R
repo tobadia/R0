@@ -44,7 +44,8 @@
 #' @param methods List of \code{methods} to be used for R0
 #' estimation/comparison. Must be provided as c("method 1", "method 2", ...)
 #' @author Pierre-Yves Boelle, Thomas Obadia
-#' @keywords internal
+#'
+#' @export
 integrity.checks <- function
 (epid,
  t,

@@ -16,6 +16,11 @@
 #' along with corresponding begin/end dates \item{$max.Rsquared}{Best R0
 #' measure for each time period, as measured by their Rsquared value.}
 #' @author Pierre-Yves Boelle, Thomas Obadia
+#'
+#' @importFrom grDevices heat.colors dev.new
+#' @importFrom graphics axis filled.contour contour title text legend points
+#'
+#' @export
 plot.R0.S <- function
 (x,
  what="heatmap",

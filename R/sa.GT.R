@@ -29,6 +29,8 @@
 #' \code{GT.type}, GT.mean and GT.sd.} \item{$conf.int[1]}{The lower limit of
 #' 95\% CI for R.} \item{$conf.int[2]}{The upper limit of 95\% CI for R.}
 #' @author Pierre-Yves Boelle, Thomas Obadia
+#' 
+#' @export
 sa.GT=function
 (incid,
 GT.type,

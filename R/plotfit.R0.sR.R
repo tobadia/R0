@@ -17,7 +17,10 @@
 #' @return Called for its side effect : Draws \code{all} the epidemic curves
 #' and associated fit data computed by est.R0
 #' @author Pierre-Yves Boelle, Thomas Obadia
-#' @keywords internal
+#'
+#' @importFrom grDevices dev.new
+#'
+#' @export
 plotfit.R0.sR <- function
 (x,
  all=TRUE,

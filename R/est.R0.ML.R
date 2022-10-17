@@ -85,7 +85,9 @@
 #' # Reproduction number estimate using  Maximum Likelihood  method.
 #' # R :  1.307249[ 1.236913 , 1.380185 ]
 #' 
+#' @importFrom stats uniroot poisson qchisq optim optimize glm
 #' 
+#' @export
 est.R0.ML <- function
 (epid,
   GT, 

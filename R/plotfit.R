@@ -18,6 +18,8 @@
 #' SB method? (default: TRUE)
 #' @param \dots parameters passed to plot.R
 #' @author Pierre-Yves Boelle, Thomas Obadia
+#'
+#' @export
 plotfit <- function
 (x,
  all=TRUE,

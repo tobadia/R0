@@ -61,6 +61,10 @@
 #' plot(GT.chld.hsld1, ylim=c(0,0.5), col="red")
 #' par(new=TRUE)
 #' plot(GT.chld.hsld2, xlim=c(0,7), ylim=c(0,0.5), col="black")
+#'
+#' @importFrom stats pweibull pgamma plnorm
+#'
+#' @export
 generation.time <- function
 (type=c("empirical","gamma","weibull","lognormal"),
 val=NULL, 

@@ -56,6 +56,10 @@
 #' est.R0.EG(Germany.1918, mGT, begin=1, end=27)
 #' ## Reproduction number estimate using  Exponential Growth 
 #' ## R :  1.525895[ 1.494984 , 1.557779 ]
+#'
+#' @importFrom stats poisson predict lm glm coefficients
+#'
+#' @export
 est.R0.EG <-function
 ( epid, 
   GT, 

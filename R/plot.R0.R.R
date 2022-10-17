@@ -14,7 +14,10 @@
 #' @return Called for its side effect : Draws \code{all} R0 or R(t) value from
 #' one estimation methods.
 #' @author Pierre-Yves Boelle, Thomas Obadia
-#' @keywords internal
+#'
+#' @importFrom graphics abline arrows axis close.screen split.screen screen legend lines points polygon
+#'
+#' @export
 plot.R0.R <- function
 (x,
  all=TRUE,

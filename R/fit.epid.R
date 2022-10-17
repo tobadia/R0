@@ -19,6 +19,8 @@
 #' @return Returns a Poisson log-likelihood with given R and \code{GT}
 #' @author Pierre-Yves Boelle, Thomas Obadia
 #' @keywords internal
+#' 
+#' @importFrom stats dpois
 fit.epid <- function
 (log.R,
 epid,

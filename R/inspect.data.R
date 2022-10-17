@@ -39,6 +39,8 @@
 #' @param t An optional vector of dates
 #' @param GT Generation Time repartition function
 #' @author Pierre-Yves Boelle, Thomas Obadia
+#'
+#' @export
 inspect.data = function
 (incid,
  t=NULL,

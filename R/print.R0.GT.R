@@ -8,7 +8,8 @@
 #' @param \dots Parameters passed to inner functions
 #' @return Called for side effect. Displays GT and mean/sd.
 #' @author Pierre-Yves Boelle, Thomas Obadia
-#' @keywords internal
+#'
+#' @export
 print.R0.GT <- function
 (x,
 ...

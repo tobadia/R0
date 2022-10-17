@@ -44,6 +44,12 @@
 #' data(H1N1.serial.interval)
 #' est.GT(infector.onset.dates=rep(0,length(H1N1.serial.interval)), 
 #'        infectee.onset.dates=H1N1.serial.interval)
+#'
+#' @importFrom MASS fitdistr
+#' @importFrom stats dgamma dlnorm dweibull density
+#' @importFrom graphics curve hist
+#' 
+#' @export
 est.GT <- function
 (infector.onset.dates=NULL,
  infectee.onset.dates=NULL,

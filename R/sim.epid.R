@@ -36,6 +36,10 @@
 #'          epid.length=30, family="poisson", peak.value=150)
 #' 
 #' # Here, a 30*100 matrix is returned. Each column is a single epidemic.
+#'
+#' @importFrom stats rpois rnbinom rmultinom
+#'
+#' @export
 sim.epid <- function
 (epid.nb,
  GT,

@@ -17,6 +17,10 @@
 #' @param CD.GT Generation time distribution to be used for computations
 #' @return A vector with both imputed incidence and source available data.
 #' @author Pierre-Yves Boelle, Thomas Obadia
+#'
+#' @importFrom stats optim
+#'
+#' @export
 impute.incid = function
 (CD.optim.vect,
 CD.epid,

@@ -80,6 +80,10 @@
 #' plot(SB)
 #' ## "Plotfit" will show the complete distribution of R for 9 time unit throughout the outbreak
 #' plotfit(SB)
+#' 
+#' @importFrom stats na.omit
+#'
+#' @export
 est.R0.SB <- function
 (epid,
   GT,

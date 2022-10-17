@@ -24,6 +24,8 @@
 #' \eqn{beta*I} and variance \eqn{negbin.size*beta*I}, to allow for
 #' overdispersion.
 #' @author Pierre-Yves Boelle, Thomas Obadia
+#' 
+#' @importFrom stats runif rpois rnbinom rgamma
 sim.epid.indiv <- function
 (
   beta,

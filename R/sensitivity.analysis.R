@@ -90,6 +90,8 @@
 #' # $best.fit
 #' #    Time.period Begin.dates  End.dates       R Growth.rate  Rsquared CI.lower. CI.upper.
 #' # 92          15  1970-01-08 1970-01-23 1.64098   0.1478316 0.9752564  1.574953  1.710209
+#'
+#' @export
 sensitivity.analysis=function
 (incid,
  GT=NULL,

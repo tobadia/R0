@@ -16,7 +16,11 @@
 #' @return Called for its side effect : Draws the fit of one estimation method
 #' to the data.
 #' @author Pierre-Yves Boelle, Thomas Obadia
-#' @keywords internal
+#'
+#' @importFrom grDevices dev.new
+#' @importFrom graphics abline axis close.screen split.screen screen lines points
+#'
+#' @export
 plotfit.R0.R <- function
 (x,
  all=TRUE,

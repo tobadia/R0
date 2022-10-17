@@ -9,7 +9,8 @@
 #' @return Called for side effect. Shows a plot of the generation time
 #' distribution.
 #' @author Pierre-Yves Boelle, Thomas Obadia
-#' @keywords internal
+#'
+#' @export
 plot.R0.GT <- function
 (x,
  ...

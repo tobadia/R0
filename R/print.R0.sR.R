@@ -14,7 +14,8 @@
 #' @return Called for its side effect : Prints all R0 or R(t) values from
 #' requested estimation methods.
 #' @author Pierre-Yves Boelle, Thomas Obadia
-#' @keywords internal
+#'
+#' @export
 print.R0.sR <- function
 (x,
 ...

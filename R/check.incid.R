@@ -66,6 +66,8 @@
 #' ## Finally, if no names() are available for the dataset and date.first.obs is not provided,
 #' ## setting time.step to any integer value will generate a t vector starting 
 #' ## from 1 and incrementing by the time.step parameter.
+#'
+#' @export
 check.incid = function
 (incid,
 t=NULL,

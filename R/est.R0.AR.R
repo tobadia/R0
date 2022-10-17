@@ -67,6 +67,8 @@
 #' est.R0.AR(pop.size=1732, incid=c(2,3,0,7,4,2,0,5))
 #' # Reproduction number estimate using Attack Rate method
 #' # R :  1.006699[ 1.003965 , 1.009453 ]
+#'
+#' @export
 est.R0.AR <- function
 (AR=NULL,
   incid=NULL,

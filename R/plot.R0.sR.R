@@ -18,7 +18,10 @@
 #' @return Called for its side effect : Draws all R0 or R(t) values from
 #' requested estimation methods.
 #' @author Pierre-Yves Boelle, Thomas Obadia
-#' @keywords internal
+#'
+#' @importFrom grDevices dev.new
+#'
+#' @export
 plot.R0.sR <- function
 (x,
  xscale="w",

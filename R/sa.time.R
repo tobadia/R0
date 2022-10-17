@@ -34,6 +34,8 @@
 #' \code{end} (columns) dates.} \item{begin}{A range of \code{begin} dates in
 #' epidemic.} \item{end}{A range of \code{end} dates in epidemic.}
 #' @author Pierre-Yves Boelle, Thomas Obadia
+#' 
+#' @export
 sa.time=function
 (incid,
  GT,
