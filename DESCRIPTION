@@ -23,3 +23,4 @@ Description: Estimation of reproduction numbers for disease outbreak, based on
 License: GPL (>= 2)
 LazyLoad: yes
 RoxygenNote: 7.2.1
+Encoding: UTF-8
