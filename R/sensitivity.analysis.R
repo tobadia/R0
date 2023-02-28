@@ -46,6 +46,9 @@
 #' @export
 #' 
 #' @example tests/sensitivity.analysis.R
+#' 
+#' @author Pierre-Yves Boelle, Thomas Obadia
+
 
 
 # Function declaration
