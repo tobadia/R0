@@ -43,6 +43,8 @@
 #' @return
 #' A sensitivity analysis object of class `R0.S` with components depending on sensitivity analysis `sa.type`.
 #' 
+#' @export
+#' 
 #' @example tests/sensitivity.analysis.R
 
 # Function declaration
