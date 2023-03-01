@@ -33,6 +33,7 @@
 #' @author Pierre-Yves Boelle, Thomas Obadia
 
 
+
 # Function declaration
 
 censored.deviation <- function(
