@@ -51,6 +51,10 @@
 #' @return
 #' A list with components `incid` and `t`.
 #' 
+#' @export
+#' 
+#' @keyword internal
+#' 
 #' @example tests/check.incid.R
 #' 
 #' @author Pierre-Yves Boelle, Thomas Obadia
