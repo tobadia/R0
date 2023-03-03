@@ -53,7 +53,7 @@
 #' 
 #' @export
 #' 
-#' @keyword internal
+#' @keywords internal
 #' 
 #' @example tests/check.incid.R
 #' 
@@ -69,9 +69,9 @@ check.incid <- function(
     date.first.obs = NULL, 
     time.step.     = 1 
 )
-
-# Code
-
+  
+  # Code
+  
 {
   #Various class and integrity checks
   if (is.numeric(incid) | is.character(incid) | inherits(incid, "Date")) {
@@ -90,16 +90,16 @@ check.incid <- function(
       t <- as.character(seq(min(tmp,na.rm=T), max(tmp,na.rm=T),by=time.step))      
       incid <- as.numeric(table(factor(incid, levels=t)))
     }
-        
+    
     #No dates provided, use names(t) if available, or integers from 1 to length(incid) if not
-	  if (is.null(t)) {
+    if (is.null(t)) {
       if (is.null(date.first.obs)) {
         
         if (!is.null(names(incid))) {
           t <- names(incid)
           
         }
-  		  else {
+        else {
           t <- 1:length(incid)
           t[-1] <- t[-1]*time.step - (time.step-1)
         }
@@ -107,12 +107,12 @@ check.incid <- function(
       else {
         t <- seq(from=as.Date(date.first.obs), to=time.step*length(incid)+as.Date(date.first.obs)-1, by=time.step)
       }
-	  }
+    }
     
-	  #Try to determine if t is numeric or date
-	  if (!any(is.na(suppressWarnings(as.numeric(t)))) & !inherits(t, "Date")) {
-		  #names are numeric 
-		  t <- as.numeric(t)
+    #Try to determine if t is numeric or date
+    if (!any(is.na(suppressWarnings(as.numeric(t)))) & !inherits(t, "Date")) {
+      #names are numeric 
+      t <- as.numeric(t)
       incid <- incid[order(t)]
       t <- t[order(t)]
       if (length(unique(t)) != length(t)) {stop("duplicates t values or duplicate names in incid")}
@@ -122,27 +122,27 @@ check.incid <- function(
       tmp$incid[is.na(tmp$incid)] <- 0
       incid <- tmp$incid
       t <- tmp$t
-	  } 
+    } 
     
     #Try dates with most common format
     else if (suppressWarnings((!is.na(strptime(t[1], format="%Y-%m-%d"))) | (!is.na(strptime(t[1], format="%Y/%m/%d"))))) {
-		  t <- as.Date(t)
-		  incid <- incid[order(t)]
-		  t <- t[order(t)]
-		  if (length(unique(t)) != length(t)) {stop("duplicates t values or duplicate names in incid")}
-		  # check that all t values are present with at last time.step interval
-		  if (min(as.numeric(diff(t))) < time.step) stop(paste("t values must be at least time.step =",time.step," units apart from each other"))
-		  tmp <- merge(data.frame(t=t, incid=incid),data.frame(t=seq(min(t,na.rm=T),max(t,na.rm=T),by=time.step)),all.y=T)
-		  tmp$incid[is.na(tmp$incid)] <- 0
-		  incid <- tmp$incid
-		  t <- as.Date(as.character(tmp$t))
-	  }
+      t <- as.Date(t)
+      incid <- incid[order(t)]
+      t <- t[order(t)]
+      if (length(unique(t)) != length(t)) {stop("duplicates t values or duplicate names in incid")}
+      # check that all t values are present with at last time.step interval
+      if (min(as.numeric(diff(t))) < time.step) stop(paste("t values must be at least time.step =",time.step," units apart from each other"))
+      tmp <- merge(data.frame(t=t, incid=incid),data.frame(t=seq(min(t,na.rm=T),max(t,na.rm=T),by=time.step)),all.y=T)
+      tmp$incid[is.na(tmp$incid)] <- 0
+      incid <- tmp$incid
+      t <- as.Date(as.character(tmp$t))
+    }
     
     #Doesn't match any date format or custom numeric sequence
     else {
-		  #replace t by integer sequence
-		  t <- 1:length(incid)
-	  }
+      #replace t by integer sequence
+      t <- 1:length(incid)
+    }
   } 
   
   #t is provided along with incidence : 
@@ -158,13 +158,13 @@ check.incid <- function(
       epicurve.object <- incid
       if (!is.null(epicurve.object)$dates) {
         #Basic case: epicurve.dates
-        incid = table(epicurve.object$dates)
-        t = as.Date(names(table(epicurve.object$dates)))
+        incid <- table(epicurve.object$dates)
+        t <- as.Date(names(table(epicurve.object$dates)))
         
         #If object was from more precise epicurve method (weeks, month), there must be a $stratum3 object
         if (!is.null(epicurve.object$stratum3)) {
-          incid = table(epicurve.object$stratum3)
-          t = as.Date(names(table(epicurve.object$stratum3)))
+          incid <- table(epicurve.object$stratum3)
+          t <- as.Date(names(table(epicurve.object$stratum3)))
         }
         
         if (is.null(t) | is.null(incid)) {
@@ -181,15 +181,15 @@ check.incid <- function(
     
     
   }
-
+  
   #Incid is not negative or missing
   if (any(incid < 0) || any(is.na(incid))) {
-	  stop("'incid' should be positive and non missing")
+    stop("'incid' should be positive and non missing")
   }
   
   if (length(incid) != length(t)) {
-	  stop("'incid' & 't' must have the same length")
+    stop("'incid' & 't' must have the same length")
   }
-
-	return(list(incid=as.vector(incid),t=t))
+  
+  return(list(incid=as.vector(incid),t=t))
 }

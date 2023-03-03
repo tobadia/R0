@@ -81,7 +81,7 @@ sensitivity.analysis <- function(
   else if ((sa.type == "time") && (!is.null(res))) {
     sa.object <- sa.time(res = res, begin = begin, end = end, ...)
   }
-
+  
   else if ((sa.type == "time") && (is.null(res))) {
     if ((is.null(GT)) | (is.null(est.method))) {
       stop("Missing input argument (probably GT or est.method). Please check sa.time documentation for further details.")
@@ -89,7 +89,7 @@ sensitivity.analysis <- function(
     else {
       sa.object <- sa.time(incid = incid, GT = GT, begin = begin, end = end, est.method = est.method, t = t, date.first.obs = date.first.obs, time.step = time.step, res = res, ...)
     }
-          
+    
   }
   else if (sa.type == "GT") {
     if ((is.null(GT.type)) | (is.null(GT.mean.range)) | (is.null(GT.sd.range)) | (is.null(est.method))) {

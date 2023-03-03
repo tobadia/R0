@@ -2,21 +2,48 @@
 # Desc   : A tweaked "plot" function designed to easily plot S objects from
 #          sensitivity.analysis.
 # Date   : 2011/11/09
+# Update : 2023/03/03
 # Author : Boelle, Obadia
 ###############################################################################
 
 
+#' @title
+#' Plot of sensitivity analyses.
+#' 
+#' @description
+#' Generates the graphical output for an object generated through 
+#' [sensitivity.analysis()].
+#' 
+#' @details
+#' For internal use. Called by [base::plot()] when applied to `R0.S` objects.
+#' A plot will be shown and the best model fit will be returned.
+#' 
+#' @param x Output of [sensitivity.analysis()] (class `R0.S`)
+#' @param what Specify the desired output. Can be `"heatmap"` (default), `"criterion"` or both.
+#' @param time.step Optional. If date of first observation is specified, number of day between each incidence observation.
+#' @param skip Number of results to ignore (time period in days) when looking for highest Rsquared value.
+#' @param ... Parameters passed to inner functions.
+#' 
+#' @return
+#' A list with best R0 measure for each possible time period, along with corresponding begin/end dates.
+#' \item{max.Rsquared}{The highest R-squared values.}
+#' \item{best.R0.values}{The corresponding \eqn{R_{0}} values.}
+#' \item{best.fit}{The best model fit as defined by the highest R-squared values among all returned.}
+#' 
+#' @keywords internal
+#' 
+#' @author Pierre-Yves Boelle, Thomas Obadia
+
+
+
 # Function declaration
 
-plot.R0.S <- function#Plot objects from sensitivity.analysis
-### Plots objects from sensitivity.analysis
-##details<< For internal use. Called by plot.
-
-(x, ##<< Result of sensitivity.analysis (class R0.S)
- what="heatmap", ##<< Specify the desired output. Can be "heatmap" (default), "criterion", or both.
- time.step=1, ##<< Optional. If date of first observation is specified, number of day between each incidence observation
- skip = 5, ##<< Number of results to ignore (time period of X days) when looking for highest Rsquared value.
- ... ##<< Parameters passed to inner functions
+plot.R0.S <- function(
+    x, 
+    what      = "heatmap", 
+    time.step = 1, 
+    skip      = 5, 
+    ... 
 )
 
 # Code
@@ -34,10 +61,10 @@ plot.R0.S <- function#Plot objects from sensitivity.analysis
 
   #Extracting duration period from dates (end-begin)
 	#fact = as.factor((res$df.clean[,3]-res$df.clean[,2])/time.step)
-  fact = as.factor(x$df.clean[,1])
+  fact <- as.factor(x$df.clean[,1])
   
   #Apply this factor to split the results inside data.frame df.clean
-  opt.df = sapply(split(x$df.clean, fact), function(df) {
+  opt.df <- sapply(split(x$df.clean, fact), function(df) {
     rownames(df[which.max(df$Rsquared),])
   })
   
@@ -80,13 +107,6 @@ plot.R0.S <- function#Plot objects from sensitivity.analysis
     points(x=best.fit$Time.period, y=best.fit$Rsquared, pch=21, col="red", bg="red")
   }
   
-  ### Called for side effect.
-  
   #Return the max.Rsquared data, as extracted from x$df.clean
   return(list(max.Rsquared=max.Rsquared, best.R0.values=x$df.clean[opt.df,4], best.fit=best.fit))
-  
-	##value<<
-	## A data frame with best R0 measure for each possible time period, along with corresponding begin/end dates
-  ## \item{$max.Rsquared}{Best R0 measure for each time period, as measured by their Rsquared value.}
-  
 }

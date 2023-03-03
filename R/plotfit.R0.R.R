@@ -1,26 +1,48 @@
-# Name   : plot.R
-# Desc   : A tweaked "plot" function designed to easily plot R objects from
-#          any of the supported estimation methods.
+# Name   : plotfit.R0.R
+# Desc   : A set of tweaked "plot" functions designed to easily plot R objects 
+#          from any of the supported estimation methods.
 # Date   : 2011/11/09
+# Update : 2023/03/03
 # Author : Boelle, Obadia
 ###############################################################################
 
 
+#' @title
+#' Plot a model fit for `R0.R` objects
+#' 
+#' @description
+#' Plot the fit of a single model output to epidemic data. 
+#' 
+#' @details
+#' For internal use. This function is called by the [plotfit()] S3 method.
+#' Depending on the estimation method, either [plotfitRxx()], [plotfitRAR()] or
+#' [plotfitRSB()] will be called.
+#' 
+#' @param x An output of `est.R0.xx()` (class `R0.R`).
+#' @param all Boolean. Should the full epidemic curve be shown ?
+#' @param xscale Scale to be adjusted on x-axis. Can be `d` (day), `w` (week (default)), `f` (fornight), `m` (month).
+#' @param SB.dist Boolean. Should the R distirbution throughout the epidemic be plotted for the SB method (defaults to `TRUE`) ?
+#' @param ... Parameters passed to inner functions.
+#' 
+#' @return
+#' This function does not return any data.
+#' Called for side effect. Draws the fit of one estimation method to the data.
+#' 
+#' @keywords internal
+#' 
+#' @author Pierre-Yves Boelle, Thomas Obadia
+
+
+
 # Function declaration
 
-plotfit.R0.R <- function#Plot the fit of a model to epidemic data
-### Plots the fit of a model to epidemic data
-##details<< For internal use. Called by plotfit.
-##keyword<< internal
-
-(x, ##<< Result of est.R (class R0.R)
- all=TRUE, ##<< Should the whole epidemic curve be shown
- xscale="w", ##<< Scale to be adjusted on X axis. Can be "d" (day), "w" (week (default)), "f" (fornight), "m" (month).
- SB.dist=TRUE, ##<< Should R distribution throughout the epidemic be plotted for SB method? (default: TRUE)
- ... ##<< Parameters passed to plot
- ) 
-  ##details<< For internal use. Called by plotfit.R0.sR.
-  
+plotfit.R0.R <- function(
+    x, 
+    all.    = TRUE, 
+    xscale. = "w", 
+    SB.dist = TRUE, 
+    ... 
+) 
   
   # Code
   
@@ -34,24 +56,57 @@ plotfit.R0.R <- function#Plot the fit of a model to epidemic data
   else {
     do.call(paste("plotfitR",x$method.code,sep=""), args=list(x=x, xscale=xscale, SB.dist=SB.dist, ...) )
   }
-  ### Called for its side effect :
-  ### Draws the fit of one estimation method to the data.
+  
 }
 
 
-plotfitRxx <- function(x, xscale,...)#Internal plotfit method for EG, ML and TD estimates
-###Internal plotfit method for EG, ML and TD estimates
+
+
+
+#' @title
+#' Internal plotfit method for EG, ML and TD estimates
+#' 
+#' @description
+#' Plot the fit of a single model output to epidemic data when the method is
+#' EG, ML or TD.
+#' 
+#' @details
+#' For internal use. This function is called by the [plotfit.R0.R()].
+#' 
+#' @param x An output of [est.R0.EG()], [est.R0.ML()] or [est.R0.TD()] (class `R0.R`).
+#' @param xscale Scale to be adjusted on x-axis. Can be `d` (day), `w` (week (default)), `f` (fornight), `m` (month).
+#' @param ... Parameters passed to inner functions.
+#' 
+#' @return
+#' This function does not return any data.
+#' Called for side effect. Draws the fit of one estimation method to the data.
+#' 
+#' @keywords internal
+#' 
+#' @author Pierre-Yves Boelle, Thomas Obadia
+
+
+
+# Generic EG, ML and TD plotfit
+plotfitRxx <- function(
+    x, 
+    xscale, 
+    ...
+)
+  
+  # Code
+  
 {
   ##keyword<< internal
-  epid = x$epid
+  epid <- x$epid
   
   #Get data used for the fit
-  begin = x$begin
-  begin.nb = x$begin.nb
-  end = x$end
-  end.nb = x$end.nb
+  begin <- x$begin
+  begin.nb <- x$begin.nb
+  end <- x$end
+  end.nb <- x$end.nb
   
-  epid.used.for.fit = list(incid=epid$incid[begin.nb:end.nb], t=epid$t[begin.nb:end.nb])
+  epid.used.for.fit <- list(incid=epid$incid[begin.nb:end.nb], t=epid$t[begin.nb:end.nb])
   
   #Plot the whole original epidemic data
   plot(epid$t,epid$incid, xlab="Time",ylab="Incidence",t='s', xaxt="n", main=paste("Epidemic curve & model (", x$method,")"), ...)
@@ -61,24 +116,58 @@ plotfitRxx <- function(x, xscale,...)#Internal plotfit method for EG, ML and TD 
   
   #Highlight the original points
   points(epid.used.for.fit$t,epid.used.for.fit$incid,pch=19)
-
+  
   #Finally, X-Axis labels
-  div = get.scale(xscale)
+  div <- get.scale(xscale)
   #Where should labels be on axis
-  atLab = pretty(epid$t, n=length(epid$t)/div)
+  atLab <- pretty(epid$t, n=length(epid$t)/div)
   #What should labels say
-  lab = format(pretty(epid$t, n=length(epid$t)/div))
+  lab <- format(pretty(epid$t, n=length(epid$t)/div))
   axis(1, at=atLab, labels=lab)
   
 }
 
-plotfitRAR <- function(x, xscale,...)#Internal plotfit method for AR estimates
-###Internal plotfit method for AR estimates
+
+
+
+
+#' @title
+#' Internal plotfit method for AR estimates
+#' 
+#' @description
+#' Plot the fit of a single model output to epidemic data when the method is AR.
+#' 
+#' @details
+#' For internal use. This function is called by the [plotfit.R0.R()].
+#' 
+#' @param x An output of [est.R0.AR()] (class `R0.R`).
+#' @param xscale Scale to be adjusted on x-axis. Can be `d` (day), `w` (week (default)), `f` (fornight), `m` (month).
+#' @param ... Parameters passed to inner functions.
+#' 
+#' @return
+#' This function does not return any data.
+#' Called for side effect. Draws the fit of one estimation method to the data.
+#' 
+#' @keywords internal
+#' 
+#' @author Pierre-Yves Boelle, Thomas Obadia
+
+
+
+# AR plotfit
+plotfitRAR <- function(
+    x, 
+    xscale,
+    ...
+)
+  
+  # Code
+  
 {
   ##keyword<< internal
   epid <- x$epid
   epid.orig <- x$epid.orig
-  epid.used.for.fit = list(incid=epid.orig$incid, t=epid.orig$t)
+  epid.used.for.fit <- list(incid=epid.orig$incid, t=epid.orig$t)
   
   #Plot the whole original epidemic data
   plot(epid$t,epid$incid, xlab="Time",ylab="Incidence",t='s', xaxt="n", main="Epidemic curve (Attack Rate)", ...)
@@ -87,27 +176,62 @@ plotfitRAR <- function(x, xscale,...)#Internal plotfit method for AR estimates
   points(epid.used.for.fit$t,epid.used.for.fit$incid,pch=19)
   
   #Finally, X-Axis labels
-  div = get.scale(xscale)
+  div <- get.scale(xscale)
   #Where should labels be on axis
-  atLab = pretty(epid$t, n=length(epid$t)/div)
+  atLab <- pretty(epid$t, n=length(epid$t)/div)
   #What should labels say
-  lab = format(pretty(epid$t, n=length(epid$t)/div))
+  lab <- format(pretty(epid$t, n=length(epid$t)/div))
   axis(1, at=atLab, labels=lab)
 }
 
-plotfitRSB <- function(x, xscale, SB.dist,...)#Internal plot method for SB estimates
-###Internal plotfit method for SB estimates
+
+
+
+
+#' @title
+#' Internal plotfit method for AR estimates
+#' 
+#' @description
+#' Plot the fit of a single model output to epidemic data when the method is SB.
+#' 
+#' @details
+#' For internal use. This function is called by the [plotfit.R0.R()].
+#' 
+#' @param x An output of [est.R0.SB()] (class `R0.R`).
+#' @param xscale Scale to be adjusted on x-axis. Can be `d` (day), `w` (week (default)), `f` (fornight), `m` (month).
+#' @param SB.dist Boolean. Should the R distirbution throughout the epidemic be plotted for the SB method (defaults to `TRUE`) ?
+#' @param ... Parameters passed to inner functions.
+#' 
+#' @return
+#' This function does not return any data.
+#' Called for side effect. Draws the fit of one estimation method to the data.
+#' 
+#' @keywords internal
+#' 
+#' @author Pierre-Yves Boelle, Thomas Obadia
+
+
+
+# SB plotfit
+plotfitRSB <- function(
+    x, 
+    xscale, 
+    SB.dist, 
+    ...
+)
+  
+  # Code
+  
 {
-  ##keyword<< internal
-  epid = x$epid
+  epid <- x$epid
   
   #Get data used for the fit
-  begin = x$begin
-  begin.nb = x$begin.nb
-  end = x$end
-  end.nb = x$end.nb
+  begin <- x$begin
+  begin.nb <- x$begin.nb
+  end <- x$end
+  end.nb <- x$end.nb
   
-  epid.used.for.fit = list(incid=epid$incid[begin.nb:end.nb], t=epid$t[begin.nb:end.nb])
+  epid.used.for.fit <- list(incid=epid$incid[begin.nb:end.nb], t=epid$t[begin.nb:end.nb])
   
   #Plot the whole original epidemic data
   plot(epid$t,epid$incid, xlab="Time",ylab="Incidence",t='s', xaxt="n", main=paste("Epidemic curve & model (", x$method,")"), ...)
@@ -119,11 +243,11 @@ plotfitRSB <- function(x, xscale, SB.dist,...)#Internal plot method for SB estim
   points(epid.used.for.fit$t,epid.used.for.fit$incid,pch=19)
   
   #Finally, X-Axis labels
-  div = get.scale(xscale)
+  div <- get.scale(xscale)
   #Where should labels be on axis
-  atLab = pretty(epid$t, n=length(epid$t)/div)
+  atLab <- pretty(epid$t, n=length(epid$t)/div)
   #What should labels say
-  lab = format(pretty(epid$t, n=length(epid$t)/div))
+  lab <- format(pretty(epid$t, n=length(epid$t)/div))
   axis(1, at=atLab, labels=lab)
   
   #When plotting Bayesian, if SB.dist is enabled, plot some R distributions throughout the epidemic
@@ -146,7 +270,7 @@ plotfitRSB <- function(x, xscale, SB.dist,...)#Internal plot method for SB estim
         next
       }
       if (is.na(num.to.plot[i])) {
-        num.to.plot[i] = num.to.plot[i-1] + floor(length(x$epid$incid[begin.nb:end.nb])/9)
+        num.to.plot[i] <- num.to.plot[i-1] + floor(length(x$epid$incid[begin.nb:end.nb])/9)
       }
       
       screen(i)

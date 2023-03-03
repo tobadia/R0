@@ -1,26 +1,63 @@
 # Name   : smooth.Rt
-# Desc   : Allows for regrouping real-time reproduction number by a given time period
+# Desc   : Allows for regrouping real-time reproduction number by a given time
+#          period
 # Date   : 2011/16/09
+# Update : 2023/03/03
 # Author : Boelle, Obadia
 ###############################################################################
 
 
+#' @title
+#' Smooth real-time reproduction number over larger time periods
+#' 
+#' @description
+#' Aggregate real-time estimates of \eqn{R(t)} (from the TD or even the SB 
+#' methods) over larger time windows, while still accounting for the generation 
+#' time distribution.
+#' 
+#' @details
+#' Regrouping Time-Dependant R(t) values, or even Real Time Bayesian most-likely 
+#' R values (according to R distributions) should take into account the 
+#' generation time. Results can be plotted exactly the same was as input 
+#' estimations, except they won't show any goodness-of-fit curve.
+#' 
+#' @param res An object of class `R0.R`, created by any real-time method (currently implemented: TD and SB).
+#' @param time.period Time period to be used for aggregation.
+#' 
+#' @return
+#' A list with components :
+#' \item{R}{The estimate of the reproduction ratio.}
+#' \item{conf.int}{The 95% confidence interval for the R estimate.}
+#' \item{GT}{Generation time distribution uised in the computation.}
+#' \item{epid}{Original or augmented epidemic data, depending whether impute.values is set to FALSE or TRUE.}
+#' \item{begin}{Starting date for the fit.}
+#' \item{begin.nb}{The number of the first day used in the fit.}
+#' \item{end}{The end date for the fit.}
+#' \item{end.nb}{The number of the las day used for the fit.}
+#' \item{data.name}{The name of the dataset used.}
+#' \item{call}{Call used for the function.}
+#' \item{method}{Method used for fitting.}
+#' \item{method.code}{Internal code used to designate method.}
+#' 
+#' @export
+#' 
+#' @example tests/smooth.Rt.R
+#' 
+#' @author Pierre-Yves Boelle, Thomas Obadia
+
+
+
 # Function declaration
 
-smooth.Rt <- function#Smooth real-time reproduction number over larger time period
-### Smooth real-time reproduction number over larger time period
-
-(res, ##<< An object of class "R0.R", created by any real-time method (currently implemented: TD and SB)
-time.period ##<< Time period to be used for computations.
+smooth.Rt <- function(
+    res, 
+    time.period 
 )
   
   
-# Code
+  # Code
   
 {
-  ##details<<Regrouping Time-Dependant R(t) values, or even Real Time Bayesian most-likely R values (according to R distributions)
-  ## should take into account the Generation Time.
-  ## Results can be plotted exactly the same was as input estimations, except they won't show any goodness of fit curve.
   
   if (!inherits(res, "R0.R")) {
     stop("Currently, sensitivity analysis from a result object only supports 'R0.R' class objects. Try using res$estimates$TD or res$estimates$SB if they are defined.")
@@ -37,7 +74,7 @@ time.period ##<< Time period to be used for computations.
   nb.groups <- floor(length(res$epid$incid[res$begin.nb:res$end.nb])/time.period)
   
   #New data will have the exact same layout as input
-  epid = list(incid = rep(0, nb.groups), t = rep(NA, nb.groups))
+  epid <- list(incid = rep(0, nb.groups), t = rep(NA, nb.groups))
   
   Rt.quant <- matrix(NA, nb.groups, ncol=4)
   colnames(Rt.quant) <- c("Date","R(t)", "CI[lower]", "CI[upper]")
@@ -62,29 +99,15 @@ time.period ##<< Time period to be used for computations.
   
   #Extract required informations for standard return
   R <- Rt.quant[,2]
-  conf.int = matrix(data=NA, nrow=dim(Rt.quant)[1], ncol=2)
+  conf.int <- matrix(data=NA, nrow=dim(Rt.quant)[1], ncol=2)
   colnames(conf.int)=c("lower", "upper")
   conf.int[,1] <- Rt.quant[,3]
   conf.int[,2] <- Rt.quant[,4]
   conf.int<-data.frame(na.omit(conf.int))
   rownames(conf.int) = as.character(Rt.quant[,1])
-
+  
   
   #return everything
   return(structure(list(R=R, conf.int=conf.int, GT=res$GT, epid=epid, begin=res$begin, begin.nb=1, end=res$end, end.nb=length(epid$t), data.name=res$data.name, call=res$call, method=res$method, method.code=res$method.code),class="R0.R"))
-
-  ##value<<
-  ## A list with components:
-  ## \item{R}{The estimate of the reproduction ratio.}
-  ## \item{conf.int}{The 95% confidence interval for the R estimate.}
-  ## \item{GT}{Generation time distribution uised in the computation.}
-  ## \item{epid}{Original or augmented epidemic data, depending whether impute.values is set to FALSE or TRUE.}
-  ## \item{begin}{Starting date for the fit.}
-  ## \item{begin.nb}{The number of the first day used in the fit.}
-  ## \item{end}{The end date for the fit.}
-  ## \item{end.nb}{The number of the las day used for the fit.}
-  ## \item{data.name}{The name of the dataset used.}
-  ## \item{call}{Call used for the function.}
-  ## \item{method}{Method used for fitting.}
-  ## \item{method.code}{Internal code used to designate method.}
+  
 }

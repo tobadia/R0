@@ -42,9 +42,9 @@ censored.deviation <- function(
     R0, 
     GT 
 ) 
-
-# Code
-
+  
+  # Code
+  
 {
   
   #Various content integrity checks
@@ -69,8 +69,8 @@ censored.deviation <- function(
   
   #N.avt.0 is the actual vector of theoretical imputed incidence, constructed with the highest assumed one 
   #and multiplicative factors from vect.
-  N.avt.0 = rev(exp(rev(vect)[1]) * cumprod(c(1, exp(rev(vect)[-1])/(1+exp(rev(vect)[-1])))))
-    
+  N.avt.0 <- rev(exp(rev(vect)[1]) * cumprod(c(1, exp(rev(vect)[-1])/(1+exp(rev(vect)[-1])))))
+  
   #cat(N.avt.0)
   
   #val is the deviation between theory and observations.

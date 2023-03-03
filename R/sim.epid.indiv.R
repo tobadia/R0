@@ -1,31 +1,58 @@
 # Name   : sim.epid.indiv
 # Desc   : Individual-based model used to simulate epidemic 
-# Date   : 2012/10/20 (last edit 2015/05/21)
+# Date   : 2012/10/20 
+# Update : 2023/03/03
 # Author : Boelle, Obadia
 ###############################################################################
 
 
+#' @title
+#' Influenza-like illness simulation (individual-based model)
+#' 
+#' @description
+#' Generates several epidemic curves with an individual-based model.
+#' 
+#' @note
+#' This is the exact function as used in the manuscript (Obadia et al., 2012).
+#' 
+#' @details
+#' The epidemic is simulated using a branching process, with infinite number of 
+#' susceptibles to allow for exponential growth. The model used follows the 
+#' Crump-Mode-Jagers description, with S/E/I/R description of the natural history. 
+#' 
+#' Latent and infectious period follow parametrized Gamma distributions typical 
+#' of influenza. An index case is first introduced, and offspring is sampled 
+#' from a negative binomial distribution, with mean \eqn{beta*I} and variance 
+#' \eqn{negbin.size*beta*I}, to allow for overdispersion.
+#' 
+#' 
+#' @param beta Contact rate in the SEIR model.
+#' @param Tmax Maximum length of the epidemic (cases infected after this length will be truncated).
+#' @param n Number of epidemics to be simulated (defaults to 1)
+#' @param family Distribution of offspring. Can be either `"poisson"` (default) or `"negbin"`.
+#' @param negbin.size If family is set to "negbin", sets the size parameter of the negative binomial distribution.
+#' 
+#' @return
+#' A matrix with epidemics stored as columns (incidence count).
+#' 
+#' @author Pierre-Yves Boelle, Thomas Obadia
+
+
+
 # Function declaration
 
-sim.epid.indiv <- function#Influenza-like illness simulation (individual-based model)
-### Generates several epidemic curves on a individual-based model
-(
-  beta, ##<< Contact rate in the SEIR model.
-  Tmax, ##<< Maximum length of the epidemic (cases infected after this length will be truncated).
-  n=1, ##<< Number of epidemics to be simulated (default is 1)
-  family="poisson", ##<< Distribution of offspring (default is "poisson").
-  negbin.size=NULL ##<< If family is set to "negbin", sets the size parameter of the negative binomial distribution.
+sim.epid.indiv <- function(
+    beta, 
+    Tmax, 
+    n           = 1, 
+    family      = "poisson", 
+    negbin.size = NULL 
 ) 
   
-{
   
-  ##note<< This is not the final version. This is the exact function as used in the manuscript (Obadia et al., 2012).
-  ##It will be properly implemented to conform with other objects of the package in future releases.
-  ##
-  ##The epidemic is simulated using a branching process, with infinite number of susceptibles to allow for exponential growth. 
-  ##The model used follows the Crump-Mode-Jagers description, with S/E/I/R description of the natural history.
-  ##Latent and infectious period follow parametrized Gamma distributions typical of influenza. 
-  ##An index case is first introduced, and offspring is sampled from a negative binomial distribution, with mean \eqn{beta*I} and variance \eqn{negbin.size*beta*I}, to allow for overdispersion.
+  # Code
+  
+{
   
   #epidemic matrix. Each column is an epidemic
   epid.matrix = matrix(data=0, nrow=Tmax, ncol=n)
@@ -56,16 +83,16 @@ sim.epid.indiv <- function#Influenza-like illness simulation (individual-based m
     epid[1:Lmax,"runif"] <- runif(Lmax)
     
     # add offspring
-    if (family=="poisson") {
+    if (family == "poisson") {
       epid[1:Lmax,"nsec"] = rpois(Lmax, lambda=epid[1:Lmax,"dinf"]*beta)
     }
-    else if (family=="negbin") {
+    else if (family == "negbin") {
       epid[1:Lmax,"nsec"] = rnbinom(Lmax, size=negbin.size, mu=epid[1:Lmax,"dinf"]*beta)
     }
-    while (epid[1,"nsec"]==0) epid[1,"nsec"] = rpois(1, lambda=epid[1,"dinf"]*beta)
+    while (epid[1,"nsec"] == 0) epid[1,"nsec"] = rpois(1, lambda=epid[1,"dinf"]*beta)
     
-    idx.in.epid=1
-    idx.max =2
+    idx.in.epid <- 1
+    idx.max <- 2
     
     while (idx.in.epid < idx.max) {
       
@@ -73,8 +100,8 @@ sim.epid.indiv <- function#Influenza-like illness simulation (individual-based m
       if (epid[idx.in.epid,"tinf"] < Tmax) {
         
         #nb of offspring
-        nsec = epid[idx.in.epid,"nsec"]
-        if (nsec >0) {
+        nsec <- epid[idx.in.epid,"nsec"]
+        if (nsec > 0) {
           
           #tinf_descendant = tinf_parent + latence_parent + runif(1)*dinf_parent
           epid[idx.max:(idx.max+nsec-1),"tinf"] = epid[idx.in.epid,"tinf"] + 
@@ -82,16 +109,15 @@ sim.epid.indiv <- function#Influenza-like illness simulation (individual-based m
             epid[idx.max:(idx.max+nsec-1),"runif"]*epid[idx.in.epid,"dinf"]
           
           #offpsring of next infector: those after the offspring of idx.in.epid + nsec
-          idx.max = idx.max + nsec
+          idx.max <- idx.max + nsec
         }
       }
       #cat("idx.in.epid=",idx.in.epid,"\n idx.max=",idx.max,"\n")
-      idx.in.epid = idx.in.epid+1
+      idx.in.epid <- idx.in.epid+1
     }
     epid.matrix[,i] <- table(cut(epid[1:(idx.max-1),"tinf"], seq(0,Tmax,1), include.lowest=TRUE))
   }
+  
   return(epid.matrix)
   
-  ##value<<
-  ## A matrix with epidemics stored as columns (incidence count)
 }

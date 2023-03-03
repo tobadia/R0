@@ -49,18 +49,18 @@
 # Function declaration
 
 est.GT <- function(
-  infector.onset.dates = NULL, 
- infectee.onset.dates  = NULL, 
- serial.interval       = NULL, 
- request.plot          = FALSE, 
- ...
+    infector.onset.dates = NULL, 
+    infectee.onset.dates  = NULL, 
+    serial.interval       = NULL, 
+    request.plot          = FALSE, 
+    ...
 )
-
   
-# Code
+  
+  # Code
   
 {
-# Data integrity check
+  # Data integrity check
   
   #Vector dimension
   if ((is.null(infector.onset.dates) | is.null(infectee.onset.dates)) && is.null(serial.interval)) {
@@ -79,13 +79,13 @@ est.GT <- function(
       #from now on, they are assumed to be of same class
     }
     
-
+    
     if (is.character(infector.onset.dates)) {
       infector.onset.dates <- as.Date(infector.onset.dates)
       infectee.onset.dates <- as.Date(infectee.onset.dates)
     }
     
-
+    
     else if (!is.numeric(infector.onset.dates) & !inherits(infector.onset.dates, "Date")) {
       stop("onset.dates vector does not contain a compatible format format (numeric, integer, character, Date)")
     }
@@ -175,5 +175,5 @@ est.GT <- function(
   gt.distrib <- generation.time(type=distribution.type, val=c(mean,sd), ...)
   cat("Best fitting GT distribution is a", distribution.type, "distribution with mean =", mean, "and sd =", sd,".\n")
   
-	return(gt.distrib)
+  return(gt.distrib)
 }
