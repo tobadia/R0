@@ -65,8 +65,8 @@
 # Function declaration
 
 est.R0.AR <- function(
-    AR.      = NULL, 
-    incid.   = NULL, 
+    AR       = NULL, 
+    incid    = NULL, 
     pop.size = NULL, 
     S0       = 1, 
     checked  = FALSE, 

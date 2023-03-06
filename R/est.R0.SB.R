@@ -74,7 +74,7 @@ est.R0.SB <- function(
     epid, 
     GT, 
     t              = NULL, 
-    begin.         = NULL, 
+    begin          = NULL, 
     end            = NULL, 
     date.first.obs = NULL, 
     time.step      = 1, 
