@@ -93,7 +93,7 @@ estimate.R <- function(
   }
   
   # Checks on GT, begin and end are run
-  parameters <- integrity.checks(epid, t, GT, begin, end, date.first.obs, time.step, AR, S0, methods)
+  parameters <- integrity.checks(epid=epid, GT=GT, t=t, begin=begin, end=end, date.first.obs=date.first.obs, time.step=time.step, AR=AR, S0=S0, methods=methods)
   begin <- parameters$begin
   end <- parameters$end
   
