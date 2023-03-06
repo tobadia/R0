@@ -22,7 +22,6 @@
 #' depending on which method was used to estimate a reproduction number.
 #' 
 #' @param x An estimated object, output from `est.R0.xx()` routines (class `R0.R`).
-#' @param all Boolean. Should the full epidemic curve be shown ?
 #' @param xscale Scale to be adjusted on x-axis. Can be `d` (day), `w` (week (default)), `f` (fornight), `m` (month).
 #' @param TD.split Boolean. Parameter to force the display of both \eqn{R(t)} and the epidemic curve in the same window for the TD method.
 #' @param ... Parameters passed to inner functions.
@@ -41,7 +40,6 @@
 
 plot.R0.R <- function(
     x, 
-    all      = TRUE, 
     xscale   = "w", 
     TD.split = FALSE, 
     ... 

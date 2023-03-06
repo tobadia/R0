@@ -4,12 +4,10 @@
 \alias{plot.R0.R}
 \title{Plot the R0/Rt value along with confidence interval}
 \usage{
-\method{plot}{R0.R}(x, all = TRUE, xscale = "w", TD.split = FALSE, ...)
+\method{plot}{R0.R}(x, xscale = "w", TD.split = FALSE, ...)
 }
 \arguments{
 \item{x}{An estimated object, output from \code{est.R0.xx()} routines (class \code{R0.R}).}
-
-\item{all}{Boolean. Should the full epidemic curve be shown ?}
 
 \item{xscale}{Scale to be adjusted on x-axis. Can be \code{d} (day), \code{w} (week (default)), \code{f} (fornight), \code{m} (month).}
 

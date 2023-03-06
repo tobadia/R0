@@ -4,12 +4,10 @@
 \alias{plotfit}
 \title{S3 method for objects of class \code{R0.R} or \code{R0.sR}}
 \usage{
-plotfit(x, all = TRUE, xscale = "w", SB.dist = TRUE, ...)
+plotfit(x, xscale = "w", SB.dist = TRUE, ...)
 }
 \arguments{
 \item{x}{An output of \code{\link[=estimate.R]{estimate.R()}} (class \code{R0.sR}) or \code{est.R0.xx()} (class \code{R0.R}).}
-
-\item{all}{Boolean. Should the full epidemic curve be shown ?}
 
 \item{xscale}{Scale to be adjusted on x-axis. Can be \code{d} (day), \code{w} (week (default)), \code{f} (fornight), \code{m} (month).}
 

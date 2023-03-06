@@ -19,7 +19,6 @@
 #' contained in the `x` argument.
 #' 
 #' @param x An output of [estimate.R()] (class `R0.sR`).
-#' @param all Boolean. Should the full epidemic curve be shown ?
 #' @param xscale Scale to be adjusted on x-axis. Can be `d` (day), `w` (week (default)), `f` (fornight), `m` (month).
 #' @param SB.dist Boolean. Should the R distirbution throughout the epidemic be plotted for the SB method (defaults to `TRUE`) ?
 #' @param ... Parameters passed to inner functions.
@@ -39,7 +38,6 @@
 
 plotfit.R0.sR <- function(
     x, 
-    all     = TRUE, 
     xscale  = "w", 
     SB.dist = TRUE, 
     ...

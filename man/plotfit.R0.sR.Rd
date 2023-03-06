@@ -4,12 +4,10 @@
 \alias{plotfit.R0.sR}
 \title{Plot a model fit for \code{R0.sR} objects}
 \usage{
-\method{plotfit}{R0.sR}(x, all = TRUE, xscale = "w", SB.dist = TRUE, ...)
+\method{plotfit}{R0.sR}(x, xscale = "w", SB.dist = TRUE, ...)
 }
 \arguments{
 \item{x}{An output of \code{\link[=estimate.R]{estimate.R()}} (class \code{R0.sR}).}
-
-\item{all}{Boolean. Should the full epidemic curve be shown ?}
 
 \item{xscale}{Scale to be adjusted on x-axis. Can be \code{d} (day), \code{w} (week (default)), \code{f} (fornight), \code{m} (month).}
 

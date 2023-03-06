@@ -4,12 +4,10 @@
 \alias{plotfit.R0.R}
 \title{Plot a model fit for \code{R0.R} objects}
 \usage{
-\method{plotfit}{R0.R}(x, all = TRUE, xscale = "w", SB.dist = TRUE, ...)
+\method{plotfit}{R0.R}(x, xscale = "w", SB.dist = TRUE, ...)
 }
 \arguments{
 \item{x}{An output of \code{est.R0.xx()} (class \code{R0.R}).}
-
-\item{all}{Boolean. Should the full epidemic curve be shown ?}
 
 \item{xscale}{Scale to be adjusted on x-axis. Can be \code{d} (day), \code{w} (week (default)), \code{f} (fornight), \code{m} (month).}
 
