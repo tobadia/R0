@@ -37,7 +37,7 @@
 #' @param end At what time estimation ends (unused by this method, just there for plotting purposes).
 #' @param date.first.obs Optional date of first observation, if `t` not specified. 
 #' @param time.step Optional. If date of first observation is specified, number of day between each incidence observation. 
-#' @param force.prior Set to any custom value to force the initial prior as a uniform distribution on [0, value].
+#' @param force.prior Set to any custom value to force the initial prior as a uniform distribution on \[0 ; value\].
 #' @param checked Internal flag used to check whether integrity checks were ran or not.
 #' @param ... Parameters passed to inner functions.
 #' 
