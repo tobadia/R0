@@ -108,7 +108,7 @@ est.R0.TD <- function(
   #Various class and integrity checks
   #transforms epidemic to the right format
   if (checked == FALSE) {
-    parameters <- integrity.checks(epid, t, GT, begin, end, date.first.obs, time.step, AR=NULL, S0=NULL, methods="TD")
+    parameters <- integrity.checks(epid=epid,GT=GT, t=t, begin=begin, end=end, date.first.obs=date.first.obs, time.step=time.step, AR=NULL, S0=NULL, methods="TD")
     begin <- parameters$begin
     end <- parameters$end
   }

@@ -37,7 +37,7 @@
 #' @param end At what time estimation ends (unused by this method, just there for plotting purposes).
 #' @param date.first.obs Optional date of first observation, if `t` not specified. 
 #' @param time.step Optional. If date of first observation is specified, number of day between each incidence observation. 
-#' @param force.prior Set to any custom value to force the initial prior as a uniform distribution on [0 ; value].
+#' @param force.prior Set to any custom value to force the initial prior as a uniform distribution on [0, value].
 #' @param checked Internal flag used to check whether integrity checks were ran or not.
 #' @param ... Parameters passed to inner functions.
 #' 
@@ -93,7 +93,7 @@ est.R0.SB <- function(
   
   #Various class and integrity checks
   if (checked == FALSE) {
-    parameters <- integrity.checks(epid, t, GT, begin, end, date.first.obs, time.step, AR=NULL, S0=NULL, methods="SB")
+    parameters <- integrity.checks(epid=epid, GT=GT, t=t, begin=begin, end=end, date.first.obs=date.first.obs, time.step=time.step, AR=NULL, S0=NULL, methods="SB")
     begin <- parameters$begin
     end <- parameters$end
   }

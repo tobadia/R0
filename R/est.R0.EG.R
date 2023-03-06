@@ -94,7 +94,7 @@ est.R0.EG <-function(
   
   # Various class and integrity check
   if (checked == FALSE) {
-    parameters <- integrity.checks(epid, t, GT, begin, end, date.first.obs, time.step, AR=NULL, S0=NULL, methods="EG")
+    parameters <- integrity.checks(epid=epid, GT=GT, t=t, begin=begin, end=end, date.first.obs=date.first.obs, time.step=time.step, AR=NULL, S0=NULL, methods="EG")
     begin <- parameters$begin
     end <- parameters$end
   }

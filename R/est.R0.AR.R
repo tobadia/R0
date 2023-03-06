@@ -79,7 +79,7 @@ est.R0.AR <- function(
 {
   # Various class and integrity checks
   if (checked == FALSE) {
-    integrity.checks(epid, t, GT=NULL, begin=NULL, end=NULL, date.first.obs=NULL, time.step=NULL, AR, S0, methods="AR")
+    integrity.checks(epid=epid, GT=NULL, t=t, begin=NULL, end=NULL, date.first.obs=NULL, time.step=NULL, AR, S0, methods="AR")
   }
   
   if (!is.null(incid)) {
