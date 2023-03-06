@@ -38,7 +38,7 @@
 
 plotfit.R0.R <- function(
     x, 
-    all.    = TRUE, 
+    all     = TRUE, 
     xscale  = "w", 
     SB.dist = TRUE, 
     ... 

@@ -70,7 +70,7 @@ plot.R0.R <- function(
 #' This plots the exponential growth parameter r, along with R and 
 #' corresponding confidence interval.
 #' 
-#' @param x An estimated object, output from [estimate.R0()] with `method = "EG"`.
+#' @param x An estimated object, output from [estimate.R()] with `method = "EG"`.
 #' @param ... Parameters passed to inner functions.
 #' 
 #' @return
@@ -125,7 +125,7 @@ plotREG <- function(
 #' @details
 #' This plots the R0 reproduction number along with confidence interval.
 #' 
-#' @param x An estimated object, output from [estimate.R0()] with `method = "AR"`.
+#' @param x An estimated object, output from [estimate.R()] with `method = "AR"`.
 #' @param ... Parameters passed to inner functions.
 #' 
 #' @return
@@ -169,7 +169,7 @@ plotRAR <- function(
 #' @details
 #' This plots the R0 reproduction number along with confidence interval.
 #' 
-#' @param x An estimated object, output from [estimate.R0()] with `method = "ML"`.
+#' @param x An estimated object, output from [estimate.R()] with `method = "ML"`.
 #' @param ... Parameters passed to inner functions.
 #' 
 #' @return
@@ -214,7 +214,7 @@ plotRML <- function(
 #' This plots the time-dependent \eqn{R(t)} reproduction number along with 
 #' confidence band.
 #' 
-#' @param x An estimated object, output from [estimate.R0()] with `method = "TD"`.
+#' @param x An estimated object, output from [estimate.R()] with `method = "TD"`.
 #' @param xscale Scale to be adjusted on x-axis. Can be `d` (day), `w` (week (default)), `f` (fornight), `m` (month).
 #' @param TD.split Boolean. Parameter to force the display of both \eqn{R(t)} and the epidemic curve in the same window for the TD method.
 #' @param ... Parameters passed to inner functions.
@@ -293,7 +293,7 @@ plotRTD <- function(
 #' This plots the bayesian estimation of \eqn{R_{0}} along with its 
 #' credible interval.
 #' 
-#' @param x An estimated object, output from [estimate.R0()] with `method = "SB"`.
+#' @param x An estimated object, output from [estimate.R()] with `method = "SB"`.
 #' @param xscale Scale to be adjusted on x-axis. Can be `d` (day), `w` (week (default)), `f` (fornight), `m` (month).
 #' @param ... Parameters passed to inner functions.
 #' 

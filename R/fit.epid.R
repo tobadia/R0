@@ -21,7 +21,7 @@
 #' ratios and generation time distirbution.
 #' 
 #' @details
-#' For internal use. Called from [est.ML.R0()].	
+#' For internal use. Called from [est.R0.ML()].	
 #' 
 #' Computes and returns the Poisson log-likelihood of an observed epidemic, 
 #' conditional on a given value of R and a generation time distribution. 
@@ -96,7 +96,7 @@ fit.epid <- function(
 #' in the context of the Maximum-Likelihood method from [est.R0.ML()].
 #' 
 #' @details
-#' For internal use. Called from [est.ML.R0()].	
+#' For internal use. Called from [est.R0.ML()].	
 #' 
 #' This is a wrapper function used to pass proper arguments to [fit.epid()] when 
 #' the ML method is used to estimate simultaneously R and GT. This function is 

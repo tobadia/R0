@@ -16,7 +16,7 @@
 #' @details
 #' For internal use.
 #' 
-#' This method is designed to either call [plot.fit.R0.R()] or [plot.fit.R0.sR()], 
+#' This method is designed to either call [plotfit.R0.R()] or [plotfit.R0.sR()], 
 #' and complies with S3 requirements at the time of writing.
 #' 
 #' It allows plotting the goodness-of-fit of an estimated model to the 

@@ -43,12 +43,12 @@
 #' 
 #' @return
 #' A list with components:
-#' \item{epid}{The vector of incidence, after being correctly formated by [check.incid()]. Used only by [plot.fit()]}
+#' \item{epid}{The vector of incidence, after being correctly formated by [check.incid()]. Used only by [plotfit()]}
 #' \item{R}{The estimate of the reproduction ratio.}
 #' \item{conf.int}{The 95% confidence interval for the R estimate.}
 #' \item{AR}{Original attack rate.}
-#' \item{begin.nb}{First date of incidence record. Used only by [plot.fit()].}
-#' \item{end.nb}{Last date of incidence record. Used only by [plot.fit()].}
+#' \item{begin.nb}{First date of incidence record. Used only by [plotfit()].}
+#' \item{end.nb}{Last date of incidence record. Used only by [plotfit()].}
 #' \item{method}{Method used for the estimation.}
 #' \item{method.code}{Internal code used to designate method.}
 #' 
