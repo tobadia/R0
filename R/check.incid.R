@@ -67,7 +67,7 @@ check.incid <- function(
     incid, 
     t              = NULL, 
     date.first.obs = NULL, 
-    time.step.     = 1 
+    time.step      = 1 
 )
   
   # Code

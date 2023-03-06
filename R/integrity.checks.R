@@ -47,7 +47,6 @@
 #' @param date.first.obs Optional date of first observation, if `t` not specified. 
 #' @param time.step Optional. If date of first observation is specified, number of day between each incidence observation. 
 #' @param AR Attack rate as a percentage from total population. 
-#' @param pop.size Population size in which the incident cases were observed. See more details in [est.R0.AR()] documentation.
 #' @param S0 Initial proportion of the population considered susceptible.
 #' @param methods Vector of methods to be used for R/R0/Rt estimation. Must be provided as `c("method 1", "method 2", ...)`.
 #' 
