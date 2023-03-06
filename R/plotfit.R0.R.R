@@ -97,7 +97,6 @@ plotfitRxx <- function(
   # Code
   
 {
-  ##keyword<< internal
   epid <- x$epid
   
   #Get data used for the fit
@@ -164,7 +163,6 @@ plotfitRAR <- function(
   # Code
   
 {
-  ##keyword<< internal
   epid <- x$epid
   epid.orig <- x$epid.orig
   epid.used.for.fit <- list(incid=epid.orig$incid, t=epid.orig$t)

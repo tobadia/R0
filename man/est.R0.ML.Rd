@@ -72,7 +72,9 @@ generated from infected individuals at each time step.
 For internal use. Called by \code{\link[=estimate.R]{estimate.R()}}.
 
 White & Pagano (2009) detail two maximum likelihood methods for estimatig the
-reproduction ratio.
+reproduction ratio. The principle of the methods described by White & all is to
+compute the expected number of cases in the future, and optimise to get R using
+a Poisson distribution.
 
 The first (and used by default in this package) assumes that the serial interval
 distirbution is known, and subsequently the likelihood is only maximised depending

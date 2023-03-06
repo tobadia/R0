@@ -24,7 +24,9 @@
 #' For internal use. Called by [estimate.R()].
 #' 
 #' White & Pagano (2009) detail two maximum likelihood methods for estimatig the 
-#' reproduction ratio. 
+#' reproduction ratio. The principle of the methods described by White & all is to 
+#' compute the expected number of cases in the future, and optimise to get R using 
+#' a Poisson distribution.
 #' 
 #' The first (and used by default in this package) assumes that the serial interval 
 #' distirbution is known, and subsequently the likelihood is only maximised depending 
@@ -131,8 +133,6 @@ est.R0.ML <- function(
   import <- import[begin.nb:end.nb]
   
   #Make a likelihood that can be optimized
-  ##details<< The principle of the methods described by White & all is to compute the expected number of 
-  ## cases in the future, and optimise to get R using a Poisson distribution.
   log.R <- log(1) #initial value is taken at 1
   if (unknown.GT==TRUE) {
     optimized.val <- optim(c(log.R, GT$mean, GT$sd), fit.epid.optim, epid=epid, import=import, control=list(fnscale=-1))$par
