@@ -48,8 +48,8 @@
 #' be taken into account when interpreting results.
 #' 
 #' @param incid An object (vector, data.frame, list) storing incidence.
-#' @param t Vector of dates at which incidence was observed (optional). 
 #' @param GT Generation time distribution from [generation.time()]. 
+#' @param t Vector of dates at which incidence was observed (optional). 
 #' 
 #' @return
 #' No object is returned. Instead, warnings are thrown upon detecting inconsistences.
@@ -64,8 +64,8 @@
 
 inspect.data <- function(
     incid, 
-    t        = NULL, 
-    GT       = NULL 
+    GT = NULL, 
+    t  = NULL 
 )
   
   # Code
