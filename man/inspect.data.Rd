@@ -4,14 +4,14 @@
 \alias{inspect.data}
 \title{Audit input data for common issues}
 \usage{
-inspect.data(incid, t = NULL, GT = NULL)
+inspect.data(incid, GT = NULL, t = NULL)
 }
 \arguments{
 \item{incid}{An object (vector, data.frame, list) storing incidence.}
 
-\item{t}{Vector of dates at which incidence was observed (optional).}
-
 \item{GT}{Generation time distribution from \code{\link[=generation.time]{generation.time()}}.}
+
+\item{t}{Vector of dates at which incidence was observed (optional).}
 }
 \value{
 No object is returned. Instead, warnings are thrown upon detecting inconsistences.

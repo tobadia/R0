@@ -7,7 +7,7 @@
 plotRTD(x, xscale, TD.split, ...)
 }
 \arguments{
-\item{x}{An estimated object, output from \code{\link[=estimate.R0]{estimate.R0()}} with \code{method = "TD"}.}
+\item{x}{An estimated object, output from \code{\link[=estimate.R]{estimate.R()}} with \code{method = "TD"}.}
 
 \item{xscale}{Scale to be adjusted on x-axis. Can be \code{d} (day), \code{w} (week (default)), \code{f} (fornight), \code{m} (month).}
 

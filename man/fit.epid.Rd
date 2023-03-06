@@ -28,7 +28,7 @@ Computes the Poisson log-likelihood of an observed epidemic, compared to the
 expected incidence values for a given R and generation time distirbution.
 }
 \details{
-For internal use. Called from \code{\link[=est.ML.R0]{est.ML.R0()}}.
+For internal use. Called from \code{\link[=est.R0.ML]{est.R0.ML()}}.
 
 Computes and returns the Poisson log-likelihood of an observed epidemic,
 conditional on a given value of R and a generation time distribution.

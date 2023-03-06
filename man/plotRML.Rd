@@ -7,7 +7,7 @@
 plotRML(x, ...)
 }
 \arguments{
-\item{x}{An estimated object, output from \code{\link[=estimate.R0]{estimate.R0()}} with \code{method = "ML"}.}
+\item{x}{An estimated object, output from \code{\link[=estimate.R]{estimate.R()}} with \code{method = "ML"}.}
 
 \item{...}{Parameters passed to inner functions.}
 }

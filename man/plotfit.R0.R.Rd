@@ -4,18 +4,18 @@
 \alias{plotfit.R0.R}
 \title{Plot a model fit for \code{R0.R} objects}
 \usage{
-\method{plotfit}{R0.R}(x, all. = TRUE, xscale. = "w", SB.dist = TRUE, ...)
+\method{plotfit}{R0.R}(x, all = TRUE, xscale = "w", SB.dist = TRUE, ...)
 }
 \arguments{
 \item{x}{An output of \code{est.R0.xx()} (class \code{R0.R}).}
 
-\item{SB.dist}{Boolean. Should the R distirbution throughout the epidemic be plotted for the SB method (defaults to \code{TRUE}) ?}
-
-\item{...}{Parameters passed to inner functions.}
-
 \item{all}{Boolean. Should the full epidemic curve be shown ?}
 
 \item{xscale}{Scale to be adjusted on x-axis. Can be \code{d} (day), \code{w} (week (default)), \code{f} (fornight), \code{m} (month).}
+
+\item{SB.dist}{Boolean. Should the R distirbution throughout the epidemic be plotted for the SB method (defaults to \code{TRUE}) ?}
+
+\item{...}{Parameters passed to inner functions.}
 }
 \value{
 This function does not return any data.

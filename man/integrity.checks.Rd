@@ -37,8 +37,6 @@ integrity.checks(
 \item{S0}{Initial proportion of the population considered susceptible.}
 
 \item{methods}{Vector of methods to be used for R/R0/Rt estimation. Must be provided as \code{c("method 1", "method 2", ...)}.}
-
-\item{pop.size}{Population size in which the incident cases were observed. See more details in \code{\link[=est.R0.AR]{est.R0.AR()}} documentation.}
 }
 \value{
 A list with two components, \code{begin} and  \code{end}.

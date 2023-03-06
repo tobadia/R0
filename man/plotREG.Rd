@@ -7,7 +7,7 @@
 plotREG(x, ...)
 }
 \arguments{
-\item{x}{An estimated object, output from \code{\link[=estimate.R0]{estimate.R0()}} with \code{method = "EG"}.}
+\item{x}{An estimated object, output from \code{\link[=estimate.R]{estimate.R()}} with \code{method = "EG"}.}
 
 \item{...}{Parameters passed to inner functions.}
 }

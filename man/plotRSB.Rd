@@ -7,7 +7,7 @@
 plotRSB(x, xscale, ...)
 }
 \arguments{
-\item{x}{An estimated object, output from \code{\link[=estimate.R0]{estimate.R0()}} with \code{method = "SB"}.}
+\item{x}{An estimated object, output from \code{\link[=estimate.R]{estimate.R()}} with \code{method = "SB"}.}
 
 \item{xscale}{Scale to be adjusted on x-axis. Can be \code{d} (day), \code{w} (week (default)), \code{f} (fornight), \code{m} (month).}
 

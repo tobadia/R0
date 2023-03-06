@@ -4,7 +4,7 @@
 \alias{check.incid}
 \title{Check incidence vector in the input}
 \usage{
-check.incid(incid, t = NULL, date.first.obs = NULL, time.step. = 1)
+check.incid(incid, t = NULL, date.first.obs = NULL, time.step = 1)
 }
 \arguments{
 \item{incid}{An object (vector, data.frame, list) storing incidence.}

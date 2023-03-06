@@ -5,8 +5,8 @@
 \title{Estimate R0 from attack rate of an epidemic}
 \usage{
 est.R0.AR(
-  AR. = NULL,
-  incid. = NULL,
+  AR = NULL,
+  incid = NULL,
   pop.size = NULL,
   S0 = 1,
   checked = FALSE,
@@ -14,6 +14,10 @@ est.R0.AR(
 )
 }
 \arguments{
+\item{AR}{Attack rate as a percentage from total population.}
+
+\item{incid}{Sum of incident cases, possibly in the form of a vector of counts.}
+
 \item{pop.size}{Population size in which the incident cases were observed.}
 
 \item{S0}{Initial proportion of the population considered susceptible.}
@@ -21,19 +25,15 @@ est.R0.AR(
 \item{checked}{Internal flag used to check whether integrity checks were ran or not.}
 
 \item{...}{Parameters passed to inner functions.}
-
-\item{AR}{Attack rate as a percentage from total population.}
-
-\item{incid}{Sum of incident cases, possibly in the form of a vector of counts.}
 }
 \value{
 A list with components:
-\item{epid}{The vector of incidence, after being correctly formated by \code{\link[=check.incid]{check.incid()}}. Used only by \code{\link[=plot.fit]{plot.fit()}}}
+\item{epid}{The vector of incidence, after being correctly formated by \code{\link[=check.incid]{check.incid()}}. Used only by \code{\link[=plotfit]{plotfit()}}}
 \item{R}{The estimate of the reproduction ratio.}
 \item{conf.int}{The 95\% confidence interval for the R estimate.}
 \item{AR}{Original attack rate.}
-\item{begin.nb}{First date of incidence record. Used only by \code{\link[=plot.fit]{plot.fit()}}.}
-\item{end.nb}{Last date of incidence record. Used only by \code{\link[=plot.fit]{plot.fit()}}.}
+\item{begin.nb}{First date of incidence record. Used only by \code{\link[=plotfit]{plotfit()}}.}
+\item{end.nb}{Last date of incidence record. Used only by \code{\link[=plotfit]{plotfit()}}.}
 \item{method}{Method used for the estimation.}
 \item{method.code}{Internal code used to designate method.}
 }

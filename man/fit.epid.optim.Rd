@@ -20,7 +20,7 @@ An objective function, wrapped around \code{\link[=fit.epid]{fit.epid()}}, that 
 in the context of the Maximum-Likelihood method from \code{\link[=est.R0.ML]{est.R0.ML()}}.
 }
 \details{
-For internal use. Called from \code{\link[=est.ML.R0]{est.ML.R0()}}.
+For internal use. Called from \code{\link[=est.R0.ML]{est.R0.ML()}}.
 
 This is a wrapper function used to pass proper arguments to \code{\link[=fit.epid]{fit.epid()}} when
 the ML method is used to estimate simultaneously R and GT. This function is

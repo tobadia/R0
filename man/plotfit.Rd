@@ -27,7 +27,7 @@ call \code{\link[=plotfit.R0.R]{plotfit.R0.R()}} and \code{\link[=plotfit.R0.sR]
 \details{
 For internal use.
 
-This method is designed to either call \code{\link[=plot.fit.R0.R]{plot.fit.R0.R()}} or \code{\link[=plot.fit.R0.sR]{plot.fit.R0.sR()}},
+This method is designed to either call \code{\link[=plotfit.R0.R]{plotfit.R0.R()}} or \code{\link[=plotfit.R0.sR]{plotfit.R0.sR()}},
 and complies with S3 requirements at the time of writing.
 
 It allows plotting the goodness-of-fit of an estimated model to the

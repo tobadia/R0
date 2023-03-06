@@ -95,7 +95,7 @@ library(R0)
 ## outbreak during 1918 influenza pandemic in Germany)
 
 data(Germany.1918)
-mGT<-generation.time("gamma", c(3, 1.5))
+mGT <- generation.time("gamma", c(3, 1.5))
 TD <- est.R0.TD(Germany.1918, mGT, begin=1, end=126, nsim=100)
 # Warning messages:
 # 1: In est.R0.TD(Germany.1918, mGT) : Simulations may take several minutes.

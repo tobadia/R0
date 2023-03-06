@@ -79,8 +79,8 @@ library(R0)
 
 ## Outbreak during 1918 influenza pandemic in Germany)
 data(Germany.1918)
-mGT<-generation.time("gamma", c(3, 1.5))
-estR0<-estimate.R(Germany.1918, mGT, begin=1, end=27, methods=c("EG", "ML", "TD", "AR", "SB"), 
+mGT <- generation.time("gamma", c(3, 1.5))
+estR0 <- estimate.R(Germany.1918, mGT, begin=1, end=27, methods=c("EG", "ML", "TD", "AR", "SB"), 
                   pop.size=100000, nsim=100)
 
 attributes(estR0)

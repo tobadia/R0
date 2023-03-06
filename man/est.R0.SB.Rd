@@ -8,7 +8,7 @@ est.R0.SB(
   epid,
   GT,
   t = NULL,
-  begin. = NULL,
+  begin = NULL,
   end = NULL,
   date.first.obs = NULL,
   time.step = 1,
@@ -24,19 +24,19 @@ est.R0.SB(
 
 \item{t}{Vector of dates at which incidence was observed.}
 
+\item{begin}{At what time estimation begins (unused by this method, just there for plotting purposes).}
+
 \item{end}{At what time estimation ends (unused by this method, just there for plotting purposes).}
 
 \item{date.first.obs}{Optional date of first observation, if \code{t} not specified.}
 
 \item{time.step}{Optional. If date of first observation is specified, number of day between each incidence observation.}
 
-\item{force.prior}{Set to any custom value to force the initial prior as a uniform distribution on \link{0 ; value}.}
+\item{force.prior}{Set to any custom value to force the initial prior as a uniform distribution on [0 ; value].}
 
 \item{checked}{Internal flag used to check whether integrity checks were ran or not.}
 
 \item{...}{Parameters passed to inner functions.}
-
-\item{begin}{At what time estimation begins (unused by this method, just there for plotting purposes).}
 }
 \value{
 A list with components:
