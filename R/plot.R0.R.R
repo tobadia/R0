@@ -51,7 +51,16 @@ plot.R0.R <- function(
   #Make sure x is of class "R0.R"
   if (!inherits(x, "R0.R")) stop("'x' must be of class R0.R")
   
-  do.call(paste("plotR",x$method.code,sep=""), args=list(x=x, xscale=xscale, TD.split=TD.split, ...) )
+  #Adjust arguments depending on method
+  if(x$method.code %in% c("EG", "ML", "AR")) {
+      do.call(paste("plotR",x$method.code,sep=""), args=list(x=x, ...) )
+    } else if (x$method.code == "SB") {
+      do.call("plotRSB", args=list(x=x, xscale=xscale, ...) )
+    } else if (x$method.code == "TD") {
+      do.call("plotRTD", args=list(x=x, xscale=xscale, TD.split=TD.split, ...) )
+    } else {
+      stop("Argument method.code not recognized")
+    }
 }
 
 
