@@ -30,6 +30,8 @@
 #' Called for side effect. Draws all \eqn{R_{0}} or /eqn{R(t)} values from an 
 #' output of [estimate.R()], built with one or more methods.
 #' 
+#' @importFrom grDevices dev.new
+#' 
 #' @keywords internal
 #' 
 #' @author Pierre-Yves Boelle, Thomas Obadia

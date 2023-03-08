@@ -35,6 +35,8 @@
 #' 
 #' @return
 #' A matrix with epidemics stored as columns (incidence count).
+#'
+#' @importFrom stats rpois rnbinom rmultinom
 #' 
 #' @export
 #' 

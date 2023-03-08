@@ -39,6 +39,8 @@
 #' \item{method}{Method used for fitting.}
 #' \item{method.code}{Internal code used to designate method.}
 #' 
+#' @importFrom stats na.omit
+#' 
 #' @export
 #' 
 #' @example tests/smooth.Rt.R

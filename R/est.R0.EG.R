@@ -59,6 +59,8 @@
 #' \item{method}{Method for estimation.}
 #' \item{method.code}{Internal code used to designate method.}
 #' 
+#' @importFrom stats poisson predict lm glm coefficients
+#' 
 #' @export
 #'
 #' @keywords internal

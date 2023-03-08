@@ -38,6 +38,10 @@
 #' A object of class `R0.GT` that complies with [generation.time()] distribution 
 #' requirements of the R0 package.
 #' 
+#' @importFrom MASS fitdistr
+#' @importFrom stats dgamma dlnorm dweibull density
+#' @importFrom graphics curv hist
+#' 
 #' @export
 #' 
 #' @example tests/est.GT.R

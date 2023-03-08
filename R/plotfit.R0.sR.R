@@ -28,6 +28,8 @@
 #' Called for side effect. Draws the fit of one or more estimation method to the 
 #' data.
 #' 
+#' @importFrom grDevices dev.new
+#' 
 #' @keywords internal
 #' 
 #' @author Pierre-Yves Boelle, Thomas Obadia

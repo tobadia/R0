@@ -30,6 +30,8 @@
 #' This function does not return any data.
 #' Called for side effect. Draws all \eqn{R_{0}} or /eqn{R(t)} values from one estimation method.
 #' 
+#' @importFrom graphics abline arrows axis close.screen split.screen screen legend lines points polygon
+#' 
 #' @keywords internal
 #' 
 #' @author Pierre-Yves Boelle, Thomas Obadia

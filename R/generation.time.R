@@ -45,6 +45,8 @@
 #' \item{mean}{The mean of the discretized GT.}
 #' \item{sd}{The standard deviation of the discretized GT.}
 #' 
+#' @importFrom stats pweibull pgamma plnorm
+#' 
 #' @export
 #' 
 #' @example tests/generation.time.R

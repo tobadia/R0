@@ -27,6 +27,9 @@
 #' This function does not return any data.
 #' Called for side effect. Draws the fit of one estimation method to the data.
 #' 
+#' @importFrom grDevices dev.new
+#' @importFrom graphics abline axis close.screen split.screen screen lines points
+#' 
 #' @keywords internal
 #' 
 #' @author Pierre-Yves Boelle, Thomas Obadia

@@ -36,6 +36,8 @@
 #' @return
 #' The Poisson log-likelihood of the observed epidemic passed as argument `epid`, 
 #' or the Poisson-predicted incidence series given R and GT values.
+#'
+#' @importFrom stats dpois
 #' 
 #' @keywords internal
 #' 

@@ -35,6 +35,8 @@
 #' @return
 #' A matrix with epidemics stored as columns (incidence count).
 #' 
+#' @importFrom stats runif rpois rnbinom rgamma
+#' 
 #' @author Pierre-Yves Boelle, Thomas Obadia
 
 

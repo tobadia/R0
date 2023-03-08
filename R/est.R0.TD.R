@@ -66,6 +66,8 @@
 #' \item{method}{Method for estimation.}
 #' \item{method.code}{Internal code used to designate method.}
 #' 
+#' @importFrom stats rmultinom quantile na.omit
+#' 
 #' @export
 #'
 #' @keywords internal

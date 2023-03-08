@@ -30,6 +30,9 @@
 #' \item{best.R0.values}{The corresponding \eqn{R_{0}} values.}
 #' \item{best.fit}{The best model fit as defined by the highest R-squared values among all returned.}
 #' 
+#' @importFrom grDevices heat.colors dev.new
+#' @importFrom graphics axis filled.contour contour title text legend points
+#' 
 #' @keywords internal
 #' 
 #' @author Pierre-Yves Boelle, Thomas Obadia

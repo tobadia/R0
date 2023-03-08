@@ -29,6 +29,8 @@
 #' @return
 #' A vector with both imputed incidence and source available data.
 #' 
+#' @importFrom stats optim
+#' 
 #' @export
 #' 
 #' @author Pierre-Yves Boelle, Thomas Obadia

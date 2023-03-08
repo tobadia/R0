@@ -6,7 +6,8 @@ Date: 2023-03-06
 Author: Pierre-Yves Boelle, Thomas Obadia
 Maintainer: Thomas Obadia <thomas.obadia@pasteur.fr>
 Depends:
-    R (>= 2.13.0),
+    R (>= 2.13.0)
+Imports:
     MASS
 Description: Estimation of reproduction numbers for disease outbreak, based on
     incidence data. The R0 package implements several documented methods. It is

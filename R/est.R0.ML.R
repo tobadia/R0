@@ -75,6 +75,8 @@
 #' \item{method}{Method used for fitting.}
 #' \item{method.code}{Internal code used to designate method.}
 #' 
+#' @importFrom stats uniroot poisson qchisq optim optimize glm
+#' 
 #' @export
 #'
 #' @keywords internal
