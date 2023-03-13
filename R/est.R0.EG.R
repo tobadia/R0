@@ -97,20 +97,20 @@ est.R0.EG <-function(
   # Various class and integrity check
   if (!checked) {
     parameters <- integrity.checks(epid = epid, 
-      GT = GT, 
-      t = t, 
-      begin = begin, 
-      end = end, 
-      date.first.obs = date.first.obs, 
-      time.step = time.step, 
-      AR = NULL, 
-      S0 = NULL, 
-      methods = "EG")
-
+                                   GT = GT, 
+                                   t = t, 
+                                   begin = begin, 
+                                   end = end, 
+                                   date.first.obs = date.first.obs, 
+                                   time.step = time.step, 
+                                   AR = NULL, 
+                                   S0 = NULL, 
+                                   methods = "EG")
+    
     begin <- parameters$begin
     end <- parameters$end
   }
-
+  
   epid <- check.incid(epid, t, date.first.obs, time.step)
   begin.nb <- which(epid$t == begin)
   end.nb <- which(epid$t == end)
@@ -157,21 +157,21 @@ est.R0.EG <-function(
   R.sup <- as.numeric(R.from.r(conf.int[2], GT))
   
   return(structure(list(R = R, 
-    conf.int = c(R.inf, R.sup), 
-    r = r, 
-    conf.int.r = conf.int, 
-    Rsquared = Rsquared, 
-    epid = epid.orig, 
-    GT = GT, 
-    data.name = DNAME, 
-    call = CALL, 
-    begin = begin, 
-    begin.nb = begin.nb, 
-    end = end, 
-    end.nb = end.nb, 
-    method = "Exponential Growth", 
-    pred = pred, 
-    fit = reg.met, 
-    method.code = "EG"), 
-  class = "R0.R"))
+                        conf.int = c(R.inf, R.sup), 
+                        r = r, 
+                        conf.int.r = conf.int, 
+                        Rsquared = Rsquared, 
+                        epid = epid.orig, 
+                        GT = GT, 
+                        data.name = DNAME, 
+                        call = CALL, 
+                        begin = begin, 
+                        begin.nb = begin.nb, 
+                        end = end, 
+                        end.nb = end.nb, 
+                        method = "Exponential Growth", 
+                        pred = pred, 
+                        fit = reg.met, 
+                        method.code = "EG"), 
+                   class = "R0.R"))
 }
