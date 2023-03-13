@@ -120,7 +120,7 @@ check.incid <- function(
     # 1B- Numeric
     if ((!any(is.na(suppressWarnings(as.numeric(t)))) & !inherits(t, "Date")) | 
         (suppressWarnings((!is.na(strptime(t[1], format="%Y-%m-%d"))) | (!is.na(strptime(t[1], format="%Y/%m/%d")))))) {
-      if (inherits(t, "Date")) {
+      if (inherits(t, "character")) {
         t <- as.Date(t)
       }
       else {
