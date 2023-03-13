@@ -139,8 +139,8 @@ est.R0.AR <- function(
   R0.from.AR <- function(AR, S0) {-log((1 - AR) / S0) / (AR - (1 - S0))}
   
   R0 <- R0.from.AR(AR = AR, S0 = S0)
-  CI95 <- c(R0.from.AR(AR - 1.96 * sqrt(AR * (1-AR) / pop.size), S0), 
-            R0.from.AR(AR + 1.96 * sqrt(AR * (1-AR) / pop.size), S0))
+  CI95 <- c(R0.from.AR(AR - 1.96 * sqrt(AR * (1 - AR) / pop.size), S0), 
+            R0.from.AR(AR + 1.96 * sqrt(AR * (1 - AR) / pop.size), S0))
   
   # Variance of R0 is estimated using Delta method
   var.R0 <- ((-((-1 + AR + S0) / (-1 + AR)) + log((1 - AR) / S0)) / (-1 + AR + S0)^2) * AR * (1-AR) / pop.size
