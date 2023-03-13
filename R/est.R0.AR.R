@@ -152,7 +152,7 @@ est.R0.AR <- function(
                         begin.nb = 1, 
                         end.nb = length(incid), 
                         AR = AR, 
-                        method="Attack Rate", 
-                        method.code="AR"), 
+                        method = "Attack Rate", 
+                        method.code = "AR"), 
                    class = "R0.R"))
 }
