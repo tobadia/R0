@@ -146,7 +146,7 @@ est.R0.AR <- function(
   var.R0 <- ((-((-1 + AR + S0) / (-1 + AR)) + log((1 - AR) / S0)) / (-1 + AR + S0)^2) * AR * (1-AR) / pop.size
   
   return(structure(list(epid = epid, 
-                        R = R0,
+                        R = R0, 
                         var = var.R0, 
                         conf.int = CI95, 
                         begin.nb = 1, 
