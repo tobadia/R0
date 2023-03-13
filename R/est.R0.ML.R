@@ -44,6 +44,11 @@
 #' 
 #' The 95% confidence interval is achieved by profiling the likelihood.
 #' 
+#' In addition to the estimation method, we implemented a framework to impute 
+#' unobserved incidence data, when the epidemic curve is found to not be available
+#' from the start of the outbreak. The details of this method are availble in the
+#' Supplementary Material S1 from \href{https://doi.org/10.1186/1472-6947-12-147}{Obadia et al., 2012}.
+#' 
 #' @param epid Object containing epidemic curve data. 
 #' @param GT Generation time distribution from [generation.time()]. 
 #' @param import Vector of imported cases. 
