@@ -78,8 +78,17 @@ est.R0.AR <- function(
   
 {
   # Various class and integrity checks
-  if (checked == FALSE) {
-    integrity.checks(epid=epid, GT=NULL, t=t, begin=NULL, end=NULL, date.first.obs=NULL, time.step=NULL, AR, S0, methods="AR")
+  if (!checked) {
+    integrity.checks(epid = epid, 
+                     GT = NULL, 
+                     t = t, 
+                     begin = NULL, 
+                     end = NULL, 
+                     date.first.obs = NULL, 
+                     time.step = NULL, 
+                     AR = AR, 
+                     S0 = S0, 
+                     methods = "AR")
   }
   
   if (!is.null(incid)) {
@@ -89,36 +98,36 @@ est.R0.AR <- function(
     epid <- NULL
   }
   
-  #Required : either (AR, incidence) or (AR, pop.size) to start simulation
-  if (is.null(AR) & any(c(is.null(incid),is.null(pop.size)))) {
+  # Required : either (AR, incidence) or (AR, pop.size) to start simulation
+  if (is.null(AR) & any(c(is.null(incid), is.null(pop.size)))) {
     stop("Either 'AR' alone or both 'AR / incid' and 'pop.size' must be provided")
   }
   
-  #If Attack Rate is not provided, it's computed as sum(incid)/pop.size
+  # 1- AR is not provided: it's computed as sum(incid)/pop.size
   if (is.null(AR)) {
-    #if incid provided as a series of incident cases, first sum
+    # When incid provided as a series of incident cases, sum it
     if (length(incid) > 1) {
       incid <- sum(incid)
     }
     
-    if (any(c(incid,pop.size) <= 0 )){
-      stop(paste("'incid' =",incid," and 'pop.size' =",pop.size,"must be nonnegative"))
+    
+    if (any(c(incid, pop.size) <= 0 )) {
+      stop(paste("'incid' =", incid, " and 'pop.size' =", pop.size, "must be nonnegative"))
     }
     
-    if (pop.size < incid){
-      stop(paste("'pop.size' =",pop.size,"must be greater than 'incid'= ", incid))
+    if (pop.size < incid) {
+      stop(paste("'pop.size' =", pop.size, "must be greater than 'incid'=", incid))
     }
     
-    #Actual AR is now computed
+    # Actual AR is now computed
     AR <- incid/pop.size
   }
   
-  #AR could also be provided
+  # 2- AR is provided
   else {
-    
-    #Obviously AR is between 0 and 1
+    # Obviously AR is between 0 and 1
     if (AR <= 0 | AR >= 1) {
-      stop(paste("'AR' =",AR,"must be between 0 and 1"))
+      stop(paste("'AR' =", AR, "must be between 0 and 1"))
     }
     
     if (is.null(pop.size)) {
@@ -126,13 +135,24 @@ est.R0.AR <- function(
     }
   }
   
-  #R0 is derived from Attack Rate based on SIR model (see Dietz)
-  R0.from.AR <- function(AR, S0) {-log((1-AR)/S0)/(AR - (1-S0))}
+  # R0 is derived from Attack Rate based on SIR model (see Dietz)
+  R0.from.AR <- function(AR, S0) {-log((1 - AR) / S0) / (AR - (1 - S0))}
   
-  R0 <- R0.from.AR(AR,S0)
-  CI95 <- c(R0.from.AR(AR-1.96*sqrt(AR *(1-AR)/pop.size),S0),R0.from.AR(AR+1.96*sqrt(AR *(1-AR)/pop.size),S0))
-  # variance of R0 is estimated using Delta method.
-  var.R0 <- ((-((-1 + AR + S0)/(-1 + AR)) + log((1 - AR)/S0))/(-1 + AR + S0)^2) * AR *(1-AR)/pop.size
+  R0 <- R0.from.AR(AR = AR, S0 = S0)
+  CI95 <- c(R0.from.AR(AR - 1.96 * sqrt(AR * (1-AR) / pop.size), S0), 
+            R0.from.AR(AR + 1.96 * sqrt(AR * (1-AR) / pop.size), S0))
   
-  return(structure(list(epid=epid, R=R0, var=var.R0, conf.int = CI95, begin.nb=1, end.nb=length(incid), AR=AR, method="Attack Rate", method.code="AR"),class="R0.R"))
+  # Variance of R0 is estimated using Delta method
+  var.R0 <- ((-((-1 + AR + S0) / (-1 + AR)) + log((1 - AR) / S0)) / (-1 + AR + S0)^2) * AR * (1-AR) / pop.size
+  
+  return(structure(list(epid = epid, 
+                        R = R0,
+                        var = var.R0, 
+                        conf.int = CI95, 
+                        begin.nb = 1, 
+                        end.nb = length(incid), 
+                        AR = AR, 
+                        method="Attack Rate", 
+                        method.code="AR"), 
+                   class = "R0.R"))
 }
