@@ -210,7 +210,7 @@ est.R0.ML <- function(
       
       full.incid <- impute.incid(c(0,0), epid.orig, R.chain[i], GT)
       R.full.incid <- est.R0.ML(epid = full.incid, GT = GT, begin = 1, end = as.numeric(end.nb + length(GT$GT)), impute.incid = FALSE)
-      R.chain[i+1] <- R.full.incid$R
+      R.chain <- rbind(R.chain, R.full.incid$R)
       R.conf.int <- R.full.incid$conf.int
       pred.full.incid <- R.full.incid$pred
     }
