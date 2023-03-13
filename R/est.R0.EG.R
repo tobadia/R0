@@ -95,56 +95,84 @@ est.R0.EG <-function(
   CALL <- match.call()
   
   # Various class and integrity check
-  if (checked == FALSE) {
-    parameters <- integrity.checks(epid=epid, GT=GT, t=t, begin=begin, end=end, date.first.obs=date.first.obs, time.step=time.step, AR=NULL, S0=NULL, methods="EG")
+  if (!checked) {
+    parameters <- integrity.checks(epid = epid, 
+      GT = GT, 
+      t = t, 
+      begin = begin, 
+      end = end, 
+      date.first.obs = date.first.obs, 
+      time.step = time.step, 
+      AR = NULL, 
+      S0 = NULL, 
+      methods = "EG")
+
     begin <- parameters$begin
     end <- parameters$end
   }
+
   epid <- check.incid(epid, t, date.first.obs, time.step)
   begin.nb <- which(epid$t == begin)
   end.nb <- which(epid$t == end)
   
   
-  
-  #Backup original epidemic data
+  # Backup original epidemic data
   epid.orig <- epid
   
-  #Epidemic data used for fit is truncted to keep only values within [begin,end]
-  #epid <- list(incid=epid$incid[begin.nb:end.nb], t=epid$t[begin.nb:end.nb], t.glm=seq(from=begin.nb, to=end.nb, by=1))
-  #epid <- list(incid=epid$incid[begin.nb:end.nb], t=epid$t[begin.nb:end.nb], t.glm=epid$t[begin.nb:end.nb])
-  epid <- list(incid=epid$incid[begin.nb:end.nb], t=epid$t[begin.nb:end.nb])
+  # Epidemic data used for fit is truncted to keep only values within [begin,end]
+  #epid <- list(incid = epid$incid[begin.nb:end.nb], t = epid$t[begin.nb:end.nb], t.glm = seq(from=begin.nb, to=end.nb, by=1))
+  #epid <- list(incid = epid$incid[begin.nb:end.nb], t = epid$t[begin.nb:end.nb], t.glm = epid$t[begin.nb:end.nb])
+  epid <- list(incid = epid$incid[begin.nb:end.nb], t = epid$t[begin.nb:end.nb])
   
   # Different methods to estimate epidemic growth rate (r) from data
   # Method 1: Linear regression
-  
   reg.met <- match.arg(reg.met)
   if (reg.met == "linear") {
-    #tmp <-lm((log(incid)) ~ t.glm, data=epid)
-    tmp <-lm((log(incid)) ~ t, data=epid)
-    Rsquared = summary(tmp)$r.squared
-    r <- coefficients(tmp)[2]
-    conf.int <- confint(tmp)[2,]
-    pred <- exp(predict(tmp,type="response"))
+    # Fit log-linear regression
+    #mod <- lm((log(incid)) ~ t.glm, data = epid)
+    mod <- lm((log(incid)) ~ t, data = epid)
+    
+    # Get relevant data from mod
+    Rsquared <- summary(mod)$r.squared
+    r <- coefficients(mod)[2]
+    conf.int <- confint(mod)[2, ]
+    pred <- exp(predict(mod, type = "response"))
   } 
   
   # Method 2: Poisson regression
   else if (reg.met == "poisson") {
-    #tmp <- glm(incid ~ t.glm, family=poisson(), data=epid)
-    tmp <- glm(incid ~ t, family=poisson(), data=epid)
-    Rsquared = (tmp$null.deviance-tmp$deviance)/(tmp$null.deviance)
-    r <- coefficients(tmp)[2]
-    confint <- confint(tmp)[2,]
-    pred <- predict(tmp,type="response")
+    # Fit Poisson regression
+    #mod <- glm(incid ~ t.glm, family = poisson(), data = epid)
+    mod <- glm(incid ~ t, family = poisson(), data = epid)
+    
+    # Get relevant data from mod
+    Rsquared <- (mod$null.deviance - mod$deviance) / (mod$null.deviance)
+    r <- coefficients(mod)[2]
+    confint <- confint(mod)[2, ]
+    pred <- predict(mod, type = "response")
   }
   
-  # GT represents Generation Time distribution -> #WE DEFINE A GI type SO THAT NO CHECK REQUIRED BUT type/class
   # Apply method of Wallinga / Lipsitch for discretized Laplace transform
+  R <- as.numeric(R.from.r(r, GT))
+  R.inf <- as.numeric(R.from.r(confint[1], GT))
+  R.sup <- as.numeric(R.from.r(confint[2], GT))
   
-  R <- as.numeric(R.from.r(r,GT))
-  R.inf <- as.numeric(R.from.r(confint[1],GT))
-  R.sup <- as.numeric(R.from.r(confint[2],GT))
-  
-  #return(structure(list(R=R, conf.int = c(R.inf,R.sup), r=r, conf.int.r=confint,epid=epid.orig, GT=GT, data.name =DNAME, begin=begin,end=end,method="Exponential Growth",pred=pred,fit=met),class="R"))
-  return(structure(list(R=R, conf.int = c(R.inf,R.sup), r=r, conf.int.r=confint, Rsquared=Rsquared, epid=epid.orig, GT=GT, data.name=DNAME, call=CALL, begin=begin, begin.nb=begin.nb, end=end, end.nb=end.nb, method="Exponential Growth",pred=pred,fit=reg.met, method.code="EG"),class="R0.R"))
-  
+  return(structure(list(R = R, 
+    conf.int = c(R.inf, R.sup), 
+    r = r, 
+    conf.int.r = confint, 
+    Rsquared = Rsquared, 
+    epid = epid.orig, 
+    GT = GT, 
+    data.name = DNAME, 
+    call = CALL, 
+    begin = begin, 
+    begin.nb = begin.nb, 
+    end = end, 
+    end.nb = end.nb, 
+    method = "Exponential Growth", 
+    pred = pred, 
+    fit = reg.met, 
+    method.code = "EG"), 
+  class = "R0.R"))
 }
