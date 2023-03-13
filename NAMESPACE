@@ -22,11 +22,11 @@ importFrom(graphics, abline, arrows, axis, close.screen,
            lines, points, polygon, screen, split.screen,
            text, title)
 importFrom(grDevices, dev.new, heat.colors)
-importFrom(stats, coefficients, density, dgamma, dlnorm,
-           dpois, dweibull, glm, lm, na.omit, optim,
-           optimize, pgamma, plnorm, poisson, predict,
-           pweibull, qchisq, quantile, rgamma, rmultinom,
-           rnbinom, rpois, runif, uniroot)
+importFrom(stats, coefficients, confint, density, dgamma, 
+           dlnorm, dpois, dweibull, glm, lm, na.omit, 
+           optim, optimize, pgamma, plnorm, poisson, 
+           predict, pweibull, qchisq, quantile, rgamma, 
+           rmultinom, rnbinom, rpois, runif, uniroot)
 
 # Registering S3 Methods
 #plot

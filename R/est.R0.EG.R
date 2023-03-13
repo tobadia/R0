@@ -59,7 +59,7 @@
 #' \item{method}{Method for estimation.}
 #' \item{method.code}{Internal code used to designate method.}
 #' 
-#' @importFrom stats poisson predict lm glm coefficients
+#' @importFrom stats confint poisson predict lm glm coefficients
 #' 
 #' @export
 #'
@@ -153,8 +153,8 @@ est.R0.EG <-function(
   
   # Apply method of Wallinga / Lipsitch for discretized Laplace transform
   R <- as.numeric(R.from.r(r, GT))
-  R.inf <- as.numeric(R.from.r(confint[1], GT))
-  R.sup <- as.numeric(R.from.r(confint[2], GT))
+  R.inf <- as.numeric(R.from.r(conf.int[1], GT))
+  R.sup <- as.numeric(R.from.r(conf.int[2], GT))
   
   return(structure(list(R = R, 
     conf.int = c(R.inf, R.sup), 
