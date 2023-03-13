@@ -125,22 +125,8 @@ est.R0.EG <-function(
   epid <- list(incid = epid$incid[begin.nb:end.nb], t = epid$t[begin.nb:end.nb])
   
   # Different methods to estimate epidemic growth rate (r) from data
-  # Method 1: Linear regression
-  reg.met <- match.arg(reg.met)
-  if (reg.met == "linear") {
-    # Fit log-linear regression
-    #mod <- lm((log(incid)) ~ t.glm, data = epid)
-    mod <- lm((log(incid)) ~ t, data = epid)
-    
-    # Get relevant data from mod
-    Rsquared <- summary(mod)$r.squared
-    r <- coefficients(mod)[2]
-    conf.int <- confint(mod)[2, ]
-    pred <- exp(predict(mod, type = "response"))
-  } 
-  
-  # Method 2: Poisson regression
-  else if (reg.met == "poisson") {
+  # Method 1: Poisson regression
+  if (reg.met == "poisson") {
     # Fit Poisson regression
     #mod <- glm(incid ~ t.glm, family = poisson(), data = epid)
     mod <- glm(incid ~ t, family = poisson(), data = epid)
@@ -151,6 +137,19 @@ est.R0.EG <-function(
     confint <- confint(mod)[2, ]
     pred <- predict(mod, type = "response")
   }
+  
+  # Method 2: Linear regression
+  else if (reg.met == "linear") {
+    # Fit log-linear regression
+    #mod <- lm((log(incid)) ~ t.glm, data = epid)
+    mod <- lm((log(incid)) ~ t, data = epid)
+    
+    # Get relevant data from mod
+    Rsquared <- summary(mod)$r.squared
+    r <- coefficients(mod)[2]
+    conf.int <- confint(mod)[2, ]
+    pred <- exp(predict(mod, type = "response"))
+  } 
   
   # Apply method of Wallinga / Lipsitch for discretized Laplace transform
   R <- as.numeric(R.from.r(r, GT))
