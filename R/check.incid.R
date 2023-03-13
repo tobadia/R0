@@ -116,10 +116,16 @@ check.incid <- function(
       }
     }
     
-    # When n t is not null, depends on its class (numeric or Date), 
+    # When t is not null, numeric or Dates can be treated similarly 
     # 1B- Numeric
-    if (!any(is.na(suppressWarnings(as.numeric(t)))) & !inherits(t, "Date")) {
-      t <- as.numeric(t)
+    if ((!any(is.na(suppressWarnings(as.numeric(t)))) & !inherits(t, "Date")) | 
+        (suppressWarnings((!is.na(strptime(t[1], format="%Y-%m-%d"))) | (!is.na(strptime(t[1], format="%Y/%m/%d")))))) {
+      if (inherits(t, "Date")) {
+        t <- as.Date(t)
+      }
+      else {
+        t <- as.numeric(t)
+      }
       incid <- incid[order(t)]
       t <- t[order(t)]
       
@@ -137,34 +143,16 @@ check.incid <- function(
                     all.y = TRUE)
       
       epid$incid[is.na(epid$incid)] <- 0
-      t <- epid$t
+      if (inherits(t, "Date")) {
+        t <- as.Date(as.character(epid$t))
+      }
+      else {
+        t <- epid$t
+      }
       incid <- epid$incid
     } 
     
-    # 1C- Dates with most common format
-    else if (suppressWarnings((!is.na(strptime(t[1], format="%Y-%m-%d"))) | (!is.na(strptime(t[1], format="%Y/%m/%d"))))) {
-      t <- as.Date(t)
-      incid <- incid[order(t)]
-      t <- t[order(t)]
-      
-      if (any(duplicated(t))) {
-        stop("Duplicated values in t or names in named incid vector.")
-      }
-      # Check that all t values are present with at last time.step interval
-      if (any(as.numeric(diff(t)) < time.step)) {
-        stop(paste("Values for t must all be at least time.step =",time.step," units apart from each other"))
-      }
-      
-      epid <- merge(data.frame(t = t, incid = incid), 
-                    data.frame(t = seq(from = min(t, na.rm = TRUE), to = max(t, na.rm = TRUE), by = time.step)), 
-                    all.y = TRUE)
-      
-      epid$incid[is.na(epid$incid)] <- 0
-      t <- as.Date(as.character(epid$t))
-      incid <- epid$incid
-    }
-    
-    # 1D- Last resort: can't identify, use 1:length(incid)
+    # 1C- Last resort: can't identify, use 1:length(incid)
     else {
       t <- 1:length(incid)
     }
