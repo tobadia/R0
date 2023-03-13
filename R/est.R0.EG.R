@@ -134,7 +134,7 @@ est.R0.EG <-function(
     # Get relevant data from mod
     Rsquared <- (mod$null.deviance - mod$deviance) / (mod$null.deviance)
     r <- coefficients(mod)[2]
-    confint <- confint(mod)[2, ]
+    conf.int <- confint(mod)[2, ]
     pred <- predict(mod, type = "response")
   }
   
@@ -159,7 +159,7 @@ est.R0.EG <-function(
   return(structure(list(R = R, 
     conf.int = c(R.inf, R.sup), 
     r = r, 
-    conf.int.r = confint, 
+    conf.int.r = conf.int, 
     Rsquared = Rsquared, 
     epid = epid.orig, 
     GT = GT, 
