@@ -87,7 +87,7 @@ est.GT <- function(
       infector.onset.dates <- as.Date(infector.onset.dates)
       infectee.onset.dates <- as.Date(infectee.onset.dates)
     }
-
+    
     # 3- Improper data
     else if (!is.numeric(infector.onset.dates) & !inherits(infector.onset.dates, "Date")) {
       stop("onset.dates vector does not contain a compatible format format (numeric, integer, character, Date)")
@@ -129,7 +129,7 @@ est.GT <- function(
   fit.type <- c("gamma", "weibull", "lognormal")
   distribution.type <- fit.type[which.max(c(fit.gamma$loglik, fit.weib$loglik, fit.lognorm$loglik))]
   
-
+  
   # Computing mean and standard deviation to use with generation.time function
   # At the same time, if request.plot is enabled, graphical output is generated
   # 
@@ -147,13 +147,13 @@ est.GT <- function(
     
     if (request.plot) {
       hist(serial.interval, 
-        prob = TRUE, 
-        col  = "deepskyblue", 
-        xlim = c(0, max(serial.interval)), 
-        ylim = c(0, (max(density(serial.interval)$y)) + 0.1), 
-        xlab = "Serial Interval", 
-        ylab = "PDF", 
-        main = "Serial Interval and Generation Time density")
+           prob = TRUE, 
+           col  = "deepskyblue", 
+           xlim = c(0, max(serial.interval)), 
+           ylim = c(0, (max(density(serial.interval)$y)) + 0.1), 
+           xlab = "Serial Interval", 
+           ylab = "PDF", 
+           main = "Serial Interval and Generation Time density")
       curve(dgamma(x, shape = shape, rate = rate), add = TRUE, col = "red")
     }
   }
@@ -166,13 +166,13 @@ est.GT <- function(
     
     if (request.plot) {
       hist(serial.interval, 
-        prob = TRUE, 
-        col  = "deepskyblue", 
-        xlim = c(0,max(serial.interval)), 
-        ylim = c(0,(max(density(serial.interval)$y)) + 0.1), 
-        xlab = "Serial Interval", 
-        ylab = "PDF", 
-        main = "Serial Interval and Generation Time density")
+           prob = TRUE, 
+           col  = "deepskyblue", 
+           xlim = c(0,max(serial.interval)), 
+           ylim = c(0,(max(density(serial.interval)$y)) + 0.1), 
+           xlab = "Serial Interval", 
+           ylab = "PDF", 
+           main = "Serial Interval and Generation Time density")
       curve(dweibull(x, shape = shape, scale = scale), add = TRUE, col = "red")
     }
   }
@@ -185,13 +185,13 @@ est.GT <- function(
     
     if (request.plot) {
       hist(serial.interval, 
-        prob = TRUE, 
-        col  = "deepskyblue", 
-        xlim = c(0,max(serial.interval)), 
-        ylim = c(0,(max(density(serial.interval)$y)) + 0.1), 
-        xlab = "Serial Interval", 
-        ylab = "PDF", 
-        main = "Serial Interval and Generation Time density")
+           prob = TRUE, 
+           col  = "deepskyblue", 
+           xlim = c(0,max(serial.interval)), 
+           ylim = c(0,(max(density(serial.interval)$y)) + 0.1), 
+           xlab = "Serial Interval", 
+           ylab = "PDF", 
+           main = "Serial Interval and Generation Time density")
       curve(dlnorm(x, meanlog = meanlog, sdlog = sdlog), add = TRUE, col = "red")
     }
   }
