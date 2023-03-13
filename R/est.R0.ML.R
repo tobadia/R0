@@ -110,94 +110,146 @@ est.R0.ML <- function(
     ... 
 ) 
 
+
 # Code
 
 {
   CALL <- match.call()
   # Various class and integrity checks
-  if (checked == FALSE) {
-    parameters <- integrity.checks(epid=epid, GT=GT, t=t, begin=begin, end=end, date.first.obs=date.first.obs, time.step=time.step, AR=NULL, S0=NULL, methods="ML")
+  # Various class and integrity check
+  if (!checked) {
+    parameters <- integrity.checks(epid = epid, 
+                                   GT = GT, 
+                                   t = t, 
+                                   begin = begin, 
+                                   end = end, 
+                                   date.first.obs = date.first.obs, 
+                                   time.step = time.step, 
+                                   AR = NULL, 
+                                   S0 = NULL, 
+                                   methods = "ML")
+    
     begin <- parameters$begin
     end <- parameters$end
   }
+  
   epid <- check.incid(epid, t, date.first.obs, time.step)
   begin.nb <- which(epid$t == begin)
   end.nb <- which(epid$t == end)
   
-  if(!is.null(import) & length(import) != length(epid$incid)) stop("Import vector and incidence vector do not have the same length.")
-  if (is.null(import)) import <- rep(0, length(epid$incid))
+  if (!is.null(import) & length(import) != length(epid$incid)) {
+    stop("Import vector and incidence vector do not have the same length.")
+  }
+  if (is.null(import)) {
+    import <- rep(0, length(epid$incid))
+  }
   
   #  if (impute.incid == TRUE) {
   #    begin.nb = 1
   #    end.nb = length(epid$incid)
   #  }
   
-  #Backup of original epidemic data
+  # Backup of original epidemic data
   epid.orig <- epid
   
-  #Truncate at end if necessary
-  epid <- list(incid=epid$incid[begin.nb:end.nb],t=epid$t[begin.nb:end.nb])
+  # Truncate at end if necessary
+  epid <- list(incid = epid$incid[begin.nb:end.nb], 
+               t = epid$t[begin.nb:end.nb])
   import <- import[begin.nb:end.nb]
   
-  #Make a likelihood that can be optimized
-  log.R <- log(1) #initial value is taken at 1
-  if (unknown.GT==TRUE) {
-    optimized.val <- optim(c(log.R, GT$mean, GT$sd), fit.epid.optim, epid=epid, import=import, control=list(fnscale=-1))$par
-    GT <- generation.time("gamma", c(optimized.val[2], optimized.val[3]))
-  }
-  res.R <- optimize(fit.epid,log(range),GT=GT,epid=epid,import=import,maximum=TRUE)
+  # Make a likelihood that can be optimized
+  logR <- log(1) # Initial value is taken at 1
   
-  if ((exp(res.R$maximum) == range[1]) | (exp(res.R$maximum) == range[2])) { 
-    warning("Algorithm converged to boundary. Try increasing 'range'")
+  # In case of joint estimation with GT distribution, process GT first
+  if (unknown.GT) {
+    GT.par <- optim(c(logR, GT$mean, GT$sd), fit.epid.optim, epid = epid, import = import, control = list(fnscale=-1))$par
+    GT <- generation.time("gamma", c(GT.par[2], GT.par[3]))
+  }
+  
+  # Explore the Poisson log-likelihood for best-fitting R0
+  logR.par <- optimize(fit.epid, log(range), GT = GT, epid = epid, import = import, maximum=TRUE)
+  
+  if ((exp(logR.par$maximum) == range[1]) | (exp(logR.par$maximum) == range[2])) { 
+    warning("Algorithm converged to boundary. Try increasing 'range'.")
   }
   
   # Should get the confidence interval by solving likelihood. 
   # Use uniroot starting from current estimate.
-  R.max <- uniroot(fit.epid,lower=res.R$maximum, upper = log(range[2]), offset=res.R$objective-qchisq(0.95,df=1),epid=epid,GT=GT,import=import)
-  R.min <- uniroot(fit.epid,lower=log(range[1]), upper=res.R$maximum, offset=res.R$objective-qchisq(0.95,df=1),epid=epid,GT=GT,import=import)
+  R.max <- uniroot(fit.epid, lower = logR.par$maximum, upper = log(range[2]), offset = logR.par$objective - qchisq(0.95, df = 1), 
+                   epid = epid, GT = GT, import = import)
+  R.min <- uniroot(fit.epid, lower = log(range[1]), upper = logR.par$maximum, offset = logR.par$objective - qchisq(0.95, df = 1), 
+                   epid = epid, GT = GT, import = import)
   
-  # Compute prediction
-  pred <- fit.epid(res.R$maximum,epid,GT,import=import,pred=TRUE)
+  # Calculate the corresponding Poisson prediction and derive deviance-measured R-squared value
+  pred <- fit.epid(log.R = logR.par$maximum, epid = epid, GT = GT, import = import, pred = TRUE)
+  mod <- glm(epid$incid ~ pred, family = poisson())
+  Rsquared <- (mod$null.deviance - mod$deviance) / (mod$null.deviance)
   
-  #We check how prediction and observed data match to compute a deviance-measured R-squared value
-  tmp <- glm(epid$incid~pred, family=poisson())
-  #tmp <- glm(epid$incid~pred)
-  Rsquared <- (tmp$null.deviance-tmp$deviance)/(tmp$null.deviance)
-  
-  #If data are censored and need to be imputed, recursive call of ML method
-  if (impute.incid == TRUE) {
-    R0.val.i <- vector()
-    R0.val.i[1] <- exp(res.R$maximum)
-    new.incid <- impute.incid(c(0,0), epid.orig, R0.val.i[1], GT)
-    R0.val.i[2] <- est.R0.ML(epid=new.incid, GT, begin=1, end=as.numeric(end.nb+length(GT$GT)), impute.incid=FALSE)$R
-    i <- 2
-    while (abs(R0.val.i[i] - R0.val.i[i-1]) > 0.0001) {
+  # If data are censored and need to be imputed, the ML method is called recursively
+  # and R is updated after each call. Its trace is kept in R.chain.
+  if (impute.incid) {
+    # Initialize imputation with starting parameters
+    R.chain <- exp(logR.par$maximum)
+    full.incid <- impute.incid(CD.optim.vect = c(0,0), 
+                               CD.epid = epid.orig, 
+                               CD.R0 = R.chain, 
+                               CD.GT = GT)
+    R.chain <- c(R.chain, est.R0.ML(epid = full.incid, GT = GT, begin = 1, end = as.numeric(end.nb + length(GT$GT)), impute.incid = FALSE)$R)
+    
+    # Recursively impute censored cases until convergence
+    i <- 1
+    while (abs(R.chain[i] - R.chain[i-1]) > 0.0001) {
+      # When too few values are available for convergence, break condition is needed
+      # Most common case is convergence to 2nd digit (which should be enough for any estimation...)
+      i <- i + 1
       
-      #When too few values are available for convergence, break condition is needed
-      #Most common case is convergence to 2nd digit (which should be enough for any estimation...)
-      if ((i>1000) && (abs(R0.val.i[i-1] - R0.val.i[i-2])<0.01)) {
+      if ((i > 1000) && (abs(R.chain[i-1] - R.chain[i-2]) < 0.01)) {
         break
         warning("Algorithm didn't converge to lower than 1e-4 after 1000 iterations. However, termination was achieved with a 1e-2 threshold over the last two values.")
       }
       
-      new.incid <- impute.incid(c(0,0), epid.orig, R0.val.i[i], GT)
-      tmp.res <- est.R0.ML(epid=new.incid, GT, begin=1, end=as.numeric(end.nb+length(GT$GT)), impute.incid=FALSE)
-      R0.val.i[i+1] <- tmp.res$R
-      tmp.conf.int <- tmp.res$conf.int
-      tmp.pred <- tmp.res$pred
-      i <- i+1
+      full.incid <- impute.incid(c(0,0), epid.orig, R.chain[i], GT)
+      R.full.incid <- est.R0.ML(epid = full.incid, GT = GT, begin = 1, end = as.numeric(end.nb + length(GT$GT)), impute.incid = FALSE)
+      R.chain[i+1] <- R.full.incid$R
+      R.conf.int <- R.full.incid$conf.int
+      pred.full.incid <- R.full.incid$pred
     }
-    R0.best <- R0.val.i[length(R0.val.i)]
-    conf.int <- tmp.conf.int
-    pred <- tmp.pred
-    new.epid <- check.incid(incid=new.incid, time.step=time.step, date.first.obs=(epid$t[1]-length(GT$GT)))
+    
+    full.epid <- check.incid(incid = full.incid, time.step = time.step, date.first.obs = (epid$t[1] - length(GT$GT)))
   }
   
-  if (impute.incid == FALSE) {
-    return (structure(list(R=exp(res.R$maximum), conf.int=c(exp(R.min$root), exp(R.max$root)), epid=epid.orig, GT=GT, begin=begin, begin.nb=begin.nb, end=end, end.nb=end.nb, pred=pred, Rsquared=Rsquared, call=CALL, method="Maximum Likelihood", method.code="ML"),class="R0.R"))
+  if (!impute.incid) {
+    return (structure(list(R = exp(logR.par$maximum), 
+                           conf.int = c(exp(R.min$root), exp(R.max$root)), 
+                           epid = epid.orig, 
+                           GT = GT, 
+                           begin = begin, 
+                           begin.nb = begin.nb, 
+                           end = end, 
+                           end.nb = end.nb, 
+                           pred = pred, 
+                           Rsquared = Rsquared, 
+                           call = CALL, 
+                           method = "Maximum Likelihood", 
+                           method.code = "ML"),
+                      class = "R0.R"))
   }
   else {
-    return (structure(list(R=R0.best, conf.int=conf.int, epid=new.epid, epid.orig=epid.orig, GT=GT, begin=new.epid$t[1], begin.nb=1, end=end, end.nb=which(new.epid$t == end), pred=pred, Rsquared=Rsquared, call=CALL, method="Maximum Likelihood", method.code="ML"),class="R0.R"))
+    return(structure(list(R = R.chain[length(R.chain)], 
+                          conf.int = R.conf.int, 
+                          epid = full.epid, 
+                          epid.orig = epid.orig, 
+                          GT = GT, 
+                          begin = full.epid$t[1], 
+                          begin.nb = 1, 
+                          end = end, 
+                          end.nb = which(full.epid$t == end), 
+                          pred = pred.full.incid, 
+                          Rsquared = Rsquared, 
+                          call = CALL, 
+                          method = "Maximum Likelihood", 
+                          method.code = "ML"),
+                     class = "R0.R"))
   }
   
 }
