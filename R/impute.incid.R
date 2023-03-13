@@ -8,7 +8,7 @@
 
 
 #' @title
-#' Optimiziation routine for incidence imputation
+#' Impute censored cases to rebuild longer epidemic vector
 #' 
 #' @description
 #' When first records of incidence are unavailable, tries to impute censored 
@@ -50,15 +50,16 @@ impute.incid = function(
   # Code
   
 { 
-  optimized.parameters <- optim(CD.optim.vect, censored.deviation, epid=CD.epid, R0=CD.R0, GT=CD.GT)$par
+  optimized.parameters <- optim(CD.optim.vect, censored.deviation, epid = CD.epid, R0 = CD.R0, GT = CD.GT)$par
   
-  vect <- c(rep(optimized.parameters[1], (length(CD.GT$GT)-1)), optimized.parameters[2])
-  censored.incidence <- rev(exp(rev(vect)[1]) * cumprod(c(1, exp(rev(vect)[-1])/(1+exp(rev(vect)[-1])))))
+  vect <- c(rep(optimized.parameters[1], (length(CD.GT$GT) - 1)), 
+            optimized.parameters[2])
+  censored.incidence <- rev(exp(rev(vect)[1]) * cumprod(c(1, exp(rev(vect)[-1]) / (1 + exp(rev(vect)[-1])))))
   
-  #Bugfix for computed values: set to 1 if optimization returns a value between 0 and 1.
+  # Bugfix for computed values: set to 1 if optimization returns a value between 0 and 1.
   censored.incidence[censored.incidence < 1] <- 1
   #cat(censored.incidence,"\n")
   
-  return(round(c(censored.incidence,CD.epid$incid)))
+  return(round(c(censored.incidence, CD.epid$incid)))
   
 }
