@@ -143,7 +143,7 @@ generation.time <- function(
       }
     }
   }
-  if (p0 == TRUE) GT[1]=0
+  if (p0) GT[1]=0
   
   time <- 0:(length(GT)-1)
   GT <- GT/sum(GT)

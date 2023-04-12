@@ -64,7 +64,7 @@ smooth.Rt <- function(
   if (!inherits(res, "R0.R")) {
     stop("Currently, sensitivity analysis from a result object only supports 'R0.R' class objects. Try using res$estimates$TD or res$estimates$SB if they are defined.")
   }
-  else if ((res$method %in% c("Time-Dependent","Sequential Bayesian")) == FALSE) {
+  else if (!res$method %in% c("Time-Dependent","Sequential Bayesian")) {
     stop("Sensitivity analysis can only be conducted on objects with method EG or ML.")
   }
   

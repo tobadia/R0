@@ -94,7 +94,7 @@ est.R0.SB <- function(
   CALL <- match.call()
   
   #Various class and integrity checks
-  if (checked == FALSE) {
+  if (!checked) {
     parameters <- integrity.checks(epid=epid, GT=GT, t=t, begin=begin, end=end, date.first.obs=date.first.obs, time.step=time.step, AR=NULL, S0=NULL, methods="SB")
     begin <- parameters$begin
     end <- parameters$end
@@ -116,7 +116,7 @@ est.R0.SB <- function(
   
   ## Initial distribution of Rt
   
-  if (force.prior == FALSE) {
+  if (!force.prior) {
     #For the first iteration, we admit Rt to be following a unfiorm distribution
     #on [0 ; maximum.delta.incid]
     delta.incid <- epid$incid[2:length(epid$incid)] - epid$incid[1:(length(epid$incid)-1)]

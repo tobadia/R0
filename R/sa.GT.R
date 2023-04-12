@@ -71,7 +71,7 @@ sa.GT <- function(
   res <- list()
   
   #Is estimation method supported?
-  if ((est.method %in% c("EG", "ML")) == FALSE) {
+  if (!est.method %in% c("EG", "ML")) {
     stop("Argument 'est.method' should be any of 'EG' or 'ML' to produce results.")
   }
   

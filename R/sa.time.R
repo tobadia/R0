@@ -78,7 +78,7 @@ sa.time <- function(
     if (!inherits(res, "R0.R")) {
       stop("Currently, sensitivity analysis from a result object only supports 'R0.R' class objects. Try using res$estimates$EG or res$estimates$ML if they are defined.")
     }
-    else if ((res$method %in% c("Exponential Growth","Maximum Likelihood")) == FALSE) {
+    else if (!res$method %in% c("Exponential Growth","Maximum Likelihood")) {
       stop("Sensitivity analysis can only be conducted on objects with method EG or ML.")
     }
     else if (res$method == "Exponential Growth") {
@@ -105,7 +105,7 @@ sa.time <- function(
   if (is.null(est.method)) {
     stop("Argument est.method should be 'EG' or 'ML'")
   }
-  else if ((est.method %in% c("EG","ML")) == FALSE) {
+  else if (!est.method %in% c("EG","ML")) {
     stop("Argument est.method should be 'EG' or 'ML'")
   }
   

@@ -261,7 +261,7 @@ plotRTD <- function(
   #What should labels say
   lab <- format(pretty(epid$t, n=length(epid$t)/div))
   
-  if (TD.split == TRUE) {
+  if (TD.split) {
     #par(bg="white")
     split.screen(c(2,1))
     screen(1)
@@ -283,7 +283,7 @@ plotRTD <- function(
   #points(epid$t, Rt.quant$CI.upper.[1:length(epid$t)], col="red", xaxt="n", pch=NA_integer_)
   axis(1, at=atLab, labels=lab)
   
-  if (TD.split == TRUE) {
+  if (TD.split) {
     close.screen(split.screen())
   }
 }

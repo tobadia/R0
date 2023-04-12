@@ -250,7 +250,7 @@ plotfitRSB <- function(
   axis(1, at=atLab, labels=lab)
   
   #When plotting Bayesian, if SB.dist is enabled, plot some R distributions throughout the epidemic
-  if (SB.dist == TRUE) {
+  if (SB.dist) {
     #x11()
     dev.new()
     split.screen(c(3,3))

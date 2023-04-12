@@ -109,7 +109,7 @@ est.R0.TD <- function(
   
   #Various class and integrity checks
   #transforms epidemic to the right format
-  if (checked == FALSE) {
+  if (!checked) {
     parameters <- integrity.checks(epid=epid,GT=GT, t=t, begin=begin, end=end, date.first.obs=date.first.obs, time.step=time.step, AR=NULL, S0=NULL, methods="TD")
     begin <- parameters$begin
     end <- parameters$end
@@ -262,7 +262,7 @@ est.R0.TD <- function(
   conf.int <- matrix(data=NA, nrow=end.nb, ncol=2)
   colnames(conf.int) <- c("lower", "upper")
   
-  if (correct == TRUE) {
+  if (correct) {
     R <- R.corrected[begin.nb:end.nb]
     conf.int[begin.nb:end.nb,1] <- quant.simu.corrected[begin.nb:end.nb,1]
     conf.int[begin.nb:end.nb,2] <- quant.simu.corrected[begin.nb:end.nb,2]
