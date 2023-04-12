@@ -74,7 +74,7 @@ sim.epid.indiv <- function(
   }
   
   
-  epid <- data.frame(matrix(data=0, nrow=Lmax, ncol=5, dimnames=list(c(1:Lmax), c("tinf","nsec","dinf","dlat","runif"))))
+  epid <- data.frame(matrix(data=0, nrow=Lmax, ncol=5, dimnames=list(1:Lmax, c("tinf","nsec","dinf","dlat","runif"))))
   
   for (i in 1:n) {
     #Memory optimization: dinf and dlat are all computed at the beginning

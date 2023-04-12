@@ -100,9 +100,9 @@ generation.time <- function(
       tmax <- truncate
     }
     if (first.half) {
-      t.scale <- c(0,0.5+c(0:tmax))
+      t.scale <- c(0,0.5+0:tmax)
     } else {
-      t.scale <- c(0:tmax)
+      t.scale <- 0:tmax
     } 
     if (type == "gamma") {
       a <- mean*mean/(sd*sd) 
