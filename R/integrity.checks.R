@@ -100,7 +100,7 @@ integrity.checks <- function(
       # if begin and end are not null
       if (class(begin) != class(end)) {
         # must be of the same class 
-        stop(paste("If both 'begin' =",begin," and 'end'=", end, "are provided, they must be of the same class (dates, character strings or integers)."))
+        stop("If both 'begin' = ",begin," and 'end' = ", end, " are provided, they must be of the same class (dates, character strings or integers).")
       }
     }
     

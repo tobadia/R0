@@ -128,7 +128,7 @@ est.R0.TD <- function(
   end <- which(t==-1)
   if (length(start) > 0 && length(end) > 0) { 
     longest <- max(end-start)
-    if (longest > length(GT$GT)) warning(paste("Gap in epidemic curve is longer than the generation interval. Consider using a different GT distribution (maybe with \"truncate=", longest, "\" (length of longest gap))."), sep="")
+    if (longest > length(GT$GT)) warning("Gap in epidemic curve is longer than the generation interval. Consider using a different GT distribution (maybe with \"truncate=", longest, "\" (length of longest gap)).")
   }
   
   #Imported cases should be provided as a vector of the same length as incid.
@@ -149,7 +149,7 @@ est.R0.TD <- function(
   
   #Initial n0 larger than first recorded value is an error
   if (n.t0 > epid$incid[1])  {
-    stop(paste("Provided initial number of cases (n.t0=",n.t0,") is larger than incidence on begin day (=",epid$incid[begin],")"))
+    stop("Provided initial number of cases (n.t0=",n.t0,") is larger than incidence on begin day (=",epid$incid[begin],")")
   }
   
   #Beginning of estimation 

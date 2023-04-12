@@ -102,11 +102,11 @@ est.R0.AR <- function(
     }
     
     if (any(c(incid,pop.size) <= 0 )){
-      stop(paste("'incid' =",incid," and 'pop.size' =",pop.size,"must be nonnegative"))
+      stop("'incid' = ",incid," and 'pop.size' = ",pop.size," must be nonnegative")
     }
     
     if (pop.size < incid){
-      stop(paste("'pop.size' =",pop.size,"must be greater than 'incid'= ", incid))
+      stop("'pop.size' = ",pop.size," must be greater than 'incid'= ", incid)
     }
     
     #Actual AR is now computed
@@ -118,7 +118,7 @@ est.R0.AR <- function(
     
     #Obviously AR is between 0 and 1
     if (AR <= 0 || AR >= 1) {
-      stop(paste("'AR' =",AR,"must be between 0 and 1"))
+      stop("'AR' = ",AR," must be between 0 and 1")
     }
     
     if (is.null(pop.size)) {

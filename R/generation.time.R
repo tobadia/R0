@@ -82,7 +82,7 @@ generation.time <- function(
       warning("Values will be standardized to sum to 1")
     if (!is.null(truncate)) {
       if (truncate < length(val)) {
-        warning(paste("Empirical distribution truncated at length ",truncate))
+        warning("Empirical distribution truncated at length ",truncate)
         GT <- GT[1:truncate]
       }
     }
@@ -138,7 +138,7 @@ generation.time <- function(
       if(length(GT.cum[GT.cum > 0.9999]) != 0){
         truncate <- (GT.cum > 0.9999)*(1:length(GT.cum))
         truncate <- min(truncate[truncate > 0])
-        if (truncate == 0) warning(paste('provide truncate larger than ',mean + 10 * sd))
+        if (truncate == 0) warning('provide truncate larger than ',mean + 10 * sd)
         GT <- GT[1:truncate]
       }
     }

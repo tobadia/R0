@@ -91,14 +91,14 @@ inspect.data <- function(
       if (is.na(incid[1])) {
         idx.last.leading.missing <- diff(cumsum(is.na(incid)))
         idx.last.leading.missing <- 1 + sum(idx.last.leading.missing[1:(min(which(idx.last.leading.missing == 0)) - 1)])
-        warning(paste0("There are trailing missing values in your data. Consider subsetting to remove data points 1 through ", idx.last.leading.missing, "."))
+        warning("There are trailing missing values in your data. Consider subsetting to remove data points 1 through ", idx.last.leading.missing, ".")
       }
       
       # Trailing NAs are detected the same way on the reversed incid vector
       if (is.na(incid[length(incid)])) {
         idx.last.trailing.missing <- diff(cumsum(is.na(rev(incid))))
         idx.last.trailing.missing <- sum(idx.last.trailing.missing[1:(min(which(idx.last.trailing.missing == 0)) - 1)])
-        warning(paste0("There are trailing missing values in your data. Consider subsetting to remove data points ", length(incid) - idx.last.trailing.missing, " through ", length(incid), "."))
+        warning("There are trailing missing values in your data. Consider subsetting to remove data points ", length(incid) - idx.last.trailing.missing, " through ", length(incid), ".")
       }
       
       # If GT is provided, check that NAs do not exceed its length, which would result in failed optimization routines.
@@ -121,14 +121,14 @@ inspect.data <- function(
       if (epid$incid[1] == 0) {
         idx.last.leading.zero <- diff(cumsum(epid$incid == 0))
         idx.last.leading.zero <- 1 + sum(idx.last.leading.zero[1:(min(which(idx.last.leading.zero == 0)) - 1)])
-        warning(paste0("There are leading zeros in your data. Consider subsetting to remove data points 1 through ", idx.last.leading.zero, "."))
+        warning("There are leading zeros in your data. Consider subsetting to remove data points 1 through ", idx.last.leading.zero, ".")
       }
       
       # Trailing zeros should not be too much of an issue, but are still checked
       if (epid$incid[length(incid)] == 0) {
         idx.last.trailing.zero <- diff(cumsum(rev(epid$ncid) == 0))
         idx.last.trailing.zero <- sum(idx.last.trailing.zero[1:(min(which(idx.last.trailing.zero == 0)) - 1)])
-        warning(paste0("There are trailing zeros in your data. Consider subsetting to remove data points ", length(epid$incid) - idx.last.trailing.zero, " through ", length(epid$incid), "."))
+        warning("There are trailing zeros in your data. Consider subsetting to remove data points ", length(epid$incid) - idx.last.trailing.zero, " through ", length(epid$incid), ".")
       }
       
       # If GT is provided, check that consecutive 0s do not exceed its length

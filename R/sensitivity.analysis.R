@@ -100,7 +100,7 @@ sensitivity.analysis <- function(
     }
   }
   else {
-    stop(paste("sa.type =",sa.type,"is not a valid argument. Must be \"time\" or \"GT\"."))
+    stop("sa.type = ",sa.type," is not a valid argument. Must be \"time\" or \"GT\".")
   }
   
   return(sa.object)
