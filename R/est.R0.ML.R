@@ -189,7 +189,7 @@ est.R0.ML <- function(
   }
   
   if (!impute.incid) {
-    return (structure(list(R=exp(res.R$maximum), conf.int=c(exp(R.min$root), exp(R.max$root)), epid=epid.orig, GT=GT, begin=begin, begin.nb=begin.nb, end=end, end.nb=end.nb, pred=pred, Rsquared=Rsquared, call=CALL, method="Maximum Likelihood", method.code="ML"),class="R0.R"))
+    return (structure(list(R=exp(res.R$maximum), conf.int=exp(c(R.min$root, R.max$root)), epid=epid.orig, GT=GT, begin=begin, begin.nb=begin.nb, end=end, end.nb=end.nb, pred=pred, Rsquared=Rsquared, call=CALL, method="Maximum Likelihood", method.code="ML"),class="R0.R"))
   }
   else {
     return (structure(list(R=R0.best, conf.int=conf.int, epid=new.epid, epid.orig=epid.orig, GT=GT, begin=new.epid$t[1], begin.nb=1, end=end, end.nb=which(new.epid$t == end), pred=pred, Rsquared=Rsquared, call=CALL, method="Maximum Likelihood", method.code="ML"),class="R0.R"))
