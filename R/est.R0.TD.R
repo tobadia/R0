@@ -229,7 +229,7 @@ est.R0.TD <- function(
   
   #We now have enough data to compute R (from infection network P)
   #along with its 2.5% and 97.5% quantiles (from multiple simulations and p)
-  R.WT <- apply(P,1,sum)    # Wallinga and Teunis definition
+  R.WT <- rowSums(P)    # Wallinga and Teunis definition
   R.corrected <- R.WT/(cumsum(GT.pad[1:Tmax]))[Tmax:1]   # Corrected for real time
   if (is.na(R.corrected[length(epid$incid)])) {
     R.corrected[length(epid$incid)] <- 0
