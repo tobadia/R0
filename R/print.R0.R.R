@@ -56,7 +56,7 @@ print.R0.R <- function(
   if (x$method.code %in% c("EG","ML","AR")) {
     cat("R : ",x$R)
     
-    if (!any(is.na(x$conf.int))) {
+    if (!anyNA(x$conf.int)) {
       cat("[", x$conf.int[1],",",x$conf.int[2],"]\n")
     }
   } 

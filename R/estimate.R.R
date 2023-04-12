@@ -103,7 +103,7 @@ estimate.R <- function(
   
   #If user inputs an unsupported method, stop. 
   sel.met <- pmatch(methods, c('EG','TD','ML','AR', 'SB'))
-  if (any(is.na(sel.met))) {
+  if (anyNA(sel.met)) {
     stop("Invalid 'methods' argument. Supported methods are 'EG',' ML', 'TD', 'AR', 'SB'.")
   }
   

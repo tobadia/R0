@@ -110,7 +110,7 @@ check.incid <- function(
     }
     
     #Try to determine if t is numeric or date
-    if (!any(is.na(suppressWarnings(as.numeric(t)))) && !inherits(t, "Date")) {
+    if (!anyNA(suppressWarnings(as.numeric(t))) && !inherits(t, "Date")) {
       #names are numeric 
       t <- as.numeric(t)
       
@@ -186,7 +186,7 @@ check.incid <- function(
   }
   
   #Incid is not negative or missing
-  if (any(incid < 0) || any(is.na(incid))) {
+  if (any(incid < 0) || anyNA(incid)) {
     stop("'incid' should be positive and non missing")
   }
   

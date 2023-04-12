@@ -84,7 +84,7 @@ inspect.data <- function(
       warning("Data does not consist only of integer values. Consider rounding to avoid computational issues.")
     }
     
-    if (any(is.na(incid))) {
+    if (anyNA(incid)) {
       warning("Warning: your data contains missing values. These will be automatically converted to zeros by check.incid() and may affect your estimates.")
       
       # Leading NAs are detected if 1st value is NA
