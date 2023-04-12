@@ -68,7 +68,7 @@ smooth.Rt <- function(
     stop("Sensitivity analysis can only be conducted on objects with method EG or ML.")
   }
   
-  if ((!is.numeric(time.period)) & (!is.integer(time.period))) {
+  if ((!is.numeric(time.period)) && (!is.integer(time.period))) {
     stop("Error: time.period should be of numeric or integer class.")
   }
   

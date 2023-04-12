@@ -119,7 +119,7 @@ est.R0.ML <- function(
   begin.nb <- which(epid$t == begin)
   end.nb <- which(epid$t == end)
   
-  if(!is.null(import) & length(import) != length(epid$incid)) stop("Import vector and incidence vector do not have the same length.")
+  if(!is.null(import) && length(import) != length(epid$incid)) stop("Import vector and incidence vector do not have the same length.")
   if (is.null(import)) import <- rep(0, length(epid$incid))
   
   #  if (impute.incid == TRUE) {
@@ -142,7 +142,7 @@ est.R0.ML <- function(
   }
   res.R <- optimize(fit.epid,log(range),GT=GT,epid=epid,import=import,maximum=TRUE)
   
-  if ((exp(res.R$maximum) == range[1]) | (exp(res.R$maximum) == range[2])) { 
+  if ((exp(res.R$maximum) == range[1]) || (exp(res.R$maximum) == range[2])) { 
     warning("Algorithm converged to boundary. Try increasing 'range'")
   }
   

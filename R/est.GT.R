@@ -67,7 +67,7 @@ est.GT <- function(
   # Data integrity check
   
   #Vector dimension
-  if ((is.null(infector.onset.dates) | is.null(infectee.onset.dates)) && is.null(serial.interval)) {
+  if ((is.null(infector.onset.dates) || is.null(infectee.onset.dates)) && is.null(serial.interval)) {
     stop("Please provide either 'serial interval' alone or both 'infector.onset.dates' and 'infectee.onset.dates'.")
   }
   
@@ -90,7 +90,7 @@ est.GT <- function(
     }
     
     
-    else if (!is.numeric(infector.onset.dates) & !inherits(infector.onset.dates, "Date")) {
+    else if (!is.numeric(infector.onset.dates) && !inherits(infector.onset.dates, "Date")) {
       stop("onset.dates vector does not contain a compatible format format (numeric, integer, character, Date)")
     }
     

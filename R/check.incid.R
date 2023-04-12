@@ -74,10 +74,10 @@ check.incid <- function(
   
 {
   #Various class and integrity checks
-  if (is.numeric(incid) | is.character(incid) | inherits(incid, "Date")) {
+  if (is.numeric(incid) || is.character(incid) || inherits(incid, "Date")) {
     
     #Basic possibility is incidence provided by date of symptoms onset for each patient
-    if (is.character(incid) | inherits(incid, "Date")) {
+    if (is.character(incid) || inherits(incid, "Date")) {
       # try to convert incid to dates using standard formats "%Y-%m-%d" / "%Y/%m/%d"
       tmp <- as.Date(incid)
       # if passed, incid was a vector of dates - convert to factor, making sure that levels correspond to min - max by time-step
@@ -110,7 +110,7 @@ check.incid <- function(
     }
     
     #Try to determine if t is numeric or date
-    if (!any(is.na(suppressWarnings(as.numeric(t)))) & !inherits(t, "Date")) {
+    if (!any(is.na(suppressWarnings(as.numeric(t)))) && !inherits(t, "Date")) {
       #names are numeric 
       t <- as.numeric(t)
       incid <- incid[order(t)]
@@ -167,7 +167,7 @@ check.incid <- function(
           t <- as.Date(names(table(epicurve.object$stratum3)))
         }
         
-        if (is.null(t) | is.null(incid)) {
+        if (is.null(t) || is.null(incid)) {
           stop("Could not find 'dates', 'weeks' or 'month' in epid")
         }
       } 

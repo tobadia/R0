@@ -87,7 +87,7 @@ sa.time <- function(
     else if (res$method == "Maximum Likelihood") {
       est.method <- "ML"
     }
-    if (is.null(begin) | is.null(end)) {
+    if (is.null(begin) || is.null(end)) {
       stop("Arguments \"begin\" and \"end\" must both be provided as vectors of index dates.")
     }
     
@@ -95,7 +95,7 @@ sa.time <- function(
     GT <- res$GT
   }
   
-  if (is.null(begin) | is.null(end)) {
+  if (is.null(begin) || is.null(end)) {
     stop("'begin' and/or 'end' is/are missing.")
   }
   

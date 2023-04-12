@@ -90,7 +90,7 @@ est.R0.AR <- function(
   }
   
   #Required : either (AR, incidence) or (AR, pop.size) to start simulation
-  if (is.null(AR) & any(c(is.null(incid),is.null(pop.size)))) {
+  if (is.null(AR) && any(c(is.null(incid),is.null(pop.size)))) {
     stop("Either 'AR' alone or both 'AR / incid' and 'pop.size' must be provided")
   }
   
@@ -117,7 +117,7 @@ est.R0.AR <- function(
   else {
     
     #Obviously AR is between 0 and 1
-    if (AR <= 0 | AR >= 1) {
+    if (AR <= 0 || AR >= 1) {
       stop(paste("'AR' =",AR,"must be between 0 and 1"))
     }
     

@@ -148,7 +148,7 @@ est.R0.SB <- function(
     
     tmp.proba.Rt <- exp(log(proba.Rt[[s-1]]) + tmp)
     #Break if incidence data starts producing NaN values
-    if ((sum(tmp.proba.Rt) == 0) | NaN %in% (sum(tmp.proba.Rt))) {
+    if ((sum(tmp.proba.Rt) == 0) || NaN %in% (sum(tmp.proba.Rt))) {
       end.nb <- s-1
       end <- epid$t[end.nb]
       break

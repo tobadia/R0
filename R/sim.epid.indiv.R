@@ -63,10 +63,10 @@ sim.epid.indiv <- function(
   if (beta <= 1.5) {
     Lmax <- 5000
   }
-  else if (beta <= 2 & beta > 1.5) {
+  else if (beta <= 2 && beta > 1.5) {
     Lmax <- 50000
   }
-  else if (beta <= 3 & beta > 2) {
+  else if (beta <= 3 && beta > 2) {
     Lmax <- 50000
   }
   else if (beta >3) {

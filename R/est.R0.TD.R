@@ -126,7 +126,7 @@ est.R0.TD <- function(
   t <- diff(c(FALSE, epid$incid==0, FALSE), 1)
   start <- which(t==1)
   end <- which(t==-1)
-  if (length(start) > 0 & length(end) > 0) { 
+  if (length(start) > 0 && length(end) > 0) { 
     longest <- max(end-start)
     if (longest > length(GT$GT)) warning(paste("Gap in epidemic curve is longer than the generation interval. Consider using a different GT distribution (maybe with \"truncate=", longest, "\" (length of longest gap))."), sep="")
   }
@@ -137,7 +137,7 @@ est.R0.TD <- function(
     import <- rep(0, length(epid$incid))
   }
   
-  if (!is.null(import) & (length(import) != length(epid$incid))) {
+  if (!is.null(import) && (length(import) != length(epid$incid))) {
     stop("Vector of imported cases should have the same length as 'epid' data.")
   }
   
