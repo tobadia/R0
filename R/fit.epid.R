@@ -60,19 +60,19 @@ fit.epid <- function(
   
 {
   R <- exp(log.R)
-  T <- length(epid$incid)
+  Tend <- length(epid$incid)
   GT <- GT$GT
   
   #Simulated epidemic is initiated at 0 and has a length of T+length(GT).
   #This way, we can multiply by GT even with the last value of incidence.
-  sim.epid <- rep(0, T+length(GT))
+  sim.epid <- rep(0, Tend+length(GT))
   
-  for (t in 1:T) {
+  for (t in 1:Tend) {
     sim.epid[t:(t+length(GT)-1)] <- sim.epid[t:(t+length(GT)-1)] + R * epid$incid[t] * GT
   }
   
-  sim.epid <- sim.epid[2:T]
-  logV <- sum(dpois(epid$incid[2:T]-import[2:T],lambda=sim.epid,log=TRUE))
+  sim.epid <- sim.epid[2:Tend]
+  logV <- sum(dpois(epid$incid[2:Tend]-import[2:Tend],lambda=sim.epid,log=TRUE))
   
   if (pred == TRUE) {
     return(pred = c(epid$incid[1],sim.epid))
