@@ -113,8 +113,10 @@ check.incid <- function(
     if (!any(is.na(suppressWarnings(as.numeric(t)))) && !inherits(t, "Date")) {
       #names are numeric 
       t <- as.numeric(t)
-      incid <- incid[order(t)]
-      t <- t[order(t)]
+      
+      t_order <- order(t)
+      incid <- incid[t_order]
+      t <- t[t_order]
       if (length(unique(t)) != length(t)) {stop("duplicates t values or duplicate names in incid")}
       # check that all t values are present with at last time.step interval
       if (min(diff(t)) < time.step) stop("t values must be at least time.step = ",time.step," units apart from each other")
@@ -127,8 +129,9 @@ check.incid <- function(
     #Try dates with most common format
     else if (suppressWarnings((!is.na(strptime(t[1], format="%Y-%m-%d"))) | (!is.na(strptime(t[1], format="%Y/%m/%d"))))) {
       t <- as.Date(t)
-      incid <- incid[order(t)]
-      t <- t[order(t)]
+      t_order <- order(t)
+      incid <- incid[t_order]
+      t <- t[t_order]
       if (length(unique(t)) != length(t)) {stop("duplicates t values or duplicate names in incid")}
       # check that all t values are present with at last time.step interval
       if (min(as.numeric(diff(t))) < time.step) stop("t values must be at least time.step = ",time.step," units apart from each other")
