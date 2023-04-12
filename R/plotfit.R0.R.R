@@ -55,7 +55,7 @@ plotfit.R0.R <- function(
     do.call(plotfitRxx, args=list(x=x, xscale=xscale, ...) )
   }
   else {
-    do.call(paste("plotfitR",x$method.code,sep=""), args=list(x=x, xscale=xscale, SB.dist=SB.dist, ...) )
+    do.call(paste0("plotfitR",x$method.code), args=list(x=x, xscale=xscale, SB.dist=SB.dist, ...) )
   }
   
 }

@@ -55,7 +55,7 @@ plot.R0.R <- function(
   
   #Adjust arguments depending on method
   if(x$method.code %in% c("EG", "ML", "AR")) {
-      do.call(paste("plotR",x$method.code,sep=""), args=list(x=x, ...) )
+      do.call(paste0("plotR",x$method.code), args=list(x=x, ...) )
     } else if (x$method.code == "SB") {
       do.call("plotRSB", args=list(x=x, xscale=xscale, ...) )
     } else if (x$method.code == "TD") {
