@@ -123,9 +123,9 @@ integrity.checks <- function(
     } else if (inherits(begin, "Date")) {
       begin.nb <- which(tmp.epid$t == begin)
     } else if (is.character(begin)) { # try to convert using standard formats
-      tmp.begin <- try(as.Date(begin, format = "%Y-%m-%d"),silent=T)
+      tmp.begin <- try(as.Date(begin, format = "%Y-%m-%d"),silent=TRUE)
       if (inherits(tmp.begin, "Date")) begin <- tmp.begin
-      tmp.begin <- try(as.Date(begin, format = "%d/%m/%Y"),silent=T)
+      tmp.begin <- try(as.Date(begin, format = "%d/%m/%Y"),silent=TRUE)
       if (inherits(tmp.begin, "Date")) begin <- tmp.begin
       begin.nb <- which(tmp.epid$t == begin)
     } 
@@ -157,9 +157,9 @@ integrity.checks <- function(
     } else if (inherits(end, "Date")) {
       end.nb <- which(tmp.epid$t == end)
     } else if (is.character(end)) { # try to convert using standard formats
-      tmp.end <- try(as.Date(end,format = "%Y-%m-%d"),silent=T)
+      tmp.end <- try(as.Date(end,format = "%Y-%m-%d"),silent=TRUE)
       if (inherits(tmp.end, "Date")) end <- tmp.end
-      tmp.end <- try(as.Date(end,format = "%d/%m/%Y"),silent=T)
+      tmp.end <- try(as.Date(end,format = "%d/%m/%Y"),silent=TRUE)
       if (inherits(tmp.end, "Date")) end <- tmp.end
       end.nb <- which(tmp.epid$t == end)
     } 

@@ -87,7 +87,7 @@ check.incid <- function(
         dt.too.close <- sort(unique(tmp))[(idx-1):idx]      
         stop("dates ", paste(dt.too.close,collapse=";")," must be at least time.step = ",time.step," units apart from each other")
       }
-      t <- as.character(seq(min(tmp,na.rm=T), max(tmp,na.rm=T),by=time.step))      
+      t <- as.character(seq(min(tmp,na.rm=TRUE), max(tmp,na.rm=TRUE),by=time.step))      
       incid <- as.numeric(table(factor(incid, levels=t)))
     }
     
@@ -118,7 +118,7 @@ check.incid <- function(
       if (length(unique(t)) != length(t)) {stop("duplicates t values or duplicate names in incid")}
       # check that all t values are present with at last time.step interval
       if (min(diff(t)) < time.step) stop("t values must be at least time.step = ",time.step," units apart from each other")
-      tmp <- merge(data.frame(t=t, incid=incid),data.frame(t=seq(min(t,na.rm=T),max(t,na.rm=T),by=time.step)),all.y=T)
+      tmp <- merge(data.frame(t=t, incid=incid),data.frame(t=seq(min(t,na.rm=TRUE),max(t,na.rm=TRUE),by=time.step)),all.y=TRUE)
       tmp$incid[is.na(tmp$incid)] <- 0
       incid <- tmp$incid
       t <- tmp$t
@@ -132,7 +132,7 @@ check.incid <- function(
       if (length(unique(t)) != length(t)) {stop("duplicates t values or duplicate names in incid")}
       # check that all t values are present with at last time.step interval
       if (min(as.numeric(diff(t))) < time.step) stop("t values must be at least time.step = ",time.step," units apart from each other")
-      tmp <- merge(data.frame(t=t, incid=incid),data.frame(t=seq(min(t,na.rm=T),max(t,na.rm=T),by=time.step)),all.y=T)
+      tmp <- merge(data.frame(t=t, incid=incid),data.frame(t=seq(min(t,na.rm=TRUE),max(t,na.rm=TRUE),by=time.step)),all.y=TRUE)
       tmp$incid[is.na(tmp$incid)] <- 0
       incid <- tmp$incid
       t <- as.Date(as.character(tmp$t))

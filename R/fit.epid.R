@@ -72,7 +72,7 @@ fit.epid <- function(
   }
   
   sim.epid <- sim.epid[2:T]
-  logV <- sum(dpois(epid$incid[2:T]-import[2:T],lambda=sim.epid,log=T))
+  logV <- sum(dpois(epid$incid[2:T]-import[2:T],lambda=sim.epid,log=TRUE))
   
   if (pred == TRUE) {
     return(pred = c(epid$incid[1],sim.epid))
