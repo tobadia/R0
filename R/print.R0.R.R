@@ -64,7 +64,7 @@ print.R0.R <- function(
   else {
     #Must be TD/SB... output first 10 values
     if (x$method.code %in% c("TD","SB")) {
-      cat(x$R[1:min(length(x$R),10)],"...\n")
+      cat(x$R[seq_len(min(length(x$R),10))],"...\n")
     }
   }
   

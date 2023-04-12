@@ -100,7 +100,7 @@ check.incid <- function(
           
         }
         else {
-          t <- 1:length(incid)
+          t <- seq_along(incid)
           t[-1] <- t[-1]*time.step - (time.step-1)
         }
       }
@@ -141,7 +141,7 @@ check.incid <- function(
     #Doesn't match any date format or custom numeric sequence
     else {
       #replace t by integer sequence
-      t <- 1:length(incid)
+      t <- seq_along(incid)
     }
   } 
   

@@ -136,7 +136,7 @@ generation.time <- function(
       # truncate when GI distribution >0.9999
       GT.cum <- cumsum(GT)
       if(length(GT.cum[GT.cum > 0.9999]) != 0){
-        truncate <- (GT.cum > 0.9999)*(1:length(GT.cum))
+        truncate <- (GT.cum > 0.9999)*(seq_along(GT.cum))
         truncate <- min(truncate[truncate > 0])
         if (truncate == 0) warning('provide truncate larger than ',mean + 10 * sd)
         GT <- GT[1:truncate]

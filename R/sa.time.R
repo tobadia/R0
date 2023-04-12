@@ -120,8 +120,8 @@ sa.time <- function(
   #Columns are named so that display is easy to read
   colnames(s.a) <- c("Time.period", "Begin.dates","End.dates","R", "Growth.rate", "Rsquared", "CI.lower", "CI.upper")
   
-  for(i in 1:length(begin)) {
-    for(j in 1:length(end)) {
+  for(i in seq_along(begin)) {
+    for(j in seq_along(end)) {
       
       #Skip test if begin>=end, and correspondig cells are filled with NA in matrix
       #if ((begin[i]>=end[j]) | (end[j] == (begin[i]+1))) {

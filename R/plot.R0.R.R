@@ -253,7 +253,7 @@ plotRTD <- function(
   epid <- x$epid
   epid$t <- epid$t[x$begin.nb:(x$end.nb-1)]
   polygon.x <- c(epid$t, rev(epid$t))
-  polygon.y <- c(x$conf.int[1:length(epid$t),1], rev(x$conf.int[1:length(epid$t),2]))
+  polygon.y <- c(x$conf.int[seq_along(epid$t),1], rev(x$conf.int[seq_along(epid$t),2]))
   
   div <- get.scale(xscale)
   #Where should labels be on axis
@@ -272,15 +272,15 @@ plotRTD <- function(
     axis(1, at=atLab, labels=lab)
     screen(2)
   }
-  plot(epid$t, R[1:length(epid$t)], ylim=c(0, max(polygon.y)), xlab="Time", ylab="R(t)", xaxt="n", pch=NA_integer_, lty="blank", main=paste("Reproduction number (", x$method,")"), ...)
+  plot(epid$t, R[seq_along(epid$t)], ylim=c(0, max(polygon.y)), xlab="Time", ylab="R(t)", xaxt="n", pch=NA_integer_, lty="blank", main=paste("Reproduction number (", x$method,")"), ...)
   polygon(polygon.x, polygon.y, col="gray", border=NA)
-  lines(epid$t, R[1:length(epid$t)])
+  lines(epid$t, R[seq_along(epid$t)])
   abline(h=1, lty="dashed", col="gray40")
   
   #Blue = lowest quantile (default: 5%)
   #Red = highest quantile (default: 95%)
-  #points(epid$t, Rt.quant$CI.lower.[1:length(epid$t)], col="blue", xaxt="n", pch=NA_integer_)
-  #points(epid$t, Rt.quant$CI.upper.[1:length(epid$t)], col="red", xaxt="n", pch=NA_integer_)
+  #points(epid$t, Rt.quant$CI.lower.[seq_along(epid$t)], col="blue", xaxt="n", pch=NA_integer_)
+  #points(epid$t, Rt.quant$CI.upper.[seq_along(epid$t)], col="red", xaxt="n", pch=NA_integer_)
   axis(1, at=atLab, labels=lab)
   
   if (TD.split) {
@@ -331,13 +331,13 @@ plotRSB <- function(
   
   epid$t = epid$t[x$begin.nb:(x$end.nb-1)]
   polygon.x = c(epid$t, rev(epid$t))
-  polygon.y = c(x$conf.int[1:length(epid$t),1], rev(x$conf.int[1:length(epid$t),2]))
+  polygon.y = c(x$conf.int[seq_along(epid$t),1], rev(x$conf.int[seq_along(epid$t),2]))
   
-  #plot(epid$t, Rt.quant$R.t.[1:length(epid$t)], ylim=c(0, max(polygon.y)), xlab="Time", ylab="R(t)", xaxt="n", main=paste("Reproduction number (", x$method,")"),...)
-  plot(epid$t, R[1:length(epid$t)], ylim=c(0, max(polygon.y)), xlab="Time", ylab="R(t)", xaxt="n", pch=NA_integer_, lty="blank", 
+  #plot(epid$t, Rt.quant$R.t.[seq_along(epid$t)], ylim=c(0, max(polygon.y)), xlab="Time", ylab="R(t)", xaxt="n", main=paste("Reproduction number (", x$method,")"),...)
+  plot(epid$t, R[seq_along(epid$t)], ylim=c(0, max(polygon.y)), xlab="Time", ylab="R(t)", xaxt="n", pch=NA_integer_, lty="blank", 
        main=paste("Reproduction number (", x$method,")"), ...)
   polygon(polygon.x, polygon.y, col="gray", border=NA)
-  lines(epid$t, R[1:length(epid$t)])
+  lines(epid$t, R[seq_along(epid$t)])
   abline(h=1, lty="dashed", col="gray40")
   
   div = get.scale(xscale)

@@ -260,7 +260,7 @@ plotfitRSB <- function(
     else {
       num.to.plot <- c(begin.nb:end.nb)
     }
-    for (i in 1:length(num.to.plot)) {
+    for (i in seq_along(num.to.plot)) {
       if (i == 1) {
         screen(1)
         plot(y=x$proba.Rt[[num.to.plot[i]]], x=seq(from=0, to=(length(x$proba.Rt[[num.to.plot[i]]])/100-0.01), by=0.01), xlab="R value", ylab="PDF", type="l", main=paste("t=",num.to.plot[i]), ...)
