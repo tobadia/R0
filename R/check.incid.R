@@ -117,7 +117,7 @@ check.incid <- function(
       t_order <- order(t)
       incid <- incid[t_order]
       t <- t[t_order]
-      if (length(unique(t)) != length(t)) {stop("duplicates t values or duplicate names in incid")}
+      if (anyDuplicated(t) > 0) {stop("duplicates t values or duplicate names in incid")}
       # check that all t values are present with at last time.step interval
       if (min(diff(t)) < time.step) stop("t values must be at least time.step = ",time.step," units apart from each other")
       tmp <- merge(data.frame(t=t, incid=incid),data.frame(t=seq(min(t,na.rm=TRUE),max(t,na.rm=TRUE),by=time.step)),all.y=TRUE)
@@ -132,7 +132,7 @@ check.incid <- function(
       t_order <- order(t)
       incid <- incid[t_order]
       t <- t[t_order]
-      if (length(unique(t)) != length(t)) {stop("duplicates t values or duplicate names in incid")}
+      if (anyDuplicated(t) > 0) {stop("duplicates t values or duplicate names in incid")}
       # check that all t values are present with at last time.step interval
       if (min(as.numeric(diff(t))) < time.step) stop("t values must be at least time.step = ",time.step," units apart from each other")
       tmp <- merge(data.frame(t=t, incid=incid),data.frame(t=seq(min(t,na.rm=TRUE),max(t,na.rm=TRUE),by=time.step)),all.y=TRUE)
