@@ -80,11 +80,9 @@ generation.time <- function(
       stop("Values in 'val' must be positive")
     if (sum(GT) >1)
       warning("Values will be standardized to sum to 1")
-    if (!is.null(truncate)) {
-      if (truncate < length(val)) {
+    if (!is.null(truncate) && truncate < length(val)) {
         warning("Empirical distribution truncated at length ",truncate)
         GT <- GT[1:truncate]
-      }
     }
     # if parametric
   } else {
@@ -135,7 +133,7 @@ generation.time <- function(
     if (is.null(truncate)) {
       # truncate when GI distribution >0.9999
       GT.cum <- cumsum(GT)
-      if(length(GT.cum[GT.cum > 0.9999]) != 0){
+      if(any(GT.cum > 0.9999)){
         truncate <- (GT.cum > 0.9999)*(seq_along(GT.cum))
         truncate <- min(truncate[truncate > 0])
         if (truncate == 0) warning('provide truncate larger than ',mean + 10 * sd)

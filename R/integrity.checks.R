@@ -87,21 +87,14 @@ integrity.checks <- function(
     
     # Various class and integrity checks are ran
     #check generation time (can be omitted if method is limited to AR)
-    if (length(methods) == 1) {
-      if (methods != "AR") {
-        if (!inherits(GT, "R0.GT")) {
-          stop("'GT' must be provided as a GT class object.")
-        }
-      }
+    if (!identical(methods, "AR") && !inherits(GT, "R0.GT")) {
+      stop("'GT' must be provided as a GT class object.")
     }
     
     #Checks on 'begin' and 'end'
-    if (!is.null(begin) && !is.null(end)) {
-      # if begin and end are not null
-      if (class(begin) != class(end)) {
-        # must be of the same class 
-        stop("If both 'begin' = ",begin," and 'end' = ", end, " are provided, they must be of the same class (dates, character strings or integers).")
-      }
+    if (!is.null(begin) && !is.null(end) && class(begin) != class(end)) {
+      # must be of the same class 
+      stop("If both 'begin' = ",begin," and 'end' = ", end, " are provided, they must be of the same class (dates, character strings or integers).")
     }
     
     if ((is.character(begin) || is.character(end) || inherits(begin, "Date") || inherits(end, "Date")) && !inherits(tmp.epid$t, "Date")) {
