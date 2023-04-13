@@ -142,7 +142,7 @@ est.R0.ML <- function(
   }
   res.R <- optimize(fit.epid,log(range),GT=GT,epid=epid,import=import,maximum=TRUE)
   
-  if ((exp(res.R$maximum) == range[1]) || (exp(res.R$maximum) == range[2])) { 
+  if (exp(res.R$maximum) %in% c(range[1], range[2])) { 
     warning("Algorithm converged to boundary. Try increasing 'range'")
   }
   
