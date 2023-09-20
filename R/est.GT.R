@@ -67,7 +67,7 @@ est.GT <- function(
   # Data integrity check
   
   #Vector dimension
-  if ((is.null(infector.onset.dates) | is.null(infectee.onset.dates)) && is.null(serial.interval)) {
+  if ((is.null(infector.onset.dates) || is.null(infectee.onset.dates)) && is.null(serial.interval)) {
     stop("Please provide either 'serial interval' alone or both 'infector.onset.dates' and 'infectee.onset.dates'.")
   }
   
@@ -90,7 +90,7 @@ est.GT <- function(
     }
     
     
-    else if (!is.numeric(infector.onset.dates) & !inherits(infector.onset.dates, "Date")) {
+    else if (!is.numeric(infector.onset.dates) && !inherits(infector.onset.dates, "Date")) {
       stop("onset.dates vector does not contain a compatible format format (numeric, integer, character, Date)")
     }
     
@@ -145,7 +145,7 @@ est.GT <- function(
     mean <- shape/rate
     sd <- sqrt(shape)/rate
     
-    if (request.plot == TRUE) {
+    if (request.plot) {
       hist(serial.interval, prob=TRUE, col="deepskyblue", xlim=c(0,max(serial.interval)), ylim=c(0,(max(density(serial.interval)$y))+0.1), xlab="Serial Interval", ylab="PDF", main="Serial Interval and Generation Time density")
       curve(dgamma(x, shape=shape, rate=rate), add=TRUE, col="red")
     }
@@ -157,7 +157,7 @@ est.GT <- function(
     mean <- scale*exp(lgamma(1 + 1/shape))
     sd <- sqrt(scale^2 * (exp(lgamma(1+2/shape)) - (exp(lgamma(1+1/shape)))^2))
     
-    if (request.plot == TRUE) {
+    if (request.plot) {
       hist(serial.interval, prob=TRUE, col="deepskyblue", xlim=c(0,max(serial.interval)), ylim=c(0,(max(density(serial.interval)$y))+0.1), xlab="Serial Interval", ylab="PDF", main="Serial Interval and Generation Time density")
       curve(dweibull(x, shape=shape, scale=scale), add=TRUE, col="red")
     }
@@ -169,7 +169,7 @@ est.GT <- function(
     mean <- exp(1/2 * sdlog^2 + meanlog)
     sd <-sqrt(exp(2*meanlog + sdlog^2) * (exp(sdlog^2) - 1))
     
-    if (request.plot == TRUE) {
+    if (request.plot) {
       hist(serial.interval, prob=TRUE, col="deepskyblue", xlim=c(0,max(serial.interval)), ylim=c(0,(max(density(serial.interval)$y))+0.1), xlab="Serial Interval", ylab="PDF", main="Serial Interval and Generation Time density")
       curve(dlnorm(x, meanlog=meanlog, sdlog=sdlog), add=TRUE, col="red")
     }

@@ -55,7 +55,7 @@ plotfit.R0.R <- function(
     do.call(plotfitRxx, args=list(x=x, xscale=xscale, ...) )
   }
   else {
-    do.call(paste("plotfitR",x$method.code,sep=""), args=list(x=x, xscale=xscale, SB.dist=SB.dist, ...) )
+    do.call(paste0("plotfitR",x$method.code), args=list(x=x, xscale=xscale, SB.dist=SB.dist, ...) )
   }
   
 }
@@ -250,7 +250,7 @@ plotfitRSB <- function(
   axis(1, at=atLab, labels=lab)
   
   #When plotting Bayesian, if SB.dist is enabled, plot some R distributions throughout the epidemic
-  if (SB.dist == TRUE) {
+  if (SB.dist) {
     #x11()
     dev.new()
     split.screen(c(3,3))
@@ -260,7 +260,7 @@ plotfitRSB <- function(
     else {
       num.to.plot <- c(begin.nb:end.nb)
     }
-    for (i in 1:length(num.to.plot)) {
+    for (i in seq_along(num.to.plot)) {
       if (i == 1) {
         screen(1)
         plot(y=x$proba.Rt[[num.to.plot[i]]], x=seq(from=0, to=(length(x$proba.Rt[[num.to.plot[i]]])/100-0.01), by=0.01), xlab="R value", ylab="PDF", type="l", main=paste("t=",num.to.plot[i]), ...)

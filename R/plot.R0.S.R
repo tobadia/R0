@@ -91,7 +91,7 @@ plot.R0.S <- function(
   
   #Plotting heatmap
 	filled.contour(x=x$begin, y=x$end, z=t(x$mat.sen), color.palette=function(t) rev(heat.colors(t)), key.title=(title(main="R0")),                  
-    plot.axes={contour(x=x$begin, y=x$end, z=t(x$mat.sen), levels=c(best.fit$CI.lower, best.fit$CI.upper), lwd=2, add=T); 
+    plot.axes={contour(x=x$begin, y=x$end, z=t(x$mat.sen), levels=c(best.fit$CI.lower, best.fit$CI.upper), lwd=2, add=TRUE); 
     axis(1, x$begin);
     axis(2, x$end);
     points(which(x$epid$t == best.fit$Begin.dates), which(x$epid$t == best.fit$End.dates), pch=19);

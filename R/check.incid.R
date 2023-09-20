@@ -74,10 +74,10 @@ check.incid <- function(
   
 {
   #Various class and integrity checks
-  if (is.numeric(incid) | is.character(incid) | inherits(incid, "Date")) {
+  if (is.numeric(incid) || is.character(incid) || inherits(incid, "Date")) {
     
     #Basic possibility is incidence provided by date of symptoms onset for each patient
-    if (is.character(incid) | inherits(incid, "Date")) {
+    if (is.character(incid) || inherits(incid, "Date")) {
       # try to convert incid to dates using standard formats "%Y-%m-%d" / "%Y/%m/%d"
       tmp <- as.Date(incid)
       # if passed, incid was a vector of dates - convert to factor, making sure that levels correspond to min - max by time-step
@@ -85,9 +85,9 @@ check.incid <- function(
       if ( as.numeric(min(diff(sort(unique(tmp))))) < time.step) {
         idx <- which(as.numeric(diff(sort(unique(tmp)))) < time.step)[1]
         dt.too.close <- sort(unique(tmp))[(idx-1):idx]      
-        stop(paste("dates", paste(dt.too.close,collapse=";"),"must be at least time.step =",time.step,"units apart from each other"))
+        stop("dates ", paste(dt.too.close,collapse=";")," must be at least time.step = ",time.step," units apart from each other")
       }
-      t <- as.character(seq(min(tmp,na.rm=T), max(tmp,na.rm=T),by=time.step))      
+      t <- as.character(seq(min(tmp,na.rm=TRUE), max(tmp,na.rm=TRUE),by=time.step))      
       incid <- as.numeric(table(factor(incid, levels=t)))
     }
     
@@ -100,7 +100,7 @@ check.incid <- function(
           
         }
         else {
-          t <- 1:length(incid)
+          t <- seq_along(incid)
           t[-1] <- t[-1]*time.step - (time.step-1)
         }
       }
@@ -110,15 +110,17 @@ check.incid <- function(
     }
     
     #Try to determine if t is numeric or date
-    if (!any(is.na(suppressWarnings(as.numeric(t)))) & !inherits(t, "Date")) {
+    if (!anyNA(suppressWarnings(as.numeric(t))) && !inherits(t, "Date")) {
       #names are numeric 
       t <- as.numeric(t)
-      incid <- incid[order(t)]
-      t <- t[order(t)]
-      if (length(unique(t)) != length(t)) {stop("duplicates t values or duplicate names in incid")}
+      
+      t_order <- order(t)
+      incid <- incid[t_order]
+      t <- t[t_order]
+      if (anyDuplicated(t) > 0) {stop("duplicates t values or duplicate names in incid")}
       # check that all t values are present with at last time.step interval
-      if (min(diff(t)) < time.step) stop(paste("t values must be at least time.step =",time.step," units apart from each other"))
-      tmp <- merge(data.frame(t=t, incid=incid),data.frame(t=seq(min(t,na.rm=T),max(t,na.rm=T),by=time.step)),all.y=T)
+      if (min(diff(t)) < time.step) stop("t values must be at least time.step = ",time.step," units apart from each other")
+      tmp <- merge(data.frame(t=t, incid=incid),data.frame(t=seq(min(t,na.rm=TRUE),max(t,na.rm=TRUE),by=time.step)),all.y=TRUE)
       tmp$incid[is.na(tmp$incid)] <- 0
       incid <- tmp$incid
       t <- tmp$t
@@ -127,12 +129,13 @@ check.incid <- function(
     #Try dates with most common format
     else if (suppressWarnings((!is.na(strptime(t[1], format="%Y-%m-%d"))) | (!is.na(strptime(t[1], format="%Y/%m/%d"))))) {
       t <- as.Date(t)
-      incid <- incid[order(t)]
-      t <- t[order(t)]
-      if (length(unique(t)) != length(t)) {stop("duplicates t values or duplicate names in incid")}
+      t_order <- order(t)
+      incid <- incid[t_order]
+      t <- t[t_order]
+      if (anyDuplicated(t) > 0) {stop("duplicates t values or duplicate names in incid")}
       # check that all t values are present with at last time.step interval
-      if (min(as.numeric(diff(t))) < time.step) stop(paste("t values must be at least time.step =",time.step," units apart from each other"))
-      tmp <- merge(data.frame(t=t, incid=incid),data.frame(t=seq(min(t,na.rm=T),max(t,na.rm=T),by=time.step)),all.y=T)
+      if (min(as.numeric(diff(t))) < time.step) stop("t values must be at least time.step = ",time.step," units apart from each other")
+      tmp <- merge(data.frame(t=t, incid=incid),data.frame(t=seq(min(t,na.rm=TRUE),max(t,na.rm=TRUE),by=time.step)),all.y=TRUE)
       tmp$incid[is.na(tmp$incid)] <- 0
       incid <- tmp$incid
       t <- as.Date(as.character(tmp$t))
@@ -141,7 +144,7 @@ check.incid <- function(
     #Doesn't match any date format or custom numeric sequence
     else {
       #replace t by integer sequence
-      t <- 1:length(incid)
+      t <- seq_along(incid)
     }
   } 
   
@@ -167,7 +170,7 @@ check.incid <- function(
           t <- as.Date(names(table(epicurve.object$stratum3)))
         }
         
-        if (is.null(t) | is.null(incid)) {
+        if (is.null(t) || is.null(incid)) {
           stop("Could not find 'dates', 'weeks' or 'month' in epid")
         }
       } 
@@ -183,7 +186,7 @@ check.incid <- function(
   }
   
   #Incid is not negative or missing
-  if (any(incid < 0) || any(is.na(incid))) {
+  if (any(incid < 0) || anyNA(incid)) {
     stop("'incid' should be positive and non missing")
   }
   

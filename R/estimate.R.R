@@ -103,7 +103,7 @@ estimate.R <- function(
   
   #If user inputs an unsupported method, stop. 
   sel.met <- pmatch(methods, c('EG','TD','ML','AR', 'SB'))
-  if (any(is.na(sel.met))) {
+  if (anyNA(sel.met)) {
     stop("Invalid 'methods' argument. Supported methods are 'EG',' ML', 'TD', 'AR', 'SB'.")
   }
   
@@ -114,7 +114,7 @@ estimate.R <- function(
   #AR needs arguments very different from other methods, so it is caled separately if required
   #Optional arguments for each method must be input when calling est.R0. They will be passed
   #to their respective method.
-  for (met in 1:length(methods)) {
+  for (met in seq_along(methods)) {
     if (methods[met] == "AR") {
       estimates[[met]] <- do.call(paste("est.R0",methods[met],sep="."), args=list(incid=epid, AR=AR, pop.size=pop.size, S0=S0, checked=checked, ...))
     }

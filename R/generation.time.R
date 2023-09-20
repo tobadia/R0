@@ -80,11 +80,9 @@ generation.time <- function(
       stop("Values in 'val' must be positive")
     if (sum(GT) >1)
       warning("Values will be standardized to sum to 1")
-    if (!is.null(truncate)) {
-      if (truncate < length(val)) {
-        warning(paste("Empirical distribution truncated at length ",truncate))
+    if (!is.null(truncate) && truncate < length(val)) {
+        warning("Empirical distribution truncated at length ",truncate)
         GT <- GT[1:truncate]
-      }
     }
     # if parametric
   } else {
@@ -100,9 +98,9 @@ generation.time <- function(
       tmax <- truncate
     }
     if (first.half) {
-      t.scale <- c(0,0.5+c(0:tmax))
+      t.scale <- c(0,0.5+0:tmax)
     } else {
-      t.scale <- c(0:tmax)
+      t.scale <- 0:tmax
     } 
     if (type == "gamma") {
       a <- mean*mean/(sd*sd) 
@@ -135,15 +133,15 @@ generation.time <- function(
     if (is.null(truncate)) {
       # truncate when GI distribution >0.9999
       GT.cum <- cumsum(GT)
-      if(length(GT.cum[GT.cum > 0.9999]) != 0){
-        truncate <- (GT.cum > 0.9999)*(1:length(GT.cum))
+      if(any(GT.cum > 0.9999)){
+        truncate <- (GT.cum > 0.9999)*(seq_along(GT.cum))
         truncate <- min(truncate[truncate > 0])
-        if (truncate == 0) warning(paste('provide truncate larger than ',mean + 10 * sd))
+        if (truncate == 0) warning('provide truncate larger than ',mean + 10 * sd)
         GT <- GT[1:truncate]
       }
     }
   }
-  if (p0 == TRUE) GT[1]=0
+  if (p0) GT[1]=0
   
   time <- 0:(length(GT)-1)
   GT <- GT/sum(GT)

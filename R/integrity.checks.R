@@ -78,7 +78,7 @@ integrity.checks <- function(
 
 {
   #Integrity checks are different for AR and other methods.
-  if ("EG" %in% methods | "ML" %in% methods | "TD" %in% methods | "SB" %in% methods) {
+  if ("EG" %in% methods || "ML" %in% methods || "TD" %in% methods || "SB" %in% methods) {
     #Computes the date vector with date.first.obs
     if (!is.null(date.first.obs)) {
       date.first.obs = as.Date(date.first.obs)
@@ -87,24 +87,17 @@ integrity.checks <- function(
     
     # Various class and integrity checks are ran
     #check generation time (can be omitted if method is limited to AR)
-    if (length(methods) == 1) {
-      if (methods != "AR") {
-        if (!inherits(GT, "R0.GT")) {
-          stop("'GT' must be provided as a GT class object.")
-        }
-      }
+    if (!identical(methods, "AR") && !inherits(GT, "R0.GT")) {
+      stop("'GT' must be provided as a GT class object.")
     }
     
     #Checks on 'begin' and 'end'
-    if (!is.null(begin) & !is.null(end)) {
-      # if begin and end are not null
-      if (class(begin) != class(end)) {
-        # must be of the same class 
-        stop(paste("If both 'begin' =",begin," and 'end'=", end, "are provided, they must be of the same class (dates, character strings or integers)."))
-      }
+    if (!is.null(begin) && !is.null(end) && !identical(class(begin), class(end))) {
+      # must be of the same class 
+      stop("If both 'begin' = ",begin," and 'end' = ", end, " are provided, they must be of the same class (dates, character strings or integers).")
     }
     
-    if ((is.character(begin) | is.character(end) | inherits(begin, "Date") | inherits(end, "Date")) & !inherits(tmp.epid$t, "Date")) {
+    if ((is.character(begin) || is.character(end) || inherits(begin, "Date") || inherits(end, "Date")) && !inherits(tmp.epid$t, "Date")) {
       # begin ou end ne peuvent ?tre des dates que si t est une date
       stop("'begin' or 'end' may be provided as dates only if 'epid' or 't' contains dates.")
       
@@ -117,15 +110,15 @@ integrity.checks <- function(
       begin <- tmp.epid$t[1]
     } else if (is.numeric(begin)) {
       # begin is given 
-      if ((begin <1) | begin > length(tmp.epid$t)) begin=1
+      if ((begin <1) || begin > length(tmp.epid$t)) begin=1
       begin.nb <- begin
       begin <- tmp.epid$t[begin]
     } else if (inherits(begin, "Date")) {
       begin.nb <- which(tmp.epid$t == begin)
     } else if (is.character(begin)) { # try to convert using standard formats
-      tmp.begin <- try(as.Date(begin, format = "%Y-%m-%d"),silent=T)
+      tmp.begin <- try(as.Date(begin, format = "%Y-%m-%d"),silent=TRUE)
       if (inherits(tmp.begin, "Date")) begin <- tmp.begin
-      tmp.begin <- try(as.Date(begin, format = "%d/%m/%Y"),silent=T)
+      tmp.begin <- try(as.Date(begin, format = "%d/%m/%Y"),silent=TRUE)
       if (inherits(tmp.begin, "Date")) begin <- tmp.begin
       begin.nb <- which(tmp.epid$t == begin)
     } 
@@ -151,15 +144,15 @@ integrity.checks <- function(
       # end is given 
       # provide default value for end.nb
       end.nb <- end
-      if ((end.nb < begin.nb) | (end > length(tmp.epid$t))) end = end.nb
+      if ((end.nb < begin.nb) || (end > length(tmp.epid$t))) end = end.nb
       if (end.nb <= begin.nb) end <- length(tmp.epid$t)
       end <- tmp.epid$t[end.nb]
     } else if (inherits(end, "Date")) {
       end.nb <- which(tmp.epid$t == end)
     } else if (is.character(end)) { # try to convert using standard formats
-      tmp.end <- try(as.Date(end,format = "%Y-%m-%d"),silent=T)
+      tmp.end <- try(as.Date(end,format = "%Y-%m-%d"),silent=TRUE)
       if (inherits(tmp.end, "Date")) end <- tmp.end
-      tmp.end <- try(as.Date(end,format = "%d/%m/%Y"),silent=T)
+      tmp.end <- try(as.Date(end,format = "%d/%m/%Y"),silent=TRUE)
       if (inherits(tmp.end, "Date")) end <- tmp.end
       end.nb <- which(tmp.epid$t == end)
     } 
@@ -174,11 +167,11 @@ integrity.checks <- function(
   
   #If method is only AR, checks if arguments are consistent
   else {
-    if ((!is.null(S0)) && (S0 < 0 | S0 > 1)) {
+    if ((!is.null(S0)) && (S0 < 0 || S0 > 1)) {
       stop("S0 should only take value between 0 and 1.")
     }
     
-    if ((!is.null(AR)) && (AR < 0 | AR > S0)) {
+    if ((!is.null(AR)) && (AR < 0 || AR > S0)) {
       stop("AR should only take value between 0 and S0")
     }
   }

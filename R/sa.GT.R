@@ -71,13 +71,13 @@ sa.GT <- function(
   res <- list()
   
   #Is estimation method supported?
-  if ((est.method %in% c("EG", "ML")) == FALSE) {
+  if (!est.method %in% c("EG", "ML")) {
     stop("Argument 'est.method' should be any of 'EG' or 'ML' to produce results.")
   }
   
   count = 1
-  for (i in 1:length(GT.mean.range)) {
-    for (j in 1:length(GT.sd.range)) {
+  for (i in seq_along(GT.mean.range)) {
+    for (j in seq_along(GT.sd.range)) {
       list.GT[[count]] <- generation.time(GT.type, c(GT.mean.range[[i]], GT.sd.range[j]))
       count <- count+1
     }
@@ -92,7 +92,7 @@ sa.GT <- function(
   #Columns are named so that display is easy to read
   colnames(s.a) <- c("GT.Type", "GT.Mean", "GT.SD", "R", "CI.lower", "CI.upper")
   
-  for(i in 1:length(list.GT)) {
+  for(i in seq_along(list.GT)) {
     #Simulation is ran according to the requested method, with each correct begin/end value
     res <- estimate.R(incid, list.GT[[i]], begin=begin, end=end, t=t, date.first.obs=date.first.obs, time.step=time.step, methods=est.method,...)
     
