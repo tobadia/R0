@@ -19,7 +19,7 @@ est.GT(
 
 \item{serial.interval}{Vector of reported serial interval.}
 
-\item{request.plot}{Should data adjustment be displayed at the end?}
+\item{request.plot}{Boolean. Should data adjustment be displayed at the end?}
 
 \item{...}{Parameters passed to other functions (useful for hidden parameters of \code{\link[=generation.time]{generation.time()}})}
 }
@@ -42,7 +42,7 @@ infected infectee k (symptoms on day \code{infectee.onset.dates[k]}). If only
 between each pair of infector and infectee (i.e. the difference between the
 two \verb{*.onset.dates} vectors).
 
-When request.plot is set to TRUE, a graphical output provides standardized
+When \code{request.plot} is set to \code{TRUE}, a graphical output provides standardized
 histogram of observed data along with the best-fitting adjusted model.
 }
 \examples{

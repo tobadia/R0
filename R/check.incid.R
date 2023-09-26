@@ -36,7 +36,7 @@
 #' incidence data agregated by the given time period, and the same data with colnames 
 #' that comply with R standard time notation.
 #'
-#' E.g.: [epitools::epicurve.weeks()] returns $dates, $weeks and $stratum3. $stratum3 
+#' E.g.: [epitools::epicurve.weeks()] returns `$dates`, `$weeks` and `$stratum3.` `$stratum3` 
 #' object is a list of dates (correct syntax), where each date is repeated to reflect 
 #' the incidence value at this time.
 #' 

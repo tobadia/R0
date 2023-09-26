@@ -41,7 +41,7 @@
 #' @param end At what time estimation ends (unused by this method, just there for plotting purposes).
 #' @param date.first.obs Optional date of first observation, if `t` not specified. 
 #' @param time.step Optional. If date of first observation is specified, number of day between each incidence observation. 
-#' @param q Quantiles for R(t). By default, 2.5% and 97.5%.
+#' @param q Quantiles for R(t) confidence level. By default, 2.5% and 97.5%.
 #' @param correct Boolean. Correction for cases not yet observed (real time). 
 #' @param nsim Number of simulations to be run to compute quantiles for R(t)
 #' @param checked Internal flag used to check whether integrity checks were ran or not.

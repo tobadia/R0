@@ -2,7 +2,7 @@
 % Please edit documentation in R/censored.deviation.R
 \name{censored.deviation}
 \alias{censored.deviation}
-\title{Impute censored cases to rebuild longer epidemic vector}
+\title{Deviation between theorietical incidence and observed data.}
 \usage{
 censored.deviation(optim.vect, epid, R0, GT)
 }
@@ -11,22 +11,24 @@ censored.deviation(optim.vect, epid, R0, GT)
 
 \item{epid}{Original epidemic vector, output of \code{\link[=check.incid]{check.incid()}}.}
 
-\item{R0}{Assumed R0 value for the original epidemic vector}
+\item{R0}{Assumed R0 value for the original epidemic vector.}
 
-\item{GT}{Generation time distribution to be used for computations}
+\item{GT}{Generation time distribution to be used for computations.}
 }
 \value{
-The deviation between sum((E(Nt)-Nt)^2)
+The deviation between \eqn{E(N_{t})} and \eqn{N_{t}} : sum((E(Nt) - Nt)^2).
 }
 \description{
-When first records of incidence are unavailable, tries to impute censored cases to rebuild longer epidemic vector.
+When first records of incidence are unavailable, tries to impute censored
+cases to rebuild longer epidemic vector.
 }
 \details{
-For internal use. Called by impute.incid.
+For internal use. Called by \code{\link[=impute.incid]{impute.incid()}}.
 
-This function is not intended for stand-alone use. It computes the difference between theoretical incidence
-and observed epidemics, for a given vector of initial values. To find the find best-fitting incidence values,
-this same vector must be optimized, to minimize the value returned by SCE.
+This function is not intended for stand-alone use. It computes the difference
+between theoretical incidence and observed epidemics, for a given vector of
+initial values. To find the find best-fitting incidence values, this same
+vector must be optimized, to minimize the value returned by SCE.
 }
 \author{
 Pierre-Yves Boelle, Thomas Obadia

@@ -2,7 +2,7 @@
 % Please edit documentation in R/impute.incid.R
 \name{impute.incid}
 \alias{impute.incid}
-\title{Optimiziation routine for incidence imputation}
+\title{Impute censored cases to rebuild longer epidemic vector}
 \usage{
 impute.incid(CD.optim.vect, CD.epid, CD.R0, CD.GT)
 }

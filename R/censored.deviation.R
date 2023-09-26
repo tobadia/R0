@@ -25,11 +25,11 @@
 #' 
 #' @param optim.vect Vector of two elements `c(multiplicative factor, log(highest imputed data))` corresponding to initial values.
 #' @param epid Original epidemic vector, output of [check.incid()].
-#' @param R0 Assumed R0 value for the original epidemic vector
-#' @param GT Generation time distribution to be used for computations
+#' @param R0 Assumed R0 value for the original epidemic vector.
+#' @param GT Generation time distribution to be used for computations.
 #'
 #' @return
-#' The deviation between \enq{E(N_{t})} and \eqn{N_{t}} : sum((E(Nt) - Nt)^2).
+#' The deviation between \eqn{E(N_{t})} and \eqn{N_{t}} : sum((E(Nt) - Nt)^2).
 #' 
 #' @keywords internal
 #' 

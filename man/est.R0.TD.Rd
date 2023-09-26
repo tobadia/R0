@@ -40,7 +40,7 @@ est.R0.TD(
 
 \item{time.step}{Optional. If date of first observation is specified, number of day between each incidence observation.}
 
-\item{q}{Quantiles for R(t). By default, 2.5\% and 97.5\%.}
+\item{q}{Quantiles for R(t) confidence level. By default, 2.5\% and 97.5\%.}
 
 \item{correct}{Boolean. Correction for cases not yet observed (real time).}
 

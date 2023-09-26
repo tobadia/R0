@@ -25,13 +25,13 @@
 #' between each pair of infector and infectee (i.e. the difference between the 
 #' two `*.onset.dates` vectors).
 #' 
-#' When request.plot is set to TRUE, a graphical output provides standardized 
+#' When `request.plot` is set to `TRUE`, a graphical output provides standardized 
 #' histogram of observed data along with the best-fitting adjusted model.
 #' 
 #' @param infector.onset.dates Vector of dates for infector symptoms onset.
 #' @param infectee.onset.dates Vector of dates for infectee symptoms onset.
 #' @param serial.interval Vector of reported serial interval.
-#' @param request.plot Should data adjustment be displayed at the end?
+#' @param request.plot Boolean. Should data adjustment be displayed at the end?
 #' @param ... Parameters passed to other functions (useful for hidden parameters of [generation.time()])
 #' 
 #' @return

@@ -45,7 +45,7 @@ This list gives incidence per day. Other epicurve methods return $dates along wi
 incidence data agregated by the given time period, and the same data with colnames
 that comply with R standard time notation.
 
-E.g.: \code{\link[epitools:epicurve]{epitools::epicurve.weeks()}} returns $dates, $weeks and $stratum3. $stratum3
+E.g.: \code{\link[epitools:epicurve]{epitools::epicurve.weeks()}} returns \verb{$dates}, \verb{$weeks} and \verb{$stratum3.} \verb{$stratum3}
 object is a list of dates (correct syntax), where each date is repeated to reflect
 the incidence value at this time.
 

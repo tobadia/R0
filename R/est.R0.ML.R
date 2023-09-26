@@ -47,7 +47,7 @@
 #' In addition to the estimation method, we implemented a framework to impute 
 #' unobserved incidence data, when the epidemic curve is found to not be available
 #' from the start of the outbreak. The details of this method are availble in the
-#' Supplementary Material S1 from \href{https://doi.org/10.1186/1472-6947-12-147}{Obadia et al., 2012}.
+#' Supplementary Material S1 from \doi{10.1186/1472-6947-12-147}{Obadia et al., 2012}.
 #' 
 #' @param epid Object containing epidemic curve data. 
 #' @param GT Generation time distribution from [generation.time()]. 
@@ -59,7 +59,7 @@
 #' @param time.step Optional. If date of first observation is specified, number of day between each incidence observation. 
 #' @param range Range of values over which the MLE must be explored. 
 #' @param unknown.GT Boolean value. When GT distribution is unknown, it is estimated jointly (see details). 
-#' @param impute.incid Boolean value. If TRUE, will impute unobserved cases at the beginning of the epidemic to correct for censored data.
+#' @param impute.incid Boolean value. If `TRUE`, will impute unobserved cases at the beginning of the epidemic to correct for censored data.
 #' @param checked Internal flag used to check whether integrity checks were ran or not.
 #' @param ... Parameters passed to inner functions.
 #' 
@@ -67,7 +67,7 @@
 #' A list with components:
 #' \item{R}{The estimate of the reproduction ratio.}
 #' \item{conf.int}{The 95% confidence interval for the R estimate.}
-#' \item{epid}{Original or augmented epidemic data, depending whether [impute.incid()] is set to `FALSE` or `TRUE.`}
+#' \item{epid}{Original or augmented epidemic data, depending whether [impute.incid()] is set to `FALSE` or `TRUE`.}
 #' \item{epid.orig}{Original epidemic data.}
 #' \item{GT}{Generation time distribution uised in the computation.}
 #' \item{begin}{Starting date for the fit.}
