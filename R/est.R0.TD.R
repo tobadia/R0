@@ -109,7 +109,7 @@ est.R0.TD <- function(
   
   #Various class and integrity checks
   #transforms epidemic to the right format
-  if (checked == FALSE) {
+  if (!checked) {
     parameters <- integrity.checks(epid=epid,GT=GT, t=t, begin=begin, end=end, date.first.obs=date.first.obs, time.step=time.step, AR=NULL, S0=NULL, methods="TD")
     begin <- parameters$begin
     end <- parameters$end
@@ -126,9 +126,9 @@ est.R0.TD <- function(
   t <- diff(c(FALSE, epid$incid==0, FALSE), 1)
   start <- which(t==1)
   end <- which(t==-1)
-  if (length(start) > 0 & length(end) > 0) { 
+  if (length(start) > 0 && length(end) > 0) { 
     longest <- max(end-start)
-    if (longest > length(GT$GT)) warning(paste("Gap in epidemic curve is longer than the generation interval. Consider using a different GT distribution (maybe with \"truncate=", longest, "\" (length of longest gap))."), sep="")
+    if (longest > length(GT$GT)) warning("Gap in epidemic curve is longer than the generation interval. Consider using a different GT distribution (maybe with \"truncate=", longest, "\" (length of longest gap)).")
   }
   
   #Imported cases should be provided as a vector of the same length as incid.
@@ -137,7 +137,7 @@ est.R0.TD <- function(
     import <- rep(0, length(epid$incid))
   }
   
-  if (!is.null(import) & (length(import) != length(epid$incid))) {
+  if (!is.null(import) && (length(import) != length(epid$incid))) {
     stop("Vector of imported cases should have the same length as 'epid' data.")
   }
   
@@ -149,7 +149,7 @@ est.R0.TD <- function(
   
   #Initial n0 larger than first recorded value is an error
   if (n.t0 > epid$incid[1])  {
-    stop(paste("Provided initial number of cases (n.t0=",n.t0,") is larger than incidence on begin day (=",epid$incid[begin],")"))
+    stop("Provided initial number of cases (n.t0=",n.t0,") is larger than incidence on begin day (=",epid$incid[begin],")")
   }
   
   #Beginning of estimation 
@@ -229,7 +229,7 @@ est.R0.TD <- function(
   
   #We now have enough data to compute R (from infection network P)
   #along with its 2.5% and 97.5% quantiles (from multiple simulations and p)
-  R.WT <- apply(P,1,sum)    # Wallinga and Teunis definition
+  R.WT <- rowSums(P)    # Wallinga and Teunis definition
   R.corrected <- R.WT/(cumsum(GT.pad[1:Tmax]))[Tmax:1]   # Corrected for real time
   if (is.na(R.corrected[length(epid$incid)])) {
     R.corrected[length(epid$incid)] <- 0
@@ -262,7 +262,7 @@ est.R0.TD <- function(
   conf.int <- matrix(data=NA, nrow=end.nb, ncol=2)
   colnames(conf.int) <- c("lower", "upper")
   
-  if (correct == TRUE) {
+  if (correct) {
     R <- R.corrected[begin.nb:end.nb]
     conf.int[begin.nb:end.nb,1] <- quant.simu.corrected[begin.nb:end.nb,1]
     conf.int[begin.nb:end.nb,2] <- quant.simu.corrected[begin.nb:end.nb,2]

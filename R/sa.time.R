@@ -78,7 +78,7 @@ sa.time <- function(
     if (!inherits(res, "R0.R")) {
       stop("Currently, sensitivity analysis from a result object only supports 'R0.R' class objects. Try using res$estimates$EG or res$estimates$ML if they are defined.")
     }
-    else if ((res$method %in% c("Exponential Growth","Maximum Likelihood")) == FALSE) {
+    else if (!res$method %in% c("Exponential Growth","Maximum Likelihood")) {
       stop("Sensitivity analysis can only be conducted on objects with method EG or ML.")
     }
     else if (res$method == "Exponential Growth") {
@@ -87,7 +87,7 @@ sa.time <- function(
     else if (res$method == "Maximum Likelihood") {
       est.method <- "ML"
     }
-    if (is.null(begin) | is.null(end)) {
+    if (is.null(begin) || is.null(end)) {
       stop("Arguments \"begin\" and \"end\" must both be provided as vectors of index dates.")
     }
     
@@ -95,7 +95,7 @@ sa.time <- function(
     GT <- res$GT
   }
   
-  if (is.null(begin) | is.null(end)) {
+  if (is.null(begin) || is.null(end)) {
     stop("'begin' and/or 'end' is/are missing.")
   }
   
@@ -105,7 +105,7 @@ sa.time <- function(
   if (is.null(est.method)) {
     stop("Argument est.method should be 'EG' or 'ML'")
   }
-  else if ((est.method %in% c("EG","ML")) == FALSE) {
+  else if (!est.method %in% c("EG","ML")) {
     stop("Argument est.method should be 'EG' or 'ML'")
   }
   
@@ -120,8 +120,8 @@ sa.time <- function(
   #Columns are named so that display is easy to read
   colnames(s.a) <- c("Time.period", "Begin.dates","End.dates","R", "Growth.rate", "Rsquared", "CI.lower", "CI.upper")
   
-  for(i in 1:length(begin)) {
-    for(j in 1:length(end)) {
+  for(i in seq_along(begin)) {
+    for(j in seq_along(end)) {
       
       #Skip test if begin>=end, and correspondig cells are filled with NA in matrix
       #if ((begin[i]>=end[j]) | (end[j] == (begin[i]+1))) {

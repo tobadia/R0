@@ -63,10 +63,10 @@ sim.epid.indiv <- function(
   if (beta <= 1.5) {
     Lmax <- 5000
   }
-  else if (beta <= 2 & beta > 1.5) {
+  else if (beta <= 2 && beta > 1.5) {
     Lmax <- 50000
   }
-  else if (beta <= 3 & beta > 2) {
+  else if (beta <= 3 && beta > 2) {
     Lmax <- 50000
   }
   else if (beta >3) {
@@ -74,7 +74,7 @@ sim.epid.indiv <- function(
   }
   
   
-  epid <- data.frame(matrix(data=0, nrow=Lmax, ncol=5, dimnames=list(c(1:Lmax), c("tinf","nsec","dinf","dlat","runif"))))
+  epid <- data.frame(matrix(data=0, nrow=Lmax, ncol=5, dimnames=list(1:Lmax, c("tinf","nsec","dinf","dlat","runif"))))
   
   for (i in 1:n) {
     #Memory optimization: dinf and dlat are all computed at the beginning

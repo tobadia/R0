@@ -110,7 +110,7 @@ est.R0.ML <- function(
 {
   CALL <- match.call()
   # Various class and integrity checks
-  if (checked == FALSE) {
+  if (!checked) {
     parameters <- integrity.checks(epid=epid, GT=GT, t=t, begin=begin, end=end, date.first.obs=date.first.obs, time.step=time.step, AR=NULL, S0=NULL, methods="ML")
     begin <- parameters$begin
     end <- parameters$end
@@ -119,7 +119,7 @@ est.R0.ML <- function(
   begin.nb <- which(epid$t == begin)
   end.nb <- which(epid$t == end)
   
-  if(!is.null(import) & length(import) != length(epid$incid)) stop("Import vector and incidence vector do not have the same length.")
+  if(!is.null(import) && length(import) != length(epid$incid)) stop("Import vector and incidence vector do not have the same length.")
   if (is.null(import)) import <- rep(0, length(epid$incid))
   
   #  if (impute.incid == TRUE) {
@@ -136,13 +136,13 @@ est.R0.ML <- function(
   
   #Make a likelihood that can be optimized
   log.R <- log(1) #initial value is taken at 1
-  if (unknown.GT==TRUE) {
+  if (unknown.GT) {
     optimized.val <- optim(c(log.R, GT$mean, GT$sd), fit.epid.optim, epid=epid, import=import, control=list(fnscale=-1))$par
     GT <- generation.time("gamma", c(optimized.val[2], optimized.val[3]))
   }
   res.R <- optimize(fit.epid,log(range),GT=GT,epid=epid,import=import,maximum=TRUE)
   
-  if ((exp(res.R$maximum) == range[1]) | (exp(res.R$maximum) == range[2])) { 
+  if (exp(res.R$maximum) %in% c(range[1], range[2])) { 
     warning("Algorithm converged to boundary. Try increasing 'range'")
   }
   
@@ -160,7 +160,7 @@ est.R0.ML <- function(
   Rsquared <- (tmp$null.deviance-tmp$deviance)/(tmp$null.deviance)
   
   #If data are censored and need to be imputed, recursive call of ML method
-  if (impute.incid == TRUE) {
+  if (impute.incid) {
     R0.val.i <- vector()
     R0.val.i[1] <- exp(res.R$maximum)
     new.incid <- impute.incid(c(0,0), epid.orig, R0.val.i[1], GT)
@@ -188,8 +188,8 @@ est.R0.ML <- function(
     new.epid <- check.incid(incid=new.incid, time.step=time.step, date.first.obs=(epid$t[1]-length(GT$GT)))
   }
   
-  if (impute.incid == FALSE) {
-    return (structure(list(R=exp(res.R$maximum), conf.int=c(exp(R.min$root), exp(R.max$root)), epid=epid.orig, GT=GT, begin=begin, begin.nb=begin.nb, end=end, end.nb=end.nb, pred=pred, Rsquared=Rsquared, call=CALL, method="Maximum Likelihood", method.code="ML"),class="R0.R"))
+  if (!impute.incid) {
+    return (structure(list(R=exp(res.R$maximum), conf.int=exp(c(R.min$root, R.max$root)), epid=epid.orig, GT=GT, begin=begin, begin.nb=begin.nb, end=end, end.nb=end.nb, pred=pred, Rsquared=Rsquared, call=CALL, method="Maximum Likelihood", method.code="ML"),class="R0.R"))
   }
   else {
     return (structure(list(R=R0.best, conf.int=conf.int, epid=new.epid, epid.orig=epid.orig, GT=GT, begin=new.epid$t[1], begin.nb=1, end=end, end.nb=which(new.epid$t == end), pred=pred, Rsquared=Rsquared, call=CALL, method="Maximum Likelihood", method.code="ML"),class="R0.R"))

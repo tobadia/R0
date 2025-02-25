@@ -56,7 +56,7 @@ print.R0.R <- function(
   if (x$method.code %in% c("EG","ML","AR")) {
     cat("R : ",x$R)
     
-    if (!any(is.na(x$conf.int))) {
+    if (!anyNA(x$conf.int)) {
       cat("[", x$conf.int[1],",",x$conf.int[2],"]\n")
     }
   } 
@@ -64,7 +64,7 @@ print.R0.R <- function(
   else {
     #Must be TD/SB... output first 10 values
     if (x$method.code %in% c("TD","SB")) {
-      cat(x$R[1:min(length(x$R),10)],"...\n")
+      cat(x$R[seq_len(min(length(x$R),10))],"...\n")
     }
   }
   

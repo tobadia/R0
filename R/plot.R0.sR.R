@@ -57,7 +57,7 @@ plot.R0.sR <- function(
   }
   
   #If invalid scale parameter is used, stop.
-  if (xscale != "d" & xscale != "w" & xscale !="f" & xscale != "m") {
+  if (xscale != "d" && xscale != "w" && xscale !="f" && xscale != "m") {
     stop("Invalid scale parameter.")
   }
   

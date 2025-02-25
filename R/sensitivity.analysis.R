@@ -83,7 +83,7 @@ sensitivity.analysis <- function(
   }
   
   else if ((sa.type == "time") && (is.null(res))) {
-    if ((is.null(GT)) | (is.null(est.method))) {
+    if ((is.null(GT)) || (is.null(est.method))) {
       stop("Missing input argument (probably GT or est.method). Please check sa.time documentation for further details.")
     }
     else {
@@ -92,7 +92,7 @@ sensitivity.analysis <- function(
     
   }
   else if (sa.type == "GT") {
-    if ((is.null(GT.type)) | (is.null(GT.mean.range)) | (is.null(GT.sd.range)) | (is.null(est.method))) {
+    if ((is.null(GT.type)) || (is.null(GT.mean.range)) || (is.null(GT.sd.range)) || (is.null(est.method))) {
       stop("Missing input argument (probably GT.type, GT.mean.range, GT.sd.range or est.method). Please check sa.time documentation for further details.")
     }
     else {
@@ -100,7 +100,7 @@ sensitivity.analysis <- function(
     }
   }
   else {
-    stop(paste("sa.type =",sa.type,"is not a valid argument. Must be \"time\" or \"GT\"."))
+    stop("sa.type = ",sa.type," is not a valid argument. Must be \"time\" or \"GT\".")
   }
   
   return(sa.object)

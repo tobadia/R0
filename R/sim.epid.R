@@ -69,7 +69,7 @@ sim.epid <- function(
   }
   
   #If negbin.size is omitted, size parameter is set so that variance = 10*R0. See details.
-  if (family=="negbin" & is.null(negbin.size)) {
+  if (family=="negbin" && is.null(negbin.size)) {
     negbin.size <- R0/4
   }
   GT <- GT$GT
@@ -98,7 +98,7 @@ sim.epid <- function(
       sim.epid[t:(t+length(GT)-1)] <- sim.epid[t:(t+length(GT)-1)]+newd
       
       # Threshold so that epidemics eventualy dies out
-      if (sim.epid[t+1] > peak.value & t < (epid.length-1)) {
+      if (sim.epid[t+1] > peak.value && t < (epid.length-1)) {
         
         #Changing the R value is like implementing control measure. Uncomment if want to doing so
         #R0 <- 0.7

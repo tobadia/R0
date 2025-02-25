@@ -95,7 +95,7 @@ est.R0.EG <-function(
   CALL <- match.call()
   
   # Various class and integrity check
-  if (checked == FALSE) {
+  if (!checked) {
     parameters <- integrity.checks(epid=epid, GT=GT, t=t, begin=begin, end=end, date.first.obs=date.first.obs, time.step=time.step, AR=NULL, S0=NULL, methods="EG")
     begin <- parameters$begin
     end <- parameters$end
